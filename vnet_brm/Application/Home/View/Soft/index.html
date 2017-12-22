@@ -1,0 +1,115 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<script type="text/javascript">
+ function submit_now(){
+   
+	
+	var itemtypeid = $('#itemtypeid').val();
+	var stitle = $('#stitle').val();
+	
+	window.location.href= "__ROOT__/index.php?s=/Home/Soft/index/itemtypeid/"+itemtypeid+"/stitle/"+stitle+"/p/1.html";
+ }
+ </script>
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">软件列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('soft_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新软件</a>
+                        	
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+							
+								<div class="form-group">
+                                    <select class="form-control" id="itemtypeid" name="itemtypeid">
+                                    	<option class="level-0" value=""  > 全部</option>
+                                        <volist name="type_all_list" id="vo"> 
+                                            <?php   $void = $vo['id'];$tyid=I('get.itemtypeid'); ?>   
+                                            <option class="level-0" value="{$vo.id}" <if condition="$void eq $tyid"> selected='selected'</if>  > {$vo.typedesc}</option>
+                                        </volist>
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="stitle" id="stitle" value="<?php echo I('get.stitle'); ?>"  placeholder="标题……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>厂商</th>
+                            <th>标题</th>
+                            <th>版本</th>
+                            <th>采购日期</th>
+                            <th>许可信息</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.id}</td>
+                                <td><?php  $manufacturerid = $vo['manufacturerid'];  echo $agent_list[$manufacturerid];  ?></td>
+                                <td>{$vo.stitle}</td>
+                                <td>{$vo.sversion}</td>
+                                <td>{$vo.purchdate|date="Y-m-d H:i:s",###}</td>
+                                <td>{$vo.slicenseinfo}</td>
+                                <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('soft_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('soft_del?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

@@ -1,0 +1,126 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+    var event_type = $('#event_type').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Jianshe/jianshe/event_type/"+event_type+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+        <!--page title begin-->
+           <h1 class="page-title">事件管理列表</h1>  
+            
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <form action=""  method="post" id="myForm">
+
+                    <div class="col-xs-6" >
+                        <div class="quick-add-btn">
+
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" name="name" id="name" value="<?php echo I('post.name'); ?>"  placeholder="事件类型……" required>
+                                
+                                
+                            </div>  
+
+                      </div> 
+                      <input  type="submit" class="btn btn-danger" value="添加新事件类型"/>                
+                </div>
+                    </form> 
+            </div>
+            <br/>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                     
+                </div>
+                            
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>事件类型</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="event_typelist" id="vo">
+                            <tr >
+                                <td>{$vo.name}</td>
+
+                                <td>
+                                    <if condition="$is_admin_define eq true" >
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_events_type?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_events_type?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    <elseif condition="$is_owner_define eq 'YES'"/>
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_events_type?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_events_type?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    <else />
+                                    
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_events_type?id='.$vo['id'])}">编辑</a>
+
+                                    </if>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+                    
+            </div>
+        </div>
+
+                    
+    </div>
+    <script>
+    function allcheck() {
+        var nn = $("#allboxs").is(":checked"); //判断th中的checkbox是否被选中，如果被选中则nn为true，反之为false
+            if(nn == true) {
+                var namebox = $("input[name^='boxs[]']");  //获取name值为boxs的所有input
+                for(i = 0; i < namebox.length; i++) {
+                    namebox[i].checked=true;    //js操作选中checkbox
+                }
+            }
+            if(nn == false) {
+                var namebox = $("input[name^='boxs[]']");
+                for(i = 0; i < namebox.length; i++) {
+                    namebox[i].checked=false;
+                }
+            }
+    }
+    
+    function submit_deal(){
+    	$("myForm").submit();
+    }
+    
+    </script>
+    
+   
+   
+</block>

@@ -1,0 +1,223 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">设备信息</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                            <a href="{:U('item_edit?id='.$id)}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>设备编辑</a>
+                            <a href="{:U('item_log?id='.$id)}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>设备Log</a>
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        <!--all device detail begin -->
+        <if condition="$flag eq 'on'">
+        
+        <table width="100%">
+        <tr>
+        <form action="" class="form-horizontal" id="add-device" role="form" method="post" >
+              <input type="hidden" name="objectid" value="{$id}">
+        
+        <td valign="top">
+                  <table class="rack" width="80%">
+                    <tbody>
+
+                      <tr><th >RU</th><th>前</th><th>中</th><th>后</th></tr>
+
+                      {$racktable}
+
+
+                      <tr><td colspan="4" style="background-color:#666;border:1px solid #666;padding:0;">&nbsp;</td></tr>
+                      <tr>
+                      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+       </td>
+       
+       
+                    <td valign="top">
+                      <div class="portlet">
+                          <h2>汇总</h2>
+                          <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <th width="50%" class="tdright">机房-房间:</th>
+                                      <td class="tdleft">{$location_name}-{$areaname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">机柜:</th>
+                                      <td class="tdleft">{$rackcomments}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备名:</th>
+                                      <td class="tdleft">{$common_name}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备U大小:</th>
+                                      <td class="tdleft">{$myusize}U</td>
+                                  </tr>
+                                   <tr>
+                                      <th width="50%" class="tdright">设备状态:</th>
+                                      <td class="tdleft">{$status}&nbsp;&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备类型:</th>
+                                      <td class="tdleft">{$typedesc}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">Ip:</th>
+                                      <td class="tdleft">{$ip}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">OEM S/N:</th>
+                                      <td class="tdleft">{$sn}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">操作系统:</th>
+                                      <td class="tdleft"><a href="javascript:void(0)">{$system}关联软件</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备厂商/品牌:</th>
+                                      <?php   $pinpai = $angnt_list["$manufacturerid"];  ?>
+                                      <td class="tdleft"><a href="javascript:void(0)">{$pinpai}</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备型号:</th>
+                                      <td class="tdleft"><a href="javascript:void(0)">{$model}</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备所属部门:</th>
+                                      <td class="tdleft"><a href="javascript:void(0)">{$dname}</a></td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <div class="portlet">
+                          <h2>Comment</h2>
+                          <div class="commentblock">{$comments}</div>
+                      </div>
+
+                    </td>
+
+
+          </tr>
+        </table>
+       
+       
+        </form>
+       <else/>
+
+        <table width="100%">
+          <tr>
+                <td valign="top">
+                  <div class="portlet">
+                      <h2><b>信息</b></h2>
+                      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                          <tbody>
+                              {$item_text}
+
+
+
+                          </tbody>
+                      </table>
+                  </div>
+                </td>
+          </tr>
+        </table>
+
+       </if>
+
+
+
+
+        </div>
+        
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".checkinput").click(function(){
+        if(!$(this).hasClass('disabled')){
+            var input = $(this).parent().find('input');
+            var num = 0;
+            for(var i=0;i<input.length;i++){
+                if(input[i].checked){
+                    num++;
+                }
+            }   
+            if(num==3){
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = false;
+                }  
+            }else{
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = true;
+                }
+            }
+        }
+      });
+    });
+    
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

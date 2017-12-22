@@ -1,0 +1,143 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">用户组与九宫格配置关系添加</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+
+
+
+                        <form id="formtextarea"  action="" method="post"> 
+                                <div class="main">
+
+                                  <div class="loca clearfix">
+
+                                  <select class="button-select" name="usergroup_id" onchange="javascript:location.href=this.value;" style="width:250px;">
+
+                                    <if condition="$tempusergroup_id eq '' ">
+                                        <option value="{:U('Squared/squared_manger')}" selected="selected" >请选择用户组......</option>
+                                    <else />
+                                        <option value="{:U('Squared/squared_manger')}" >请选择用户组......</option>
+                                    </if>
+
+                                    {$checkusergroupoption}
+
+                                  </select>
+
+                                  </div>
+                                <div class="data-list" id="msgBox">
+
+                                <table style="width:auto;" class="tweenBoxTable" name="group_users_tweenbox" id="id" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr>
+
+                                  <td>已经拥有九宫格访问权限 -> <a href="{:U('squared_truncate?usergroup_id='.$tempusergroup_id)}">强制清空</a></td>
+                                  <td></td>
+                                  <td>全部九宫格</td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                      <select id="selfhostgroup_id" name="selfhostgroup_id[]" autocomplete="off" multiple="multiple" size="10" style="width: 280px;">
+                                          {$myhostgroupoption}
+                                      </select>
+                                    </td>
+
+                                    <td class="center"><button type="button" id="add" name="add" class="btn-grey" onclick="moveListBoxSelectedItem(&quot;group_users&quot;, &quot;depart_id&quot;, &quot;selfhostgroup_id&quot;, &quot;add&quot;);">
+
+                                    <span class="arrow-left"></span></button>
+
+                                    <br>
+
+                                    <button type="button" id="remove" name="remove" class="btn-grey" onclick="moveListBoxSelectedItem(&quot;group_users&quot;, &quot;selfhostgroup_id&quot;, &quot;depart_id&quot;, &quot;rmv&quot;);">
+
+                                    <span class="arrow-right"></span></button>
+
+                                    </td>
+
+                                    <td>
+                                    <select id="depart_id" name="depart_id[]" autocomplete="off" multiple="multiple" size="10" style="width: 280px;">
+                                      <!--option value="1">Admin (Zabbix Administrator)</option>
+                                      <option value="2">guest</option-->
+                                      {$exitmyhostgroupoption}
+                                    </select>
+
+                                    </td>
+                                    <input type="hidden" name="usergroup_id" value="{$tempusergroup_id}" >
+                                </tr>
+
+                                <tr><td></td><td></td><td><input class="usergroup_btn" type="button" value="确认"></td></tr></tbody></table>
+                                
+                               </div>
+                               </div>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+                    
+</div>
+   
+<script type="text/javascript">
+
+
+function moveListBoxSelectedItem(objname, from, to, action) {
+  to = jQuery('#' + to);
+
+  jQuery('#' + from).find('option:selected').each(function(i, fromel) {
+    var notApp = true;
+    to.find('option').each(function(j, toel) {
+      if (toel.innerHTML.toLowerCase() > fromel.innerHTML.toLowerCase()) {
+        jQuery(toel).before(fromel);
+        notApp = false;
+        return false;
+      }
+    });
+    if (notApp) {
+      to.append(fromel);
+    }
+    fromel = jQuery(fromel);
+    if (action.toLowerCase() == 'add') {
+      jQuery(this)
+        .closest('form')
+        .append("<input name='" + objname + '[' + fromel.val() + ']' + "' id='" + objname + '_' + fromel.val()
+          + "' value='" + fromel.val() + "' type='hidden'>"
+        );
+    }
+    else if (action.toLowerCase() == 'rmv') {
+      jQuery('#' + objname + '_' + fromel.val()).remove();
+    }
+  });
+
+  return true;
+}
+$(".usergroup_btn").click(function(){
+  $("#selfhostgroup_id option").attr('selected','selected');
+  //$("#hostgroup_id option").attr('selected','selected');
+  $("#formtextarea").submit();
+});
+</script>
+   
+</block>

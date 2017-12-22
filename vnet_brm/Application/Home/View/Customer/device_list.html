@@ -1,0 +1,391 @@
+<extend name="Base/allcommon"/>
+
+<block name="main">
+<style type="text/css">
+hr{height:1px;overflow:hidden;margin-bottom: 0;margin-top: 0;}
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;margin-top:10px;}
+.toolbar{margin-bottom: 10px;}
+.form-content .display.block{ display:block;}
+.ctables{
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;font-size:14px;color:#333;
+}
+.ctables label{font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;}
+.ctables>label{font-weight:900;}
+
+
+.zwj {
+  font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+
+</style>
+<div class="content">
+        
+       
+        <!--page title end and the main content begin-->
+        
+        <div class="header">
+      <!--page title begin-->
+      <h1 class="page-title">各区域网络设备列表</h1>
+        </div>
+        <div class="container ly-rackmap">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                <ul class="form-li">
+                    <li class="active">网络设备分布图</li>
+                    <!--li>复合查询</li-->
+                    <div class="clear"></div>
+                </ul>
+                <div class="col-xs-6" style="width:100%;">
+                    <div class="quick-add-btn">
+
+                      <!--a href="{:U('addtree')}"  type="button" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-new-window"></span>树状结构添加</a>
+                      <a href="{:U('addassetnode')}"  type="button" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-new-window"></span>测试资产关联树状结构添加</a>                       
+                        <a href="{:U('addnode')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span>节点添加</a-->
+
+
+                   </div>
+                    
+                    
+                    
+                </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+        <!--form action="" class="form-horizontal" id="add-device" role="form" method="post">
+            
+            {$showlabel}
+            <br /><input type="submit" class="btn btn-primary"></input>
+        </form-->
+        <!--all device detail begin -->
+        <div class="form-content">
+            <div class="display block">
+                <div class="" id="all-device-detail">
+                  <table width="100%">
+                    <tr>
+                      <td valign="top" width="20%">
+                        <!--div class="panel-heading">
+                          <div class="zTreeDemoBackground left">
+                            <ul id="treeDemo" class="ztree"></ul>
+                          </div>
+                        </div-->
+                        <div class="bportlet">
+                        <table border="0" width="100%" align="center" cellspacing="0" class="tagtree" id="locationFilter">
+
+
+                        <form method="post" >
+
+                            <tbody>
+                                <tr>
+                                    <td class="tagbox" style="padding-left: 0px">
+                                        <label>
+                                            <select name="depart" >
+                                            	<option>请选择所属业务线...</option>
+                                            	<volist name="depart_list" id="vo"  >
+                                            	<?php  $vid = $vo['id'];   ?>
+													<option value="{$vo.id}" <if condition="$vid eq $depart">selected</if>>{$vo.depart_name}</option>
+												</volist>
+                                            </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tagbox" style="padding-left: 0px">
+                                        <label>
+                                            <input type="checkbox" name="location" checked="" onclick="checkAll(this)" > 全选</label>
+                                            <input type="submit" class="btn btn-primary" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tagbox" >
+                                        <hr>
+                                        {$showlabel}
+
+                                        <hr>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" class="btn btn-primary"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </form>
+                        </table>
+                        </div>
+                      </td>
+
+
+
+                      <td valign="top" >
+        				
+        				
+                        <table border="0" cellpadding="10" class="cooltable ly-cooltable" >
+                                    <tbody>
+                                        <tr>
+                                            <th class="tdleft" width="120">设备名称</th>
+                                            <th class="tdleft" width="25%">所属机房</th>
+                                            <th class="tdleft" width="25%">所属业务线</th>
+                                        </tr>
+
+                                    <volist name="list" id="vo">
+                                        <tr class="row_odd">
+                                            <th class="tdleft" style="font-size:11px;">
+
+                                               
+                                                <a href="{:U('Item/item_info?id='.$vo['id'])}" target="_blank">{$vo.common_name}</a>
+     
+                                            </th>
+
+                                            <th class="tdleft" style="font-size:11px;">
+                                              <a href="{:U('Ipdb/viewlocation?locationid='.$vo['locationid'])}"><?php $lid = $vo['locationid'];echo $location_list[$lid];?></a>/<a href="{:U('Ipdb/viewarea?areaid='.$vo['locareaid'])}"><?php $rid = $vo['locareaid'];echo $area_list[$rid];?></a>/<a href="{:U('Racks/viewrack?rackid='.$vo['rackid'])}"><?php $rackid = $vo['rackid'];echo $rack_list[$rackid];?></a>
+                                            </th>
+                                            <th class="tdleft" style="font-size:11px;">
+                                               <a><?php  $departid=$vo['depart_id']; echo $depart_arr[$departid];  ?></a> 
+                                            </th>
+
+                                        </tr>
+                                    </volist>
+									 
+
+                                    </tbody>
+                                </table>
+                      </td>
+                    </tr>
+                  </table>
+                    
+                      
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <div class="display"><!--标签内容--></div>
+            <div class="display">
+                <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                    {$table}
+                    <div class="ctables">
+                        <label for="device-type" class="col-xs-16 control-label">区域</label>
+                        <div class="col-xs-16">
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="1"> 华北大区
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="22">华南大区
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="23">华东大区
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="24">华中大区
+                            </label>
+                        </div>
+
+
+                        <label for="device-type" class="col-xs-16 control-label">城市</label>
+                        <div class="col-xs-16">
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                            </label>
+
+                        </div>
+                        <label for="device-type" class="col-xs-16 control-label">城市</label>
+                        <div class="col-xs-16">
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                            </label>
+
+                        </div>
+                        <label for="device-type" class="col-xs-16 chide control-label">城市</label>
+                        <div class="col-xs-16 chide">
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                            </label>
+
+                        </div>
+                        <label for="device-type" class="col-xs-16 chide control-label">城市</label>
+                        <div class="col-xs-16 chide">
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                            </label>
+
+                            <label class="radio-inline">
+                            <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                            </label>
+
+                        </div>
+                        <label for="device-type" class="col-xs-16 chide control-label">其他</label>
+                        <div class="col-xs-16 chide">
+                            <label class="radio-inline">
+                            <input  type="text" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-primary" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="more btn-more">更多选项<span class="arrow"></span></div>
+
+                    <div class="form-actions col-xs-8 pull-right">
+                        
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+</div>
+        
+
+                    
+
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    //var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      //$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".form-li").on("click",'li',function(){
+          $(this).addClass('active').siblings().removeClass('active');
+          var num = $(this).index();
+          $(".form-content .display").removeClass('block');
+          $(".form-content .display").eq(num).addClass('block');
+          
+        });
+      $('.btn-more').toggle(function(){
+            $(this).html('收起选项<span class="upArrow"></span>')
+            $('.ctables>div:gt(2)').removeClass('chide');
+            $('.ctables>label:gt(2)').removeClass('chide');
+        },function(){
+            $(this).html('更多选项<span class="arrow"></span>')
+            $('.ctables>div:gt(2)').addClass('chide');
+            $('.ctables>label:gt(2)').addClass('chide');
+        });
+    });
+    
+
+    function checkAll(bx) {
+        for (var tbls = document.getElementsByTagName("table"), i = tbls.length; i--;)
+            if (tbls[i].id == "locationFilter") {
+                var bxs = tbls[i].getElementsByTagName("input");
+                var in_tree = false;
+                for (var j = 0; j < bxs.length; j++) {
+                    if (in_tree == false && bxs[j].value == bx.value)
+                        in_tree = true;
+                    else if (parseInt(bxs[j].className) <= parseInt(bx.className))
+                        in_tree = false;
+                    if (bxs[j].type == "checkbox" && in_tree == true)
+                        bxs[j].checked = bx.checked;
+                }
+            }
+    }
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

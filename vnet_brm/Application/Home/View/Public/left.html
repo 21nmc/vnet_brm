@@ -1,0 +1,109 @@
+<block name="left">
+<!--the sidebar nav begin -->
+<span class="leftsider">折叠</span>
+    <div class="sidebar-nav">
+
+    	<a href="{:U('Index/index')}" class="nav-header" ><span class="glyphicon glyphicon-home"></span> 管理中心</a>
+    	
+        
+        
+        <a href="#account-menu2" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 资产管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu2" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'item_index' ">class="active"</if> ><a href="{:U('Item/index')}">硬件列表</a></li>
+            <if condition="$is_admin_define eq true" > <li <if condition="$url_flag eq 'soft_index' ">class="active"</if> ><a href="{:U('Soft/index')}">软件列表</a></li></if>
+            <li <if condition="$url_flag eq 'device_list' ">class="active"</if> ><a href="{:U('Customer/device_list')}">各地区网络设备列表</a></li>
+            <!-- <li <if condition="$url_flag eq 'contract_index' ">class="active"</if> ><a  href="{:U('Soft/contract_index')}">合同列表</a></li> -->
+            <if condition="$is_admin_define eq true" > <li <if condition="$url_flag eq 'lei_index' ">class="active"</if> ><a  href="{:U('Ying/itemtypes')}">类型管理列表</a></li> </if>
+            
+        </ul>
+        
+         <!--a href="#account-menu9" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 客户资产管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu9" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'customer_index' ">class="active"</if> ><a href="{:U('Customer/index')}">客户列表</a></li>
+            <li <if condition="$url_flag eq 'pact_index' ">class="active"</if> ><a href="{:U('Pact/index')}">合同带宽列表</a></li>
+            <if  condition="($single_depart_id eq 5) or ($is_admin_define eq true) "  >
+            <li <if condition="$url_flag eq 'customer_alert' ">class="active"</if> ><a href="{:U('Customer/alert')}">客户超带宽告警</a></li>
+            </if>
+            <if  condition="$single_depart_id eq 4 "  >
+            <li <if condition="$url_flag eq 'customer_alert' ">class="active"</if> ><a href="{:U('Customer/alert_huadong')}">客户超带宽告警</a></li>
+            </if>
+            <if  condition="$single_depart_id eq 6 "  >
+            <li <if condition="$url_flag eq 'customer_alert' ">class="active"</if> ><a href="{:U('Customer/alert_huanan')}">客户超带宽告警</a></li>
+            </if>
+            <if  condition="$single_depart_id eq 8 "  >
+            <li <if condition="$url_flag eq 'customer_alert' ">class="active"</if> ><a href="{:U('Customer/alert_chuanshu')}">客户超带宽告警</a></li>
+            </if>
+            <li <if condition="$url_flag eq 'customer_contract' ">class="active"</if> ><a href="{:U('Customer/customer_contract')}">客户合同列表</a></li>
+        </ul-->
+        
+        <a href="#account-menu3" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 机柜管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu3" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'listlocations' ">class="active"</if> ><a href="{:U('Ipdb/listlocations')}">数据中心</a></li>
+            <li <if condition="$url_flag eq 'listareas' ">class="active"</if> ><a href="{:U('Ipdb/listareas')}">房间列表</a></li>
+            <li <if condition="$url_flag eq 'listracks' ">class="active"</if> ><a  href="{:U('Racks/listracks')}">机柜列表</a></li>
+            <li <if condition="$url_flag eq 'rackmap' ">class="active"</if> ><a  href="{:U('Racks/rackmap')}">机柜综合查询</a></li>
+            <li <if condition="$url_flag eq 'reportmap' ">class="active"</if> ><a  href="{:U('Racksreport/reportmap')}">综合报表</a></li>
+            <if condition="$is_admin_define eq true" >
+            <!--li <if condition="$url_flag eq 'listnodes' ">class="active"</if> ><a  href="{:U('Node/listnodes')}">节点列表</a></li>
+            <li <if condition="$url_flag eq 'racks_index' ">class="active"</if> ><a  href="{:U('Racks/index')}">机柜九宫格</a></li-->
+            </if>
+            
+        </ul>
+
+        <!--a href="#account-menu6" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 资源管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu6" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'events' ">class="active"</if> ><a href="{:U('Resource/events')}">事件管理</a></li>
+            <li <if condition="$url_flag eq 'ip' ">class="active"</if> ><a href="{:U('Ip/index')}">IP资源管理</a></li>
+            <li <if condition="$url_flag eq 'cactimap' ">class="active"</if> ><a href="{:U('Resource/cactimap')}">出口菜单</a></li>
+            <li <if condition="$url_flag eq 'cactiindex' ">class="active"</if> ><a href="{:U('Resource/cactiindex')}">华北、华东、华南数据列表</a></li>
+            <li <if condition="$url_flag eq 'Engineroomport' ">class="active"</if> ><a href="{:U('Engineroomport/index')}">华北机房端口管理</a></li>
+            <li <if condition="$url_flag eq 'huanan' ">class="active"</if> ><a href="{:U('Engineroomport/indexhuanan')}">华南机房端口管理</a></li>
+            <li <if condition="$url_flag eq 'huadong' ">class="active"</if> ><a href="{:U('Engineroomport/indexhuadong')}">华东机房端口管理</a></li>
+            <li <if condition="$url_flag eq 'chukou' ">class="active"</if> ><a href="{:U('ExportFlow/index')}">出口端口管理</a></li>
+            <li <if condition="$url_flag eq 'weekchukou' ">class="active"</if> ><a href="{:U('Weekreport/index')}">周报端口管理</a></li>
+            <li <if condition="$url_flag eq 'Mis' ">class="active"</if> ><a href="{:U('Mis/index')}">MIS周报管理</a></li>
+
+        </ul-->
+
+        
+        <if condition="$is_admin_define eq true" >
+        <a href="#account-menu4" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 用户及用户组权限管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu4" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'user_list' ">class="active"</if> ><a href="{:U('User/user_list')}">用户列表</a></li>
+            <li <if condition="$url_flag eq 'user_group_list' ">class="active"</if> ><a href="{:U('User/user_group_list')}">用户组列表</a></li>
+            <li <if condition="$url_flag eq 'host_group_list' ">class="active"</if> ><a  href="{:U('HostGroup/host_group_list')}">系统列表</a></li>
+            <li <if condition="$url_flag eq 'relation_list' ">class="active"</if> ><a  href="{:U('HostGroup/relation_list')}">关系授权</a></li>
+            <li <if condition="$url_flag eq 'menu' ">class="active"</if> ><a  href="{:U('Menu/menulist')}">菜单管理</a></li>
+            <li <if condition="$url_flag eq 'squared' ">class="active"</if> ><a  href="{:U('Squared/squared_manger')}">九宫格管理</a></li>
+            <!--li <if condition="$url_flag eq 'appliaction' ">class="active"</if> ><a  href="{:U('Appliaction/manger')}">全局用户授权</a></li-->
+
+        </ul>
+        <elseif condition="$is_owner_define eq 'YES'"/>
+        <a href="#account-menu4" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-hd-video"></span> 部门用户管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu4" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'owner_user_list' ">class="active"</if> ><a href="{:U('User/owner_user_list')}">用户列表</a></li>
+        </ul>
+        <else /> 
+        </if>
+
+        <a href="#account-menu5" class="nav-header collapsed" data-toggle="collapse"><span class="glyphicon glyphicon-user"></span> 账户管理 <span class="glyphicon glyphicon-chevron-up"></span></a>
+        <ul id="account-menu5" class="nav nav-list collapse">
+            <li <if condition="$url_flag eq 'change_pwd' ">class="active"</if> ><a href="{:U('Login/profile')}">修改密码</a></li>
+        </ul>
+
+    </div>
+    <!--the siderbar nav en-->
+</block>
+<script type="text/javascript">
+$(function(){
+    $(".leftsider").toggle(function(){
+        $(this).css('left',0).html('展开');
+        $('.sidebar-nav').hide();
+        $('.content').css('margin-left',0)
+    },function(){
+        $(this).css('left',240).html('折叠');
+        $('.sidebar-nav').show();
+        $('.content').css('margin-left',240)
+    });
+})
+</script>

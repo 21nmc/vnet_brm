@@ -1,0 +1,118 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">房间列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+						 <if condition="$is_admin_define eq true" >
+                          <a href="{:U('itemareasadd')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span>房间添加</a>
+                         </if>
+
+              <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                                <div class="form-group">
+                                <input type="text" class="form-control" name="areaname" id="areaname" value="{$areaname}"  placeholder="房间名称……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+              </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>数据中心-房间名称</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            <td>
+                                <a href="{:U('Ipdb/viewarea?areaid='.$vo['id'])}" target="_blank">
+                                    {$vo.locname}-{$vo.areaname}
+                                </a>
+                            </td>
+                            <if condition="$is_admin_define eq true" >
+                            <td> 
+                                <a href="{:U('Ipdb/itemareasedit?id='.$vo['id'])}" >编辑</a> | 
+                                <a href="{:U('Ipdb/delareas?id='.$vo['id'])}" onclick="javascript:return p_del()">删除</a> 
+                            </td>
+							</if>
+
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var areaname = $('#areaname').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Ipdb/listareas/areaname/"+areaname+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

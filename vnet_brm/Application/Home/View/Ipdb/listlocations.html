@@ -1,0 +1,120 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">数据中心地点列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                          <if condition="$is_admin_define eq true" >
+                          <a href="{:U('addlocation')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span> 数据中心地点添加</a>
+                          </if>
+                          <!--a href="{:U('addlocation')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span> 大区信息汇总</a-->
+                       
+
+              <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                                <div class="form-group">
+                                <input type="text" class="form-control" name="name" id="name" value="{$name}"  placeholder="数据中心名称……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>数据中心名称</th>
+                            <th>房间</th>
+                            <th>建筑平面图</th>
+                            <th>关联硬件数</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+
+                                <td><a href="{:U('Ipdb/viewlocation?locationid='.$vo['id'])}" target="_blank">{$vo.name}</a></td>
+                                <td><a href="{:U('Ipdb/itemviewareas?id='.$vo['id'])}" target="_blank">{$vo.areacount}</a></td>
+                                <td><a href="__ROOT__{$vo.savename}" target="_blank">{$vo.floorplanfn}</a></td>
+                                <td><a href="{:U('Ipdb/itemlocationslist?id='.$vo['id'])}" target="_blank">{$vo.itemcount}</a></td>
+                                <if condition="$is_admin_define eq true" >
+                                <td>
+                                  <a href="{:U('Ipdb/editlocation?id='.$vo['id'])}" >编辑</a> | 
+                                  <a href="{:U('Ipdb/dellocations?id='.$vo['id'])}" onclick="javascript:return p_del()"> 删除</a>
+                                </td>
+                                </if>
+                            
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Ipdb/listlocations/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

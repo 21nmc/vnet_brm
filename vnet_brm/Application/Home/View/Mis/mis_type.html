@@ -1,0 +1,103 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+                <li ><a href="{:U('Mis/index')}">Mis月报</a></li>
+                <li ><a href="{:U('Mis/index2')}">MIS端口管理</a></li>
+                <li><a href="{:U('Mis/mis_portmanger')}">MIS端口配置</a></li>
+                <li ><a href="{:U('Mis/city')}">MIS城市管理</a></li>
+                <li><a href="{:U('Mis/product')}">MIS产品管理</a></li>
+                <li class="hover"><a href="{:U('Mis/room')}">MIS机房管理</a></li>
+                <li><a href="{:U('Mis/mis_history')}">MIS历史</a></li>
+                
+
+
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('flow_type_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新类型</a>
+                        	
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+
+                        	<th>机房编码</th>
+                            <th>机房名称</th>
+                            <th>产品</th>
+                            <th>使用量(MB)</th>
+                            <th>年</th>
+                            <th>月</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr>
+                            	<td><?php echo $vo['roomcode'];?></td>
+                            	<td><?php echo $vo['name'];?></td>
+                                <td><?php echo $vo['product_name'];?></td>
+                                <td><?php echo $vo['flow'];?></td>
+                                <td><?php echo $vo['year'];?></td>
+                                <td><?php echo $vo['month'];?></td>
+
+
+                            </tr>
+
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

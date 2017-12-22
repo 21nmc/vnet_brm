@@ -1,0 +1,68 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">房间编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="{:U('itemareasedit')}" class="form-horizontal" id="add-device" role="form" method="post">
+                            <input type="hidden" name="id" value="{$id}">
+                            <!--div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">数据中心列表:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="locationid">
+                                        <option value="0">请选择数据中心......</option>
+                                        {$locationoption}
+                                    </select>
+                                </div>
+                            </div-->
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">房间*:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="areaname" name="areaname" value="{$areaname}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">标记*:</label>
+                                <div class="col-xs-4">
+
+                                    <select class="form-control" name="contypeid">
+                                        <option value="0">顶级标记</option>
+                                        {$contypeoption}
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-actions col-xs-8 pull-right">
+                            <input type="submit" class="btn btn-primary"></input>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+
+   
+</block>

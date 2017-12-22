@@ -1,0 +1,134 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+   
+	
+	var itemtypeid = $('#itemtypeid').val();
+	var sn = $('#sn').val();
+	
+	window.location.href= "__ROOT__/index.php?s=/Home/Item/test/itemtypeid/"+itemtypeid+"/sn/"+sn+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+           <h1 class="page-title">TEST资产批量导入列表</h1>  
+        	
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('item_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新硬件</a>
+							<a href="{:U('import_items')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 批量添加</a>
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+							    <div class="form-group">
+                                    <select class="form-control" id="itemtypeid" name="itemtypeid">
+                                    	<option class="level-0" value=""  > 全部</option>
+                                        <volist name="type_all_list" id="vo"> 
+                                            <?php   $void = $vo['id'];$tyid=I('get.itemtypeid'); ?>   
+                                            <option class="level-0" value="{$vo.id}" <if condition="$void eq $tyid"> selected='selected'</if>  > {$vo.typedesc}</option>
+                                        </volist>
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="sn" id="sn" value="<?php echo I('get.sn'); ?>"  placeholder="sn编号……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>设备名称</th>
+                            <th>硬件类型</th>
+                            <th>厂商</th>
+                            <th>型号</th>
+                            <th>SN号</th>
+                            <th>状态</th>
+                            <th>软件</th>
+                            <th>所属部门</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.common_name}</td>
+                                <td><?php  $typeid = $vo['itemtypeid'];  echo $type_list[$typeid];  ?></td>
+                                <td><?php  $manufacturerid = $vo['manufacturerid'];  echo $agent_list[$manufacturerid];  ?></td>
+                                <td>{$vo.model}</td>
+                                <td>{$vo.sn}</td>
+                                <td>{$vo.status}</td>
+                                <td></td>
+                                <td></td>
+                                <td>
+
+
+ <a class="btn btn-primary btn-xs" href="{:U('Racks/rackspace?objectid='.$vo['id'])}">上下架</a>
+                                <a class="btn btn-primary btn-xs" href="{:U('Racks/rackspacemove?objectid='.$vo['id'])}">迁移</a>    
+                                    
+                              <a class="btn btn-primary btn-xs" href="{:U('item_edit?id='.$vo['id'])}">编辑信息</a>                                
+                                <a class="btn btn-default btn-xs" href="{:U('item_del?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

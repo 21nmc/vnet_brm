@@ -1,0 +1,19 @@
+<table border="0">
+    <!--tr>
+		<th align="center"><font size="5" face="楷体" color="000">资产明细</font></th>
+	</tr-->
+	<caption align="center" ><font size="5" face="宋体" color="000"><b>关联房间列表</b></font></caption>
+	<tr bgcolor="#99ccff">
+        <th>房间名称<!--left></left--></th>
+        <th align="center"><font size="4" face="宋体" color="000">关联数据中心</font><!--left></left--></th>
+    </tr>
+    <foreach name="list" item="vo">
+        <tr bgcolor="#cfcfcf">
+            <td width="150px">{$vo.areaname}</td>
+            <td width="300px">{$vo.locname}</td>
+        </tr>
+
+    </foreach>
+<tr bgcolor="#fafafa"><td colspan="2">
+    <center><input type="button" name="close" value="关闭" onclick="window.close();" /></center>
+</td></tr>

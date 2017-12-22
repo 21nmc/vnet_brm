@@ -1,0 +1,161 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+	var name = $('#name').val();
+	window.location.href= "__ROOT__/index.php?s=/Home/Resource/index/name/"+name+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+           <h1 class="page-title">华南机房报表列表</h1>  
+        	
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                            <if condition="$is_admin_define eq true" >
+                                    <a href="{:U('add_port_huanan')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    添加机房</a>
+
+                                    <a href="{:U('index_port_huanan')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    出口流量类型列表</a>     
+                            <elseif condition="$is_owner_define eq 'YES'"/>
+
+                                     <a href="{:U('add_port_huanan')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    添加机房</a>
+
+                                    <a href="{:U('index_port_huanan')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    出口流量类型列表</a>                                                               
+                            <else /> 
+                            </if>
+                        <!--form class="form-inline pull-right" id="device-search" role="form" method="get">
+						    <div class="form-group">
+
+                                <select class="form-control" name="depart_id" onchange="javascript:location.href=this.value;" >
+                                	<option class="level-0" value="" >选择部门.....</option>
+                                    <volist name="depart_list" id="vo"> 
+                                        <?php   $vodeid = $vo['id'];$deid=I('get.depart_id'); ?>   
+                                        <option class="level-0" value="__ROOT__/index.php?s=/Home/Resource/index/depart_id/{$vo.id}.html" <if condition="$vodeid eq $deid"> selected='selected'</if>  >{$vo.depart_name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                    <input type="text" class="form-control" name="name" id="name" value="<?php echo I('get.name'); ?>"  placeholder="名称……">
+                            </div>
+
+                            <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                        </form-->
+
+
+
+                        <select class="button-select" name="level" onchange="javascript:location.href=this.value;" style="width:250px;">
+
+                            {$option}
+
+                        </select>
+
+
+
+
+
+
+
+
+                       </div>
+    
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>机房名称</th>
+                            <th>本机房bgp出口in/out(Mb)</th>
+                            <th>本机房电信流量in/out(Mb)</th>
+                            <th>本机房联通流量in/out(Mb)</th>
+                            <th>本机房移动流量in/out(Mb)</th>
+
+
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td><a href="{:U('portlist_huanan?jifangid='.$vo['id'])}">{$vo.name}</a></td>
+                                <td>{$vo.bgp_in}/{$vo.bgp_out}</td>
+                                <td>{$vo.ct_in}/{$vo.ct_out}</td>
+                                <td>{$vo.cnc_in}/{$vo.cnc_out}</td>
+                                <td>{$vo.cmc_in}/{$vo.cmc_out}</td>
+                                
+                                <if condition="$is_admin_define eq true" >
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_port_huanan?id='.$vo['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_port_huanan?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <elseif condition="$is_owner_define eq 'YES'"/>
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_port_huanan?id='.$vo['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_port_huanan?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <else /> 
+                                	<td></td>
+                                </if>
+
+
+
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+                    
+    </div>
+    
+   
+   
+</block>

@@ -1,0 +1,139 @@
+<extend name="Base/common"/>987654321·
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">华南客户超带宽告警</h1>
+        </div>
+        <ul class="breadcrumb">
+            <li><a href="{:U('Customer/alert')}">华北超流量告警</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customer/alert_huadong')}">华东超流量告警</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customer/alert_huanan')}">华南超流量告警</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customer/alert_chuanshu')}">传输超流量告警</a> <span class="divider"></span></li>
+            
+        </ul>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+						
+                        
+
+                        <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                          
+
+                            <a href="__ROOT__/export_alert_huanan.php"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 导出告警</a>
+                        	
+
+                
+                        </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                        	<th>网络设备</th>
+                            <th>告警端口</th>
+                            <th>告警端口描述</th>
+                            <th>端口in流量</th>
+                            <th>端口out流量</th>
+                            <th>阀值</th>
+                            <th>端口所属公司</th>
+                            <th>告警描述</th>
+                            <th>超出带宽</th>
+                        </tr></thead>
+                        <tbody>
+  
+                        <volist name="list" id="vo">
+                        <?php $one = $vo['type']; 
+							  $desc = $vo['port_desc'];
+					          $now_desc = "";
+							  if (strpos($desc, "Interface") || $desc=="") {
+        							$now_desc =  "";
+    						  }else{
+        							$now_desc = $desc;
+    						  }
+						 ?>
+                        <tr  >
+                            <td><a href="{:U('Customer/device_find?wl_device_name='.$vo['item_name'])}">{$vo.item_name}</a></td>
+                            <td>{$vo.portname}</td>
+                            <td>{$now_desc}</td>
+                            <td>{$vo.in}</td>
+                            <td>{$vo.out}</td>
+                            <td><if condition = "$one eq '1'" >{$vo.fazhis} M</if></td>
+                            <td>{$vo.cust}</td>
+                            <td>{$vo.alert_info}</td>
+							<!--  <td><a class="btn btn-primary btn-xs" href="">查看详情</a></td>-->
+							<td>{$vo.beyond}</td>
+                        </tr>
+                        </volist>
+
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Customer/customer_contract/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

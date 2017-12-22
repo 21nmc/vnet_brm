@@ -1,0 +1,288 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">                           
+
+                            
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label"><font color="red">*</font>事件类型:</label>
+                              <div class="col-xs-4">
+
+                                <select class="form-control" name="event_type" required="required">
+
+                                   <!--option value="网络攻击" <if condition="$event_find.event_type eq '网络攻击'">selected = 'selected'</if> >网络攻击</option>
+                                   <option value="DDoS攻击" <if condition="$event_find.event_type eq 'DDoS攻击'">selected = 'selected'</if> >DDoS攻击</option>
+                                   <option value="运营商传输故障"  <if condition="$event_find.event_type eq '运营商传输故障'">selected = 'selected'</if> >运营商传输故障</option>
+                                   <option value="其他"  <if condition="$event_find.event_type eq '其他'">selected = 'selected'</if> >其他</option-->
+                                   {$option}
+                                </select>
+
+                              </div>
+                            </div>
+                            <input type="hidden" name="group_id" value="{$group_id}">
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label"><font color="red">*</font>开始时间:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="startcai" name="start_time"  required="required" value="{$event_find.start_time|date="Y-m-d H:i:s",###}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label"><font color="red">*</font>结束时间:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="endcai" name="end_time"  required="required"  value="{$event_find.end_time|date="Y-m-d H:i:s",###}" >
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label"><font color="red">*</font>影响时长:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="efftime" name="effect_time"  required="required"  value="{$event_find.effect_time}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label"><font color="red">*</font>光缆运营商:</label>                            
+                                <div class="col-xs-4" style="position:relative;">
+                                    <input type="text" class="form-control" id="gloption" name="gloption" value="{$event_find.gloption}"  required="required">
+                                    <div id="word"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label"><font color="red">*</font>线路故障范围:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="line_range" name="line_range" value="{$event_find.line_range}" required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">工单号:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="number" name="number" value="{$event_find.number}"  >
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">影响客户数量:</label>
+                                <div class="col-xs-4">
+                                <select class="form-control" name="effect_customer" required="required">
+
+                                   <option value="单一" <if condition="$event_find.effect_customer eq '单一'">selected = 'selected'</if> >单一</option>
+                                   <option value="2-5个"  <if condition="$event_find.effect_customer eq '2-5个'">selected = 'selected'</if>  >2-5个</option>
+                                   <option value="5个以上" <if condition="$event_find.effect_customer eq '5个以上'">selected = 'selected'</if> >5个以上</option>
+
+                                </select>
+                                </div>
+                            </div>
+                            
+                            
+
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label"><font color="red">*</font>影响范围:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="effect_desc" rows="3" maxlength="50" required="required">{$event_find.effect_desc}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="product-key" class="col-xs-4 control-label"><font color="red">*</font>事件真实原因:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="real_reason" rows="3" maxlength="50" required="required">{$event_find.real_reason}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="product-key" class="col-xs-4 control-label"><font color="red">*</font>处理方案:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="deal_func" rows="3" maxlength="50" required="required">{$event_find.deal_func}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="product-key" class="col-xs-4 control-label">所需帮助:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="help_desc" rows="3" maxlength="50">{$event_find.help_desc}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="device-type" class="col-xs-4 control-label"><font color="red">*</font>是否发送通知:</label>
+                                <div class="col-xs-4">
+                                <select class="form-control" name="has_notice" required="required">
+
+                                   <option value="1" <if condition="$event_find.has_notice eq '1'">selected = 'selected'</if> >是</option>
+                                   <option value="0" <if condition="$event_find.has_notice eq '0'">selected = 'selected'</if> >否</option>
+
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group"> 
+                                <label for="device-type" class="col-xs-4 control-label"><font color="red">*</font>是否重大事件:</label>
+                                <div class="col-xs-4">
+                                <div id="tip1" data-tipso="是否重大事111"><select class="form-control" name="is_important" required="required">
+
+                                   <option value="1" <if condition="$event_find.is_important eq '1'">selected = 'selected'</if> >是</option>
+                                   <option value="0" <if condition="$event_find.is_important eq '0'">selected = 'selected'</if> >否</option>
+
+                                </select></div>
+                                </div>
+                            </div>
+                            
+							 <div class="form-group"> 
+                                <label for="device-type" class="col-xs-4 control-label"><font color="red">*</font>绩效指数:</label>
+                                <div class="col-xs-4">
+                                <select class="form-control" name="pay_index" required="required">
+                                    <option value="D" <if condition="$event_find.pay_index eq 'D'">selected = 'selected'</if> >D</option>
+                                    <option value="C" <if condition="$event_find.pay_index eq 'C'">selected = 'selected'</if> >C</option>
+                                    <option value="B" <if condition="$event_find.pay_index eq 'B'">selected = 'selected'</if> >B</option>
+									<option value="A" <if condition="$event_find.pay_index eq 'A'">selected = 'selected'</if> >A</option>
+                                     
+                                </select>
+                                </div>
+                            </div>
+                            
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+   
+
+<script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ly/jquery.autocompleter.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/ly/tipso.js"></script>
+<script type="text/javascript">
+//jeDate.skin('gray');
+jeDate({
+    dateCell:"#startcai",
+    format:"YYYY-MM-DD hh:mm:ss",
+    isTime:true
+})
+
+jeDate({
+    dateCell:"#endcai",
+    format:"YYYY-MM-DD hh:mm:ss",
+    isTime:true
+})
+/*var timestamp2 = Date.parse(new Date(stringTime));*/
+/*$("#efftime").onclick(function(){
+	var start=document.getElementById("startcai").value;  
+	var end=document.getElementById("endcai").value;
+	if(start != "" && end != ""){
+		var stat = Date.parse(new Date(start));
+		var en = Date.parse(new Date(end));
+		if(en > stat){
+			var gap = (en - stat)/1000
+			var fen = gap / 60;
+			document.getElementById("endcai").value = fen.toFixed(2) + "second";
+		}
+	}
+});*/
+$('#startcai').blur(function(){
+    var that = this;
+    setTimeout(function(){
+        var startcai = Date.parse(new Date($(that).val()))/1000;
+        if($('#endcai').val()!=''){
+            var endcai = Date.parse(new Date($('#endcai').val()))/1000;
+            if((endcai - startcai) >0){
+                $('#efftime').val(Math.ceil((endcai - startcai)/60));
+            }
+        }
+    },500);
+});
+$('#endcai').blur(function(){
+    var that = this;
+    setTimeout(function(){
+        var endcai = Date.parse(new Date($(that).val()))/1000;
+        if($('#startcai').val()!=''){
+            var startcai = Date.parse(new Date($('#startcai').val()))/1000;
+            if((endcai - startcai) >0){
+                $('#efftime').val(Math.ceil((endcai - startcai)/60));
+            }
+        }
+    },500);
+});
+$('#isnotice').change(function(){
+    console.log($(this).val());
+    if($(this).val()==1){
+
+    }
+});
+$('#tip1').tipso({
+    useTitle: false,
+    background: 'tomato'
+});
+$(function(){
+//当键盘键被松开时发送Ajax获取数据
+    $('#gloption').keyup(function(){
+        var keywords = $(this).val();
+        if (keywords=='') { $('#word').hide(); return };
+        $.ajax({
+            url: 'http://211.151.5.12/zichan/index.php/Home/Resource/ajax_events_gloption/name/' + keywords + '.html',
+            dataType: 'json',
+            // jsonp: 'cb', //回调函数的参数名(键值)key
+            // jsonpCallback: 'fun', //回调函数名(值) value
+            beforeSend:function(){
+                $('#word').append('<div>正在加载。。。</div>');
+            },
+            success:function(data){
+                $('#word').empty().show();
+                //if (data=='')
+                //{
+                  //  $('#word').append('<div class="error">Not find  "' + keywords + '"</div>');
+                //}
+                $.each(data, function(){
+                    $('#word').append('<div class="click_work">'+ this.name +'</div>');
+                })
+            },
+            error:function(){
+                //$('#word').empty().show();
+                //$('#word').append('<div class="click_work">Fail "' + keywords + '"</div>');
+            }
+        })
+    })
+//点击搜索数据复制给搜索框
+    $(document).on('click','.click_work',function(){
+        var word = $(this).text();
+        $('#gloption').val(word);
+        $('#word').hide();
+        // $('#texe').trigger('click');触发搜索事件
+    })
+
+})
+</script>
+
+   
+</block>

@@ -1,0 +1,84 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<style>
+.more-device-button {
+    margin:10px auto;
+    text-align:center;
+}
+</style>
+
+<div class="content">
+
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">导出数据</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <div class="display">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="panel panel-default" id="ledpanel">
+                        <div class="panel-heading">
+                            <h5>设备数据导出EXCEL<span class="make-switch pull-right" data-on="success" data-off="danger"></span></h5>
+                        </div>
+
+                        <div class="more-device-button">
+                            <button  class="btn btn-primary" data-toggle="modal" data-target="#led-more-device">设备数据导出Excel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="panel panel-default" id="ledpanel">
+                        <div class="panel-heading">
+                            <h5>设备数据导出EXCEL<span class="make-switch pull-right" data-on="success" data-off="danger"></span></h5>
+                        </div>
+                        <div class="panel-body">
+                        <p>设备所属的部门：</p>  <br/> 
+                        			<select class="form-control" id="depart_id">
+                                        <option class="level-0" value="-1">默认</option>
+                                        <volist name="depart_list" id="vo">
+											<option class="level-0" value="{$vo.id}">{$vo.depart_name}</option>
+										</volist>
+                                    </select>
+                        </div>
+                       
+                    <div class="more-device-button">
+                            <button  class="btn btn-primary" data-toggle="modal" data-target="#led-more-device" onclick="deal_device()">设备数据导出EXCEL</button>
+                    </div>
+                </div>
+            </div>
+         
+      
+            <!--导出模块end-->
+        </div>
+        </div>
+    </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+     <script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+		function deal_device(){
+			var departid = $('#depart_id').val();
+			//alert(departid);
+			//window.location.href= "__ROOT__/export_items.php?depart_id="+departid;
+			window.open("__ROOT__/export_items.php?depart_id="+departid);
+		}
+   
+    </script>
+   
+</block>

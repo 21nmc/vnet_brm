@@ -1,0 +1,135 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+ 
+ <script type="text/javascript">
+
+</script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">资源添加</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">资源编号</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="code_name"  require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">资源名称</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="source_name" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">归属运营商</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="factory" require>
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">资源分类</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="category" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">IP地址</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="ip" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">带宽</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="bandwidth" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">接入设备</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="device" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">接入端口</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="port" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">开通时间</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="time" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">联系人</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="contact">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">操作人</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="person_op">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">备注</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="desc" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__STATIC__/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+    jeDate({
+    	dateCell:"#end",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+    })
+    </script>
+   
+</block>

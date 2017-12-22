@@ -1,0 +1,371 @@
+<extend name="Base/allcommon"/>
+
+<block name="main">
+<style type="text/css">
+hr{height:1px;overflow:hidden;margin-bottom: 0;margin-top: 0;}
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;margin-top:10px;}
+.toolbar{margin-bottom: 10px;}
+.form-content .display.block{ display:block;}
+.ctables{
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;font-size:14px;color:#333;
+}
+.ctables label{font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;}
+.ctables>label{font-weight:900;}
+</style>
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title"><a href="{:U('Index/index')}">首页</a>->机柜综合查询</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+          
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                <ul class="form-li">
+                    <li><a href="{:U('index')}" >机柜报表</a></li>
+                    <li class="active"><a href="{:U('reportmap')}">Map报表</a></li>
+                    <!--li>复合查询</li-->
+                    <div class="clear"></div>
+                </ul>
+                <div class="col-xs-6" style="width:100%;">
+                    <div class="quick-add-btn">
+
+                      <!--a href="{:U('addtree')}"  type="button" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-new-window"></span>树状结构添加</a>
+                      <a href="{:U('addassetnode')}"  type="button" class="btn btn-danger">
+                      <span class="glyphicon glyphicon-new-window"></span>测试资产关联树状结构添加</a>                       
+                        <a href="{:U('addnode')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span>节点添加</a-->
+
+
+                   </div>
+                    
+                    
+                    
+                </div>
+                    
+                </div>
+
+            </div>
+
+
+
+        <!--all device detail begin -->
+        <div class="form-content">
+
+<if condition="$flag eq '' ">
+
+            <div class="display block">
+                <div class="" id="all-device-detail">
+                  <table width="100%">
+                    <tr>
+                      <td valign="top" width="70%">
+                        <div class="bufen l">
+                            <div class="map">
+                                <a class="huaxi" href="__ROOT__/index.php/Home/Racksreport/reportmap/flag/area/title/华西区.html">华西区</a>
+                                <a class="huabei" href="__ROOT__/index.php/Home/Racksreport/reportmap/flag/area/title/华北区.html">华北区</a>
+                                <a class="huadong" href="__ROOT__/index.php/Home/Racksreport/reportmap/flag/area/title/华东区.html">华东区</a>
+                                <a class="huanan" href="__ROOT__/index.php/Home/Racksreport/reportmap/flag/area/title/华南区.html">华南区</a>
+                            </div>
+                        </div>
+                      </td>
+
+
+
+                      <td valign="top">
+        
+                        <table border="0" cellpadding="10" class="cooltable">
+                                    <tbody>
+                                        <tr>
+                                            <th class="tdleft">区域</th>
+                                            <th class="tdleft">机柜数</th>
+                                            <th class="tdleft">设备数</th>
+                                            <th class="tdleft">使用率</th>
+                                        </tr>
+
+                                    <volist name="list" id="vo">
+                                        <tr class="row_odd">
+                                            <th class="tdleft">
+
+                                                {$vo.name}
+                                                
+     
+                                            </th>
+
+                                            <th class="tdleft">{$vo.rackscount}</th>
+                                            <th class="tdleft">{$vo.itemscount}</th>
+
+                                                <th class="tdleft">
+                                                    <table border="0" cellspacing="5">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center" valign="bottom">
+                                                                {$vo.busy}
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </th>
+                                        </tr>
+                                    </volist>
+
+
+                                    </tbody>
+                                </table>
+                      </td>
+                    </tr>
+                  </table>
+                    
+                      
+                </div>
+            </div>
+
+
+</if>
+
+<if condition="$flag eq 'area' ">
+
+
+
+<div class="content-block">
+    <div class="bufen w100">
+        <div class="ditu-bufen l">
+
+            <if condition="$title eq '华北区' "><img src="__PUBLIC__/static/ly/huabei_hover.png"><p>华北区</p></if>
+            <if condition="$title eq '华南区' "><img src="__PUBLIC__/static/ly/huanan_hover.png"><p>华南区</p></if>
+            <if condition="$title eq '华东区' "><img src="__PUBLIC__/static/ly/huadong_hover.png"><p>华东区</p></if>
+            <if condition="$title eq '华西区' "><img src="__PUBLIC__/static/ly/huaxi_hover.png"><p>华西区</p></if>
+            <if condition="$title eq '华中区' "><img src="__PUBLIC__/static/ly/huazhong_hover.png"><p>华中区</p></if>
+            <if condition="$title eq '西南区' "><img src="__PUBLIC__/static/ly/huaxinan_hover.png"><p>西南区</p></if>
+
+            <p style="text-align:left; font-size:14px; line-height:22px; width:150px; margin:30px auto;">总机柜数：453<br>
+                总设备数：495<br>
+                平均使用率：8.1%</p>
+        </div>
+        <table class="table-bufen l">
+            <tbody><tr>
+                <th>机房</th>
+                <th>机柜数</th>
+                <th>设备数</th>
+                <th>使用率</th>
+            </tr>
+
+
+            <volist name="list" id="vo">
+                <tr class="row_odd">
+                    <th class="tdleft">
+
+                        {$vo.name}
+                        
+
+                    </th>
+
+                    <th class="tdleft">{$vo.rackscount}</th>
+                    <th class="tdleft">{$vo.itemscount}</th>
+
+                        <th class="tdleft">
+                            <table border="0" cellspacing="5">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" valign="bottom">
+                                        {$vo.busy}
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </th>
+                </tr>
+            </volist>
+                            
+            </tbody>
+        </table>
+    <div class="clear"></div>
+    </div>
+    
+</div>
+
+
+</if>
+
+
+
+
+
+<if condition="$flag eq 'rack' ">
+
+
+
+<div class="content-block">
+    <div class="bufen w100">
+        <div class="ditu-bufen l">
+
+
+            <if condition="$title eq '华北区' "><img src="__PUBLIC__/static/ly/huabei_hover.png"><p>华北区</p></if>
+            <if condition="$title eq '华南区' "><img src="__PUBLIC__/static/ly/huanan_hover.png"><p>华南区</p></if>
+            <if condition="$title eq '华东区' "><img src="__PUBLIC__/static/ly/huadong_hover.png"><p>华东区</p></if>
+            <if condition="$title eq '华西区' "><img src="__PUBLIC__/static/ly/huaxi_hover.png"><p>华西区</p></if>
+            <if condition="$title eq '华中区' "><img src="__PUBLIC__/static/ly/huazhong_hover.png"><p>华中区</p></if>
+            <if condition="$title eq '西南区' "><img src="__PUBLIC__/static/ly/huaxinan_hover.png"><p>西南区</p></if>
+
+            <p style="text-align:left; font-size:14px; line-height:22px; width:150px; margin:30px auto;">总机柜数：453<br>
+                总设备数：495<br>
+                平均使用率：8.1%</p>
+        </div>
+        <table class="table-bufen l">
+            <tbody><tr>
+                <th>机房</th>
+                <th>机柜数</th>
+                <th>设备数</th>
+                <th>使用率</th>
+            </tr>
+
+
+            <volist name="list" id="vo">
+                <tr class="row_odd">
+                    <th class="tdleft">
+
+                        {$vo.name}
+                        
+
+                    </th>
+
+                    <th class="tdleft">{$vo.rackscount}</th>
+                    <th class="tdleft">{$vo.itemscount}</th>
+
+                        <th class="tdleft">
+                            <table border="0" cellspacing="5">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" valign="bottom">
+                                        {$vo.busy}
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </th>
+                </tr>
+            </volist>
+                            
+            </tbody>
+        </table>
+    <div class="clear"></div>
+    </div>
+    
+</div>
+
+
+
+
+
+
+
+
+</if>
+
+
+
+
+
+
+
+
+</div>
+        
+
+                    
+
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    //var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      //$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".form-li").on("click",'li',function(){
+          $(this).addClass('active').siblings().removeClass('active');
+          var num = $(this).index();
+          $(".form-content .display").removeClass('block');
+          $(".form-content .display").eq(num).addClass('block');
+          
+        });
+      $('.btn-more').toggle(function(){
+            $(this).html('收起选项<span class="upArrow"></span>')
+            $('.ctables>div:gt(2)').removeClass('chide');
+            $('.ctables>label:gt(2)').removeClass('chide');
+        },function(){
+            $(this).html('更多选项<span class="arrow"></span>')
+            $('.ctables>div:gt(2)').addClass('chide');
+            $('.ctables>label:gt(2)').addClass('chide');
+        });
+    });
+    
+
+    function checkAll(bx) {
+        for (var tbls = document.getElementsByTagName("table"), i = tbls.length; i--;)
+            if (tbls[i].id == "locationFilter") {
+                var bxs = tbls[i].getElementsByTagName("input");
+                var in_tree = false;
+                for (var j = 0; j < bxs.length; j++) {
+                    if (in_tree == false && bxs[j].value == bx.value)
+                        in_tree = true;
+                    else if (parseInt(bxs[j].className) <= parseInt(bx.className))
+                        in_tree = false;
+                    if (bxs[j].type == "checkbox" && in_tree == true)
+                        bxs[j].checked = bx.checked;
+                }
+            }
+    }
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

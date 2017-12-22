@@ -1,0 +1,127 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+   
+	
+	var itemtypeid = $('#itemtypeid').val();
+	var depart_id = $('#depart_id').val();
+	var common_name = $('#common_name').val();
+	var sn = $('#sn').val();
+	
+	window.location.href= "__ROOT__/index.php?s=/Home/Item/see_junks/sn/"+sn+"/common_name/"+common_name+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+           <h1 class="page-title">下架资产列表</h1>  
+        	
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('index')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 返回资产列表</a>
+                            
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+							    
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="common_name" id="common_name" value="<?php echo I('get.common_name'); ?>"  placeholder="设备名称……">
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="sn" id="sn" value="<?php echo I('get.sn'); ?>"  placeholder="sn编号……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>设备名称</th>
+                            <th>硬件类型</th>
+                            <th>所属部门</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td><a href="{:U('item_info?id='.$vo['id'])}">{$vo.common_name}</a></td>
+                                <td><?php  $typeid = $vo['itemtypeid'];  echo $type_list[$typeid];  ?></td>
+                                
+                                <td><?php  $departid = $vo['depart_id'];  echo $depart_arr_now[$departid];  ?></td>
+                                
+                                <if condition="$is_admin_define eq true" >
+                                <td>
+
+	                                 <a class="btn btn-primary btn-xs" href="{:U('Racks/rackspace_move?objectid='.$vo['id'])}">迁移</a> 
+	                                
+	                                 <a class="btn btn-primary btn-xs" href="{:U('item_edit?id='.$vo['id'])}">编辑信息</a>                                
+
+                                </td>
+                                <elseif condition="$is_owner_define eq 'YES'"/>
+                                <td>
+								                                   
+                                </td>
+                                <else /> 
+                                	<td></td>
+                                </if>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

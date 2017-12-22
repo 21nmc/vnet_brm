@@ -1,0 +1,289 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">全局用户授权</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+
+
+
+                        <form id="formtextarea"  action="" method="post"> 
+                                <div class="main">
+
+                                  <div class="loca clearfix">
+
+                                  <select class="button-select" name="usergroup_id" onchange="javascript:location.href=this.value;" style="width:250px;">
+
+                                    <if condition="$tempusergroup_id eq '' ">
+                                        <option value="{:U('Appliaction/manger')}" selected="selected" >请选择用户......</option>
+                                    <else />
+                                        <option value="{:U('Appliaction/manger')}" >请选择用户......</option>
+                                    </if>
+
+                                    {$option}
+
+                                  </select>
+
+                                  </div>
+                        </form>
+ 
+
+
+
+
+
+
+
+                        <table class="table">
+                              <thead>
+                              <tr>
+                                    <th>用户名</th>
+                                    <th>所在系统</th>
+                                    <th>当前密码</th>
+                                    <th>输入新密码</th>
+                              </tr></thead>
+                              <tbody>
+
+ <form method="post" >        
+                              <volist name="list" id="vo">
+                              <tr >
+
+                                      <td>{$vo.username}</td>
+                                      <td><font color="green"><b>资产系统</b></font>和<font color="green"><b>报表系统</b></font></td>
+                                      <td>{$vo.password}</td>
+                                     
+                                      <td><input type="text" name="newpassword" value="" required>
+                                          <input type="hidden" name="username" value="{$username}">
+                                          <input type="hidden" name="password" value="{$vo.password}">
+                                          <input type="submit" name="sub1" value="提交">
+                                      </td>
+
+                              </tr>
+                              </volist>
+
+                              <volist name="hrmlist" id="vo2">
+                                <tr >
+                                    <td>{$vo2.name}</td>
+                                    <td>Hrm系统</td>
+                                    <td>{$vo2.password}</td>
+                                    <td>
+
+                                        <select class="button-select" name="hrm_postdepart_id" >
+
+                                          <if condition="$hrm_depart_id eq '' ">
+                                              <option value="" selected="selected" >请选择部门......</option>
+                                          <else />
+                                              <option value="" >请选择部门......</option>
+                                          </if>
+
+                                          {$hrm_departoption}
+
+                                        </select>
+
+
+
+                                        <input type="hidden" name="hrm_userid" value="{$vo2.user_id}">
+                                        <input type="hidden" name="hrm_username" value="{$vo2.name}">
+                                        <input type="hidden" name="hrm_password" value="{$vo.password}">
+                                    </td>
+                                </tr>
+                              </volist>
+
+
+
+
+                              <volist name="Customerlist" id="vo3">
+                                <tr >
+                                    <td>{$vo3.username}</td>
+                                    <td>客户自服务系统</td>
+                                    <td>{$vo3.password}</td>
+                                    <td>
+
+                                        <select class="button-select" name="customer_postdepart_id" >
+
+                                          <if condition="$customer_depart_id eq '' ">
+                                              <option value="" selected="selected" >请选择部门......</option>
+                                          <else />
+                                              <option value="" >请选择部门......</option>
+                                          </if>
+
+                                          {$customer_departoption}
+
+                                        </select>
+
+                                        <input type="hidden" name="customer_id" value="{$vo3.id}">
+                                        <input type="hidden" name="customer_username" value="{$vo3.username}">
+                                        <input type="hidden" name="customer_password" value="{$vo3.password}">
+                                    </td>
+                                </tr>
+                              </volist>
+
+
+
+                              <volist name="yhlist" id="vo4">
+                                <tr >
+                                    <td>{$vo4.username}</td>
+                                    <td>网管平台</td>
+                                    <td>{$vo4.password}</td>
+                                    <td>
+
+                                        <select class="button-select" name="yhuser_postdepart_id" >
+
+                                          <if condition="$yhuser_depart_id eq '' ">
+                                              <option value="" selected="selected" >请选择部门......</option>
+                                          <else />
+                                              <option value="" >请选择部门......</option>
+                                          </if>
+
+                                          {$yhuser_departoption}
+
+                                        </select>
+
+                                        <input type="hidden" name="nms_id" value="{$vo4.id}">
+                                        <input type="hidden" name="nms_username" value="{$vo4.username}">
+                                        <input type="hidden" name="nms_password" value="{$vo4.password}">
+                                    </td>
+                                </tr>
+                              </volist>
+
+
+
+
+                              <volist name="userslist" id="vo5">
+                                <tr >
+                                    <td>{$vo5.login}</td>
+                                    <td>知识库</td>
+                                    <td>{$vo5.hash}</td>
+                                    <td>
+
+                                        <select class="button-select" name="users_postdepart_id" >
+
+                                          <if condition="$users_depart_id eq '' ">
+                                              <option value="" selected="selected" >请选择部门......</option>
+                                          <else />
+                                              <option value="" >请选择部门......</option>
+                                          </if>
+
+                                          {$users_departoption}
+
+                                        </select>
+
+                                        <input type="hidden" name="tiki_id" value="{$vo5.id}">
+                                        <input type="hidden" name="tiki_username" value="{$vo5.login}">
+                                        <input type="hidden" name="tiki_password" value="{$vo5.hash}">
+                                    </td>
+                                </tr>
+                              </volist>
+
+
+
+
+                              <volist name="Iplist" id="vo6">
+                                <tr >
+                                    <td>{$vo6.username}</td>
+                                    <td>IP地址管理系统</td>
+                                    <td>{$vo6.password|substr=0,38}</td>
+                                    <td>
+
+                                        <select class="button-select" name="ip_postdepart_id" >
+
+                                          <if condition="$ip_postdepart_id eq '' ">
+                                              <option value="" selected="selected" >请选择部门......</option>
+                                          <else />
+                                              <option value="" >请选择部门......</option>
+                                          </if>
+
+                                          {$ip_departoption}
+
+                                        </select>
+
+                                        <input type="hidden" name="ip_id" value="{$vo6.id}">
+                                        <input type="hidden" name="ip_username" value="{$vo6.username}">
+                                        <input type="hidden" name="ip_password" value="{$vo6.password}">
+                                    </td>
+                                </tr>
+                              </volist>
+
+
+
+
+
+ </form> 
+
+
+
+
+
+
+                              <tr><td  colspan="10" style="align:center"></td></tr>
+                                  
+                                 
+                              </tbody>
+                        </table>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+                    
+</div>
+   
+<script type="text/javascript">
+
+
+function moveListBoxSelectedItem(objname, from, to, action) {
+  to = jQuery('#' + to);
+
+  jQuery('#' + from).find('option:selected').each(function(i, fromel) {
+    var notApp = true;
+    to.find('option').each(function(j, toel) {
+      if (toel.innerHTML.toLowerCase() > fromel.innerHTML.toLowerCase()) {
+        jQuery(toel).before(fromel);
+        notApp = false;
+        return false;
+      }
+    });
+    if (notApp) {
+      to.append(fromel);
+    }
+    fromel = jQuery(fromel);
+    if (action.toLowerCase() == 'add') {
+      jQuery(this)
+        .closest('form')
+        .append("<input name='" + objname + '[' + fromel.val() + ']' + "' id='" + objname + '_' + fromel.val()
+          + "' value='" + fromel.val() + "' type='hidden'>"
+        );
+    }
+    else if (action.toLowerCase() == 'rmv') {
+      jQuery('#' + objname + '_' + fromel.val()).remove();
+    }
+  });
+
+  return true;
+}
+$(".usergroup_btn").click(function(){
+  $("#selfhostgroup_id option").attr('selected','selected');
+  //$("#hostgroup_id option").attr('selected','selected');
+  $("#formtextarea").submit();
+});
+</script>
+   
+</block>

@@ -1,0 +1,126 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">机架列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                          <if condition="($is_admin_define eq true)" >
+                          <a href="{:U('addrack')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span> 机架添加</a>
+                          </if>
+
+                            <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                                <div class="form-group">
+                                <input type="text" class="form-control" name="areaname" id="areaname" value="{$label}"  placeholder="房间名称……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>在用</th>
+                            <th>硬件</th>
+                            <th>大小 (U)*</th>
+                            <th>深度</th>
+                            <th>地点</th>
+                            <th>区域/房间</th>
+                            <th>标签</th>
+                            <th>操作{$is_admin_define}</th>
+                        </tr></thead>
+                        <tbody>
+  
+                            <volist name="list" id="vo">
+                            <tr >
+
+                                <td>{$vo.inused}</td>
+                                <td>{$vo.rackcount}</td>
+                                <td>{$vo.usize}</td>
+                                <td>{$vo.locname}</td>
+                                <td>{$vo.areaname}</td>
+                                <td>{$vo.label}</td>
+
+								<if condition="($is_admin_define eq true)" >
+                                <td>
+                                  <a href="{:U('Rack/editlistracks?id='.$vo['id'])}" >编辑</a> | 
+                                  <a href="{:U('Rack/dellistracks?id='.$vo['id'])}" onclick="javascript:return p_del()"> 删除</a>
+                                </td>
+                            	</if>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var label = $('#label').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Ipdb/listracks/areaname/"+areaname+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

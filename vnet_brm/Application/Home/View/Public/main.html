@@ -1,0 +1,198 @@
+<block name="main">
+
+
+<div class="content">
+        <div class="header">
+            	<!--the home stats begin-->
+        
+    	<!--the home stats end and page title begin-->
+        <h1 class="page-title">管理中心</h1>
+        </div>
+         <ul class="breadcrumb">
+           <!--  
+        	<li><a href="index.html">首页</a> <span class="divider">/</span></li>
+            <li class="active">管理中心</li>-->
+        </ul> 
+        <!--page title end and the main content begin-->
+        
+        
+        
+        <div class="container">
+        	<!-- the alert info begin -->
+        	
+        	
+        	<!-- the alert info end and the panel begin-->
+        	<div class="panel panel-default" id="all-device-info">
+        		<div class="panel-heading">数据中心 - {$usergroup_name}</div>
+        		  <div class="panel-body">
+        			 <div class="stat-widget-container">
+        				    <div class="col-xs-4">
+        					   <a href="{:U('Item/index')}"><p class="number">{$items_count} <span>台</span></p></a>
+        					   <p class="detail">所属设备数</p>
+        				    </div>
+            			     <div class="col-xs-4">
+        					   <p class="number">{$racks_count} <span>台</span></p>
+        					   <p class="detail">所属机柜总数</p>
+        				    </div>  
+        				    <div class="col-xs-4">
+        					   <p class="number">5 <span>个</span></p>
+        					   <p class="detail">所属资源</p>
+        				    </div>    				
+        			 </div>
+        		  </div>
+        	</div>
+            
+            <div class="row">
+            
+                <div class="col-xs-4">
+                    <div class="panel panel-default" id="ledpanel">
+                        <div class="panel-heading">
+                            <h5>设备列表<span class="make-switch pull-right" data-on="success" data-off="danger"></span></h5>
+                        </div>
+                         <table class="table">
+                        <thead><tr>
+                            <th>名称</th>
+                            <th>IP</th>
+                            <th>状态</th>
+                            <th>所占U数</th>
+                            
+                        </tr></thead>
+                        <tbody>
+                            <volist name="item_list" id="vo">
+                            <tr>
+                                <td>{$vo.common_name}</td>
+                                <td>{$vo.ipv4}</td>
+                                <td>正常</td>
+                                <td>{$vo.usize}</td>
+                            </tr>
+                            </volist>
+                        </tbody>
+                        </table>
+                    <div class="more-device-button">
+                            <a href="{:U('Item/index')}"><button  class="btn btn-primary"> 查看资产列表 </button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                    <div class="panel panel-default" id="ledpanel">
+                        <div class="panel-heading">
+                            <h5>机柜列表<span class="make-switch pull-right" data-on="success" data-off="danger"></span></h5>
+                        </div>
+                         <table class="table">
+                        <thead><tr>
+                            <th>名称</th>
+                            <th>租用方式</th>
+                            <th>U位</th>
+                        </tr></thead>
+                        <tbody>
+                          <volist name="rack_list" id="vo">
+                            <tr>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.name}</td>
+                                <td>{$vo.name}</td>
+                            </tr>
+                          </volist>  
+                        </tbody>
+                        </table>
+                    <div class="more-device-button">
+                            <a href="{:U('Racks/listracks')}"><button  class="btn btn-primary"> 查看机柜列表 </button></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-4">
+                    <div class="panel panel-default" id="ledpanel">
+                        <div class="panel-heading">
+                            <h5>资源列表<span class="make-switch pull-right" data-on="success" data-off="danger"></span></h5>
+                        </div>
+                         <table class="table">
+                        <thead><tr>
+                            <th>名称</th>
+                            <th>状态</thz>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>审批01</td>
+                                <td><span class="label label-success">已处理</span></td>
+                                <td>2017-1-23</td>
+                                <td><a href="#" class="btn btn-danger btn-xs">不再显示</a></td>
+                            </tr>
+                            <tr>
+                                <td>审批02</td>
+                                <td><span class="label label-success">已处理</span></td>
+                                <td>2017-1-24</td>
+                                <td><a href="#" class="btn btn-danger btn-xs">不再显示</a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    <div class="more-device-button">
+                            <button  class="btn btn-primary" data-toggle="modal" data-target="#led-more-device"> 查看资源列表 </button>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            <!--  <div class="row">
+                <div class="col-xs-6" id="device-info">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><span class="glyphicon glyphicon-transfer"></span> 待办工作</div>
+                    <table class="table">
+                        <thead><tr>
+                            <th>代办工作名称</th>
+                            <th>状态</th>
+                            <th>工程师</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>代办工作1</td>
+                                <td><span class="label label-success">已完成</span></td>
+                                <td>某某</td>
+                            </tr>
+                            <tr>
+                                <td>代办工作2</td>
+                                <td><span class="label label-danger">未完成</span></td>
+                                <td>某某</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+                <div class="col-xs-6" id="sensor-device-info">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><span class="glyphicon glyphicon-hd-video"></span> 故障统计</div>
+                    <table class="table">
+                        <thead><tr>
+                            <th>故障名称</th>
+                            <th>状态</th>
+                            <th>时间</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>故障1</td>
+                                <td><span class="label label-danger">严重</span></td>
+                                <td>2016-11-02 11:22:22</td>
+                            </tr>
+                            <tr>
+                                <td>故障2</td>
+                                <td><span class="label label-success">一般</span></td>
+                                <td>2016-11-03 12:22:22</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+          -->
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+    </div>
+
+</block>

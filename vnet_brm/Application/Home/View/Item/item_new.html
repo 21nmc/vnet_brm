@@ -1,0 +1,320 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+
+<style>
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;}
+.form-content .display.block{ display:block;}
+
+.xiaobiaoti{ color:#95b8d6; margin-bottom:10px; border-bottom:2px solid #95b8d6; font-size:18px; font-weight:bold; line-height:34px; padding-left:10px;}
+.hang-coco{ line-height:34px; text-align:center;}
+.hang-biaoti{ background:#95b8d6; color:#fff; margin:4px auto; width:80%; font-size:16px; font-weight:bold;}
+.hang-coco a{line-height:30px;  background:#f7f7f7; margin:1px auto; width:80%; display:block; color:#333;}
+.hang-coco a:hover{ background:#dbdbdb; }
+.checkbox-coco{ display:block; float:left; line-height:34px; font-size:16px;}
+input[type="checkbox"].checkbox-coco-kuang{ margin:9px 6px 0 0; width:16px; height:16px;}
+
+.coco-rizhi h4{ line-height:34px; font-size:14px;}
+
+.sortable{ line-height:34px; margin-bottom:10px;}
+.sortable th{background:#95b8d6; color:#fff; padding:0 4px; }
+.sortable tr:nth-of-type(2n+1){ background:#f8f8f8;}
+.sortable input[type="checkbox"]{ width:16px; height:16px; margin:0 0 0 6px;}
+
+</style>
+
+
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">硬件添加</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                
+                    <div class="display block">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                        <div class="col-xs-4">
+                        	<div class="xiaobiaoti">内在特性</div>	
+                            <input type="hidden" name="flag" value="1">
+                            <input type="hidden" name="id" value="{$id}">
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">硬件类型:</label>                            
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="itemtypeid">
+                                        <volist name="type_list" id="vo">  
+                                            <option class="level-0" value="{$vo.id}"> {$vo.typedesc}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">厂商:</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="manufacturerid">
+                            			<volist name="agent_list" id="vo">
+                            			  
+                                        	<option class='level-0' value='{$vo.id}'  >{$vo.title}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label"><span style="color:red;">*</span>设备名称:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="common_name"  required="required">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label"><span style="color:red;">*</span>型号:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="model"  required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label"><span style="color:red;">*</span>SN号:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="sn"  require required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">SN2号:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="sn2" value="" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">资产编号:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="start" name="asset"  >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label"><span style="color:red;">*</span>所占U数:</label>
+                                <div class="col-xs-8">
+                                    <input type="number" class="form-control" id="start" name="usize" required="required" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">注释:</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" id="device-description" name="comments" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="xiaobiaoti">账目</div>	
+                            
+                            
+                             <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">采购商店名称:</label>                            
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="cai" name="origin"  require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">采购价格(￥):</label>                            
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="cai" name="purchprice"  require>
+                                </div>
+                            </div>
+                           
+                          
+                           
+                           	
+                    	</div>
+                    	
+                    	<div class="col-xs-4">
+                        	<div class="xiaobiaoti">维保</div>	
+                           
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">采购日期:</label>                            
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="startcai" name="purchasedate"  require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">保修时间(月):</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="cai" name="warrantymonths" require>
+                                </div>
+                            </div>
+                            
+                            <div class="xiaobiaoti">网络</div>	
+                            
+                            
+                           <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">DNS 名称:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="ddd" name="dnsname" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">MACs:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="ddd" name="macs"  >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">IPv4:</label>
+                                <div class="col-xs-8">
+                                   <input type="text" class="form-control" id="ddd" name="ipv4"  >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">IPv6:</label>
+                                <div class="col-xs-8">
+                                   <input type="text" class="form-control" id="ddd" name="ipv6" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">交换机:</label>                            
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="switchid">
+                                        <option class="level-0" value=""  >请选择交换机</option>
+                                        <volist name="switch_list" id="vo">
+                                         
+                                        	<option class="level-0" value="{$vo.id}"  >{$vo.common_name}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">端口:</label>
+                                <div class="col-xs-8">
+                                   <input type="text" class="form-control" id="start" name="ports" >
+                                </div>
+                            </div>
+                            
+                            <div class="xiaobiaoti">MISC</div>	
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">内存 (GB):</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="ram"  require>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">CPU型号:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="cpu"  require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">设备功率:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="power" value="" require>
+                                </div>
+                            </div>
+                           
+                           	
+                    	</div>
+                    	
+                    	<div class="col-xs-4">
+                        	
+                            <div class="xiaobiaoti">相关信息</div>	
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-3 control-label"><span style="color:red;">*</span>所属部门:</label>
+                                <div class="col-xs-8">
+                                  <select class="form-control" name="depart_id" required="required">
+                                   <volist name="depart_list" id="vo">
+                         
+                                        	<option class="level-0" value="{$vo.id}"  >{$vo.depart_name}</option>
+                                    </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-3 control-label">所属产品:</label>
+                                <div class="col-xs-8">
+                                  <select class="form-control" name="belong_product">
+                        
+                                            <option class="level-0" value=""  >请选择所属产品</option>
+                                        	<option class="level-0" value="BB产品"  >BB产品</option>
+                                        	<option class="level-0" value="三线BGP"  <if condition="'三线BGP' eq $belong_product"> selected="selected"</if>>三线BGP</option>
+                                    		<option class="level-0" value="全线BGP"  <if condition="'全线BGP' eq $belong_product"> selected="selected"</if>>全线BGP</option>
+                                    		<option class="level-0" value="共享"  <if condition="'共享' eq $belong_product"> selected="selected"</if>>共享</option>
+                                    		<option class="level-0" value="单电信"  <if condition="'单电信' eq $belong_product"> selected="selected"</if>>单电信</option>
+                                    		<option class="level-0" value="单移动"  <if condition="'单移动' eq $belong_product"> selected="selected"</if>>单移动</option>
+                                    		<option class="level-0" value="单线国际"  <if condition="'单线国际' eq $belong_product"> selected="selected"</if>>单线国际</option>
+                                    		<option class="level-0" value="单联通"  <if condition="'单联通' eq $belong_product"> selected="selected"</if>>单联通</option>
+                                    		<option class="level-0" value="双线"  <if condition="'双线' eq $belong_product"> selected="selected"</if>>双线</option>
+                                    		<option class="level-0" value="双线BGP"  <if condition="'双线BGP' eq $belong_product"> selected="selected"</if>>双线BGP</option>
+                                    		<option class="level-0" value="四线BGP"  <if condition="'四线BGP' eq $belong_product"> selected="selected"</if>>四线BGP</option>
+                                    		<option class="level-0" value="小宽带"  <if condition="'小宽带' eq $belong_product"> selected="selected"</if>>小宽带</option>
+                                    		<option class="level-0" value="静态四线BGP"  <if condition="'静态四线BGP' eq $belong_product"> selected="selected"</if>>静态四线BGP</option>
+                                    		<option class="level-0" value="骨干网设备"  <if condition="'骨干网设备' eq $belong_product"> selected="selected"</if>>骨干网设备</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-3 control-label">slot number:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="slot_number" value="" require>
+                                </div>
+                            </div>
+                           
+                           	
+                    	</div>
+                    	
+                    	<div class="clear"></div>
+                    	
+                    	
+                    	
+                    	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary" id="other"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                
+                
+                
+                    
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+       
+    //jeDate.skin('gray');
+    jeDate({
+    	dateCell:"#startcai",
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+    })
+    </script>
+   
+</block>

@@ -1,0 +1,112 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+	var name = $('#name').val();
+	window.location.href= "__ROOT__/index.php?s=/Home/Resource/index/name/"+name+"/p/1.html";
+ }
+ </script>
+
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+                <li ><a href="{:U('ExportFlow/index')}">一分钟出口端口</a></li>
+                <li ><a href="{:U('ExportFlow/portmanger')}">5分钟出口端口配置</a></li>
+                <li ><a href="{:U('ExportFlow/index2')}">5分钟出口端口管理</a></li>
+                <li ><a href="{:U('ExportFlow/flow_type')}">资源类型</a></li>
+                <li class="hover"><a href="{:U('ExportFlow/day')}">机房日报</a></li>
+                <li ><a href="{:U('ExportFlow/week')}">周报</a></li>
+                <li><a href="{:U('ExportFlow/doubleweek')}">双周报</a></li>
+                <li><a href="{:U('ExportFlow/month')}">月报</a></li>
+                <li><a href="{:U('ExportFlow/history')}">历史</a></li>
+
+                <!--li><a href="{:U('ExportFlow/portmanger')}">MIS出口端口配置</a></li>
+                <li class="hover"><a href="{:U('ExportFlow/index2')}">MIS出口端口管理</a></li>
+                <li><a href="{:U('ExportFlow/city')}">MIS城市管理</a></li>
+                <li><a href="{:U('ExportFlow/product')}">MIS产品类型管理</a></li>
+                <li><a href="{:U('ExportFlow/room')}">MIS机房管理</a></li-->
+
+                <!--li><a href="{:U('ExportFlow/huabei_product')}">华北机房带宽产品统计</a></li>
+                <li><a href="{:U('ExportFlow/auto_week')}">自定义</a></li-->
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                       <a href="{:U('add_city')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加城市</a>
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        
+                        <thead>
+                        <tr>
+                        	
+                            <th>城市id</th>
+                            <th>城市名</th>
+
+                        </tr></thead>
+                        <tbody>
+                            
+                            <volist name="type_list" id="vo">
+                            
+                            <tr>
+                          
+                            	
+                            	<td>{$vo.citycode}</td>
+                                <td>{$vo.name}</td>
+                                <td>
+                                     <a class="btn btn-primary btn-xs" href="{:U('edit_city?id='.$vo['id'])}">编辑信息</a>
+                                     <a class="btn btn-default btn-xs" href="{:U('del_city?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                            </tr>
+                            
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                        
+                   </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

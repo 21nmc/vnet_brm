@@ -1,0 +1,75 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<script type="text/javascript">
+ 
+ </script>
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">本部门用户列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('owner_user_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新用户</a>
+                        </div>
+                    </div>
+                </div>
+		   </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>用户</th>
+                            <th>用户组</th>
+                            <th>操作</th>
+
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.username}</td>
+                                <td><?php  $gid=$vo['usergroup_id']; echo $usergrouplist[$gid];  ?></td>
+                                <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('owner_user_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('owner_user_del?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

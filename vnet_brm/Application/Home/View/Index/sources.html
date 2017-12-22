@@ -1,0 +1,101 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+ 
+ <script type="text/javascript">
+ function submit_now(){
+	   
+		var code_name = $('#code_name').val();
+		window.location.href= "/dataSource/index.php?s=/Home/Index/sources/code_name/"+code_name+"/p/1.html";
+}
+</script>
+ 
+ <div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">资源统计列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('sources_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新资源</a>
+                        	<a href="{:U('import_sources')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 资源导入</a>
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="ip" id="code_name" value="<?php echo I('get.code_name'); ?>"  placeholder="资源编号……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead><tr>
+                        	<th>资源编号</th>
+                            <th>资源名称</th>
+                            <th>归属运营商</th>
+                            <th>资源分类</th>
+                            <th>IP地址</th>
+                            <th>带宽</th>
+                            <th>联系人</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.code_name}</td>
+                                <td>{$vo.source_name}</td>
+                                <td>{$vo.factory}</td>
+                                <td>{$vo.category}</td>
+                                <td>{$vo.ip}</td>
+                                <td>{$vo.bandwidth}</td>
+                                <td>{$vo.contact}</td>
+                                <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('edit_sources?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('del_sources?id='.$vo['id'])}" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="8" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+    
+</block>

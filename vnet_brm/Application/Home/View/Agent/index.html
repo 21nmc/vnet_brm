@@ -1,0 +1,100 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+        		<li ><a href="{:U('Ying/itemtypes')}">硬件类型列表</a></li>
+        		<li class="hover"><a href="{:U('Agent/index')}">代理类型列表</a></li>
+        		<li><a href="{:U('Ipdb/itemcontracttypes')}">合同类型列表</a></li>
+                <li ><a href="{:U('Product/productlist')}">产品列表</a></li>
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('agent_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加代理</a>
+                        	
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                        	<th>ID</th>
+                            <th>代理类型</th>
+                            <th>标题</th>
+                            <th>合同</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.id}</td>
+                                <td><if condition="$vo.type eq 1"> 供应商
+                                <elseif condition="$vo.type eq 2"/>软件厂商
+                                <elseif condition="$vo.type eq 3"/>硬件厂商
+                                <elseif condition="$vo.type eq 4"/>采购人
+                                <elseif condition="$vo.type eq 5"/>承揽人
+								</if></td>
+                          		
+                          		<td>{$vo.title}</td>
+                          		<td>{$vo.contactinfo}</td>
+                          		<td>
+                                <a class="btn btn-primary btn-xs" href="{:U('agent_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('agent_del?id='.$vo['id'])}" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

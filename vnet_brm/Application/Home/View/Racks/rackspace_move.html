@@ -1,0 +1,638 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style type="text/css">
+hr{height:1px;overflow:hidden;margin-bottom: 0;margin-top: 0;}
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;margin-top:10px;}
+.toolbar{margin-bottom: 10px;}
+.form-content .display.block{ display:block;}
+.ctables{
+    font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;font-size:14px;color:#333;
+}
+.ctables label{font-family: "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", Arial, sans-serif;}
+.ctables>label{font-weight:900;}
+</style>
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">设备迁移</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+
+                <ul class="form-li">
+                   <!-- <li class="active">设备View</li>-->
+                    <li class="active">设备迁移</li>
+
+                    <!-- <li><a href="{:U('Item/item_edit?id='.$objectid)}" >设备编辑</a></li> -->
+                    <!--<li><a href="{:U('Racks/rackslog?id='.$objectid)}" target="_blank">日志查看</a></li>-->
+                    <div class="clear"></div>
+                </ul>
+
+
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                       </div>
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+
+
+<div class="form-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <if condition="$block eq 'block' ">
+      <div class="display block">
+  <else />
+      <div class="display">
+  </if>
+
+        <table width="100%">
+          <tr>
+            <!--td valign="top">
+            <div class="zTreeDemoBackground left">
+              <ul id="treeDemo" class="ztree"></ul>
+            </div>
+            </td-->
+
+              <form action="" class="form-horizontal" id="add-device" role="form" method="post" >
+              <input type="hidden" name="objectid" value="{$objectid}">
+
+
+                <td valign="top">
+                  <table class="rack" width="80%">
+                    <tbody>
+
+                      <tr><th >RU</th><th>前</th><th>中</th><th>后</th></tr>
+
+                      {$racktable}
+
+
+                      <tr><td colspan="4" style="background-color:#666;border:1px solid #666;padding:0;">&nbsp;</td></tr>
+                      <tr>
+                      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </td>
+
+
+              </form>
+
+
+                    <td valign="top">
+                      <div class="portlet">
+                          <h2>汇总</h2>
+                          <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <th width="50%" class="tdright">机房-房间:</th>
+                                      <td class="tdleft">{$location_name}-{$areaname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">机柜:</th>
+                                      <td class="tdleft">{$rackcomments}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备名:</th>
+                                      <td class="tdleft">{$common_name}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备U大小:</th>
+                                      <td class="tdleft">{$myusize}U</td>
+                                  </tr>
+                                   <tr>
+                                      <th width="50%" class="tdright">设备状态:</th>
+                                      <td class="tdleft">{$status}&nbsp;&nbsp;</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备类型:</th>
+                                      <td class="tdleft">{$typedesc}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">Ip:</th>
+                                      <td class="tdleft">{$ip}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">OEM S/N:</th>
+                                      <td class="tdleft">{$sn}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">操作系统:</th>
+                                      <td class="tdleft"><a href="">{$system}关联软件</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备厂商/品牌:</th>
+                                      <td class="tdleft"><a href="">{$manufacturerid}</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备型号:</th>
+                                      <td class="tdleft"><a href="">{$model}</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备所属部门:</th>
+                                      <td class="tdleft"><a href="">{$dname}</a></td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <div class="portlet">
+                          <h2>Comment</h2>
+                          <div class="commentblock">{$comments}</div>
+                      </div>
+
+                    </td>
+
+
+          </tr>
+        </table>
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<if condition="$block eq 'block' ">
+    <div class="display">
+<else />
+    <div class="display block">
+</if>
+
+<if condition="$flag neq 'move1' ">
+
+
+
+        <form action="" class="form-horizontal" id="add-device" role="form" method="post" >
+            <input type="hidden" name="objectid" value="{$objectid}">
+            <input type="hidden" name="flag" value="move1">
+            <input type="hidden" name="myusize" value="{$myusize}">
+
+            <div class="form-group">
+                <label for="category-name" class="col-xs-4 control-label">
+                设备大小:</label>
+                <div class="col-xs-3">
+                    <!--select class="form-control" name="itemusize">
+                        {$itemusizeoption}
+                    </select-->
+                    {$myusize}U
+                </div>
+            </div>
+
+
+           <div class="form-group">
+                <label for="category-name" class="col-xs-4 control-label">数据中心*：</label>
+                <div class="col-xs-3">
+                    <select class="form-control" name="locationid" id="select1">
+                        {$loclist}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category-name" class="col-xs-4 control-label">区域*：</label>
+                <div class="col-xs-3">
+                    <select class="form-control" name="areaid" id="select2"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category-name" class="col-xs-4 control-label">机柜:</label>
+                <div class="col-xs-3">
+                    <select class="form-control" name="rackid" id="select3"></select>
+                </div>
+            </div>
+
+
+            <div class="form-actions col-xs-8 pull-right">
+                <input type="submit" class="btn btn-primary" value="下一步"></input>
+            </div>
+
+        </form>
+</if>
+
+    
+
+
+<if condition="$flag eq 'move1' ">
+  <table width="100%">
+    <tr>
+      <td valign="top">
+从{$location_name}=>{$areaname}=>{$rackcomments}<br />到{$movelocationname}=>{$moveareaname}=>{$movecomments}
+        <form action="" class="form-horizontal" id="add-device" role="form" method="post" >
+            <input type="hidden" name="objectid" value="{$objectid}">
+            <input type="hidden" name="flag" value="move">
+            <input type="hidden" name="myusize" value="{$myusize}">
+
+            <input type="hidden" name="locationid" value="{$movelocationid}">
+            <input type="hidden" name="areaid" value="{$moveareaid}">
+            <input type="hidden" name="rackid" value="{$moverackid}">
+
+            <table width="100%" cellpadding="2">
+              <tr>
+                <td><label for="category-name" class="control-label">准备迁移设备大小:</label></td>
+                <td>{$myusize}U</td>
+              </tr>
+              <tr>
+                <td><label for="category-name" class="control-label">迁移目标数据中心地点*：</label></td>
+                <td>{$movelocationname}</td>
+              </tr>
+              <tr>
+                <td><label for="category-name" class="control-label">迁移目标区域*：</label></td>
+                <td>{$moveareaname}</td>
+              </tr>
+              <tr>
+                <td><label for="category-name" class="control-label">迁移目标机柜:</label></td>
+                <td>{$movecomments}{$is_store}</td>
+              </tr>
+              <tr>
+                <td><label for="category-name" class="control-label">
+                机架位置(从底部算起):</label></td>
+                <td><select class="form-control" name="rackposition">
+                        {$moveusizelist}
+                    </select></td>
+              </tr>
+              <tr>
+                <td><label for="category-name" class="control-label">
+                占用机架深度:</label></td>
+                <td><select class="form-control" name="rackposdepthid">
+                          <if condition="$rackposdepth eq '1' "><option  value='1' SELECTED>--后</option><else /><option  value='1'>--后</option></if>
+
+                          <if condition="$rackposdepth eq '2' "><option  value='2' SELECTED>-中-</option><else /><option  value='2'>-中-</option></if>
+
+                          <if condition="$rackposdepth eq '3' "><option  value='3' SELECTED>-中后</option><else /><option  value='3'>-中后</option></if>
+
+                          <if condition="$rackposdepth eq '4' "><option  value='4' SELECTED>前--</option><else /><option  value='4'>前--</option></if>
+
+                          <if condition="$rackposdepth eq '5' "><option  value='5' SELECTED>前中-</option><else /><option  value='5'>前中-</option></if>
+
+                          <if condition="$rackposdepth eq '6' "><option  value='6' SELECTED>前中后</option><else /><option  value='6'>前中后</option></if>
+
+                      </select></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center"><input type="submit" class="btn btn-primary" value="迁移"></input></td>
+                <td></td>
+              </tr>
+            </table>
+   
+        </form>
+
+</td>
+
+
+<!---原来机柜-->
+
+<if condition="$is_store_now neq '1' ">
+
+<td valign="top" style="padding-left:10px;">
+  <table class="rack" width="100%">
+    <tbody>
+
+      <tr><th >RU</th><th>前</th><th>中</th><th>后</th></tr>
+       
+      {$racktable}
+
+
+      <tr><td colspan="4" style="background-color:#666;border:1px solid #666;padding:0;">&nbsp;</td></tr>
+      <tr>
+      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+      <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+      </tr>
+
+    </tbody>
+  </table>
+</td>
+
+</if>
+
+
+<!---目标机柜-->
+<td valign="top" style="padding-left:10px;">
+
+      <table class="rack" width="100%">
+        <tbody>
+          <tr><th >RU</th><th>前</th><th>中</th><th>后</th></tr>
+
+          {$moveracktable}
+
+          <tr><td colspan="4" style="background-color:#666;border:1px solid #666;padding:0;">&nbsp;</td></tr>
+          <tr>
+          <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+          <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </td></tr></table>
+
+  </if>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+</div>
+    
+
+
+
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var select3 = document.getElementById("select3");
+  var arr = {$jsonlist2};
+  var arr2={$jsonlist3};
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].locationid){ //value==arr[i].customer
+        select2.add(new Option(arr[i].areaname,arr[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+
+
+  select2.onchange = function(){
+    var value2 = this.value;
+    select3.length = 0;
+    select3.add(new Option("默认",""));
+    for(var i=0;i<arr2.length;i++){
+
+      if(value2==arr2[i].locareaid){ //value==arr[i].customer
+        select3.add(new Option(arr2[i].name,arr2[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+
+  }
+
+
+  select1.onchange();
+
+  select2.onchange();
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+
+  var select5 = document.getElementById("select5");
+  var select6 = document.getElementById("select6");
+  var select7 = document.getElementById("select7");
+  var arr = {$jsonlist2};
+  var arr2={$jsonlist3};
+
+  select5.onchange = function(){
+    var value = this.value;
+    select6.length = 0;
+    select6.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].locationid){ //value==arr[i].customer
+        select6.add(new Option(arr[i].areaname,arr[i].id));
+      }
+    }
+
+    if(select6.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+
+
+  select6.onchange = function(){
+    var value2 = this.value;
+    select7.length = 0;
+    select7.add(new Option("默认",""));
+    for(var i=0;i<arr2.length;i++){
+
+      if(value2==arr2[i].locareaid){ //value==arr[i].customer
+        select7.add(new Option(arr2[i].name,arr2[i].id));
+      }
+    }
+
+    if(select7.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+
+  }
+
+
+  select5.onchange();
+
+  select6.onchange();
+
+</script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var select11 = document.getElementById("select11");
+  var select12 = document.getElementById("select12");
+  var select13 = document.getElementById("select13");
+  var arr = {$jsonlist2};
+  var arr2={$jsonlist3};
+
+
+  select11.onchange = function(){
+    var value = this.value;
+    select12.length = 0;
+    select12.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].locationid){ //value==arr[i].customer
+        select12.add(new Option(arr[i].areaname,arr[i].id));
+      }
+    }
+
+    if(select12.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+
+
+  select12.onchange = function(){
+    var value2 = this.value;
+    select13.length = 0;
+    select13.add(new Option("默认",""));
+    for(var i=0;i<arr2.length;i++){
+
+      if(value2==arr2[i].locareaid){ //value==arr[i].customer
+        select13.add(new Option(arr2[i].name,arr2[i].id));
+      }
+    }
+
+    if(select13.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+
+  }
+
+
+  select11.onchange();
+
+  select12.onchange();
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+    $(document).ready(function(){
+      //$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".form-li").on("click",'li',function(){
+          $(this).addClass('active').siblings().removeClass('active');
+          var num = $(this).index();
+          $(".form-content .display").removeClass('block');
+          $(".form-content .display").eq(num).addClass('block');
+          
+        });
+      $('.btn-more').toggle(function(){
+            $(this).html('收起选项<span class="upArrow"></span>')
+            $('.ctables>div:gt(2)').removeClass('chide');
+            $('.ctables>label:gt(2)').removeClass('chide');
+        },function(){
+            $(this).html('更多选项<span class="arrow"></span>')
+            $('.ctables>div:gt(2)').addClass('chide');
+            $('.ctables>label:gt(2)').addClass('chide');
+        });
+    });
+
+
+
+
+
+</script>  
+   
+
+
+
+
+
+
+
+</block>

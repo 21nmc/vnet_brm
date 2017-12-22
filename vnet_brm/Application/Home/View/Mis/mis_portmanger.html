@@ -1,0 +1,185 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">MIS端口配置列表</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+
+
+                        <form id="formtextarea"  action="{:U('Mis/mis_portmanger')}" method="post"> 
+                                <div class="main">
+
+                                  <div class="loca clearfix">
+
+                                  <select class="button-select" name="roomcode" style="width:250px;" id="select1">
+
+                                        <volist name="roomlist" id="vo">
+
+                                           <?php  $roomcode_now = $vo['roomcode']; $request_roomcode=$_REQUEST['roomcode']; ?>
+                                            <option value="{$vo.roomcode}" <if condition=" $request_roomcode eq $roomcode_now">selected="selected"</if> >{$vo.roomname}</option>
+
+                                        </volist>
+
+                                  </select>
+
+
+
+                                  <select class="button-select" name="mis_month_id" onchange="javascript:location.href=this.value;" style="width:250px;" id="select2">
+
+                                    <if condition="$tempmis_month_id eq '' ">
+                                       <option value="{:U('Mis/mis_portmanger')}" selected="selected" >请选择产品类型......</option>
+                                    <else />
+                                        <option value="{:U('Mis/mis_portmanger')}" >请选择产品类型......</option>
+                                    </if>
+
+                                    {$checkusergroupoption}
+
+                                  </select>
+
+                                  </div>
+                                <div class="data-list" id="msgBox">
+
+                                <table style="width:auto;" class="tweenBoxTable" name="group_users_tweenbox" id="id" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr>
+
+                                  <td>已经拥有出口端口 -> <a href="{:U('mis_truncate?mis_month_id='.$tempmis_month_id)}">强制清空</a></td>
+                                  <td></td>
+                                  <td>全部出口端口  -> <a href="{:U('index2')}" target="_blank">出口端口管理</a></td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                      <select id="selfhostgroup_id" name="selfhostgroup_id[]" autocomplete="off" multiple="multiple" size="10" style="width: 480px;">
+                                          {$myhostgroupoption}
+                                      </select>
+                                    </td>
+
+                                    <td class="center"><button type="button" id="add" name="add" class="btn-grey" onclick="moveListBoxSelectedItem(&quot;group_users&quot;, &quot;depart_id&quot;, &quot;selfhostgroup_id&quot;, &quot;add&quot;);">
+
+                                    <span class="arrow-left"></span></button>
+
+                                    <br>
+
+                                    <button type="button" id="remove" name="remove" class="btn-grey" onclick="moveListBoxSelectedItem(&quot;group_users&quot;, &quot;selfhostgroup_id&quot;, &quot;depart_id&quot;, &quot;rmv&quot;);">
+
+                                    <span class="arrow-right"></span></button>
+
+                                    </td>
+
+                                    <td>
+                                    <select id="depart_id" name="depart_id[]" autocomplete="off" multiple="multiple" size="10" style="width: 480px;">
+                                      <!--option value="1">Admin (Zabbix Administrator)</option>
+                                      <option value="2">guest</option-->
+                                      {$exitmyhostgroupoption}
+                                    </select>
+
+                                    </td>
+                                    <input type="hidden" name="mis_month_id" value="{$tempmis_month_id}" >
+                                </tr>
+
+                                <tr><td></td><td></td><td><input class="usergroup_btn" type="button" value="确认"></td></tr></tbody></table>
+                                
+                               </div>
+                               </div>
+                        </form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+                    
+</div>
+   
+<script type="text/javascript">
+
+
+function moveListBoxSelectedItem(objname, from, to, action) {
+  to = jQuery('#' + to);
+
+  jQuery('#' + from).find('option:selected').each(function(i, fromel) {
+    var notApp = true;
+    to.find('option').each(function(j, toel) {
+      if (toel.innerHTML.toLowerCase() > fromel.innerHTML.toLowerCase()) {
+        jQuery(toel).before(fromel);
+        notApp = false;
+        return false;
+      }
+    });
+    if (notApp) {
+      to.append(fromel);
+    }
+    fromel = jQuery(fromel);
+    if (action.toLowerCase() == 'add') {
+      jQuery(this)
+        .closest('form')
+        .append("<input name='" + objname + '[' + fromel.val() + ']' + "' id='" + objname + '_' + fromel.val()
+          + "' value='" + fromel.val() + "' type='hidden'>"
+        );
+    }
+    else if (action.toLowerCase() == 'rmv') {
+      jQuery('#' + objname + '_' + fromel.val()).remove();
+    }
+  });
+
+  return true;
+}
+$(".usergroup_btn").click(function(){
+  $("#selfhostgroup_id option").attr('selected','selected');
+  //$("#hostgroup_id option").attr('selected','selected');
+  $("#formtextarea").submit();
+});
+</script>
+
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var arr = {$jsonlist2};
+  var arr2=new Array();
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("请选择产品类型......",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].roomcode){ //value==arr[i].customer
+        var str = '/zichan/index.php?s=/Home/Mis/mis_portmanger/roomcode/'+arr[i].roomcode+'/mis_month_id/'+arr[i].id+'.html'
+        select2.add(new Option(arr[i].pname,str));
+      }
+    }
+
+    // if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    // }
+      // $('#span1').html("");
+  }
+  // select1.onchange();
+
+
+  // select2.onchange();
+
+</script> 
+</block>

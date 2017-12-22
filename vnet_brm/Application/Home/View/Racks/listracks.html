@@ -1,0 +1,138 @@
+<extend name="Base/common"/>987654321·
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">机柜列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+						<if condition="($is_admin_define eq true)" >
+                        <a href="{:U('addrack')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span> 机柜添加</a>
+                        </if>
+                        <a href="{:U('rackmap')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span> 机柜分布图</a>
+
+                        <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                        
+                            
+                            <div class="form-group">
+                                    <select class="form-control" id="depart_id" name="depart_id">
+                                    	<option class="level-0" value="" >所属业务线</option>
+                                        <volist name="depart_list" id="vo"> 
+                                            <?php   $vodeid = $vo['id'];$deid=I('get.depart_id'); ?>   
+                                            <option class="level-0" value="{$vo.id}" <if condition="$vodeid eq $deid"> selected='selected'</if>  >{$vo.depart_name}</option>
+                                        </volist>
+                                        
+                                    </select>
+                                </div>
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="name" id="name" value="{$name}"  placeholder="机柜名称……">
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                        </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>硬件</th>
+                            <th>大小(U)*</th>
+                            <th>深度</th>
+                            <th>机房</th>
+                            <th>房间</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+  
+                        <volist name="list" id="vo">
+                        <tr >
+                            <td><a href="{:U('Racks/viewrack?rackid='.$vo['id'])}">{$vo.name}</a></td>
+                            <td>{$vo.rackcount}</td>
+                            <td>{$vo.usize}</td>
+                            <td>{$vo.depth}mm</td>
+                            <td>{$vo.locname}</td>
+                            <td>{$vo.areaname}</td>
+							<if condition="($is_admin_define eq true)" >
+                            <td>
+                              <a href="{:U('Racks/editlistracks?id='.$vo['id'])}" >编辑</a> | 
+                              <a href="{:U('Racks/dellistracks?id='.$vo['id'])}" onclick="javascript:return p_del()"> 删除</a>
+                            </td>
+                        	</if>
+                        </tr>
+                        </volist>
+
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+	var depart_id = $('#depart_id').val();
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Racks/listracks/name/"+name+"/depart_id/"+depart_id+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

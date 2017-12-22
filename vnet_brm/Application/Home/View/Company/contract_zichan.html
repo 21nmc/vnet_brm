@@ -1,0 +1,104 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">{$contract_info.title}-合同资产</h1>
+        </div>
+       <ul class="breadcrumb">
+            <li><a href="{:U('Customermanage/zichangindex')}">端口资产</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customermanage/zichangindexip')}">ip资产</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customermanage/zichangindexroom')}">机柜资产</a> <span class="divider"></span></li>
+            <li><a href="{:U('Customermanage/zichangindexdns')}">DNS记录</a> <span class="divider"></span></li>
+            
+        </ul>
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('port_new?contract_id='.$contract_id)}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加端口</a>
+
+                  
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="ip" id="code_name" value="<?php echo I('get.code_name'); ?>"  placeholder="">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>客户名</th>
+                           
+                             <th>网络设备</th>
+                            <th>端口</th>
+                            <th>描述</th>
+                            <th>带宽</th>
+                             <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.companyname}</td>
+                                
+                                <td>{$vo.mis_network}</td>
+                                <td>{$vo.mis_port}</td>
+                                <td>{$vo.mis_meta}</td>
+                                <td>{$vo.mis_bandwidth}</td>
+                            
+                                
+                                <td>
+
+                                <a class="btn btn-primary btn-xs" href="{:U('zichan_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('zichandel?id='.$vo['id'])}" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           <!-- <img src="http://211.151.5.12/curl.php?local_graph_id=52078&graph_start=&graph_end="> -->
+
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

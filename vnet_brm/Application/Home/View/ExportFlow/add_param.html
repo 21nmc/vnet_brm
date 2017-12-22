@@ -1,0 +1,149 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">添加</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">                           
+                            <input type="hidden" name="jifang_url_id" value="{$jifang_url_id}">
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">机房:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="jifang_id">
+                                         {$option}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">出口流量类型<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="port_type" name="port_type">
+                                         <option  value="静态出口流量" >静态出口流量</option>
+                                         <option  value="本机房BGP使用量" >本机房BGP使用量</option>
+                                         <option  value="本机房静态使用量" >本机房静态使用量</option>
+                                         <option  value="BGP复用静态流量" >BGP复用静态流量</option>
+                                         <option  value="其他机房复用静态流量" >其他机房复用静态流量</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">设备名称<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="device_name" name="device_name"  required>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">端口<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="port" name="port"  required><br />
+                                    <font color="red" style="font-size:9pt;color:red;"><!--background:black-->请统一命名规范：千兆口=GigabitEthernet1/1 | 万兆口一=Ten-GigabitEthernet6/0/1 | 万兆口二=XGigabitEthernet6/0/1/0 | 捆绑端口=M-GigabitEthernet0/0/0 | Vlan-interface | LoopBack0</font>
+                                </div>
+                                
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">IP<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="ip" name="ip"  required>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">端口描述:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="desc" name="desc"  >
+                                </div>
+                            </div>
+
+
+                             <!--div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">ZABBIX_HOSTID:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="hostid" name="hostid"  >
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">ZABBIX_in参数:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="initemid" name="initemid"  >
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">ZABBIX_out参数:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="outitemid" name="outitemid"  >
+                                </div>
+                            </div-->
+
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+  
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var arr = {$jsonlist2};
+  var arr2=new Array();
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].webid){ //value==arr[i].customer
+        select2.add(new Option(arr[i].typename,arr[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+  select1.onchange();
+
+
+  //select2.onchange();
+
+</script>
+
+
+
+
+
+
+
+
+   
+</block>

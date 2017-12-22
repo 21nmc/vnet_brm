@@ -1,0 +1,11 @@
+[ 2017-12-18T18:41:20+08:00 ] 211.99.216.18 /vnet_brm/index.php/Home/Login/index.html
+ERR: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+
+[ 2017-12-18T18:42:47+08:00 ] 211.99.216.18 /vnet_brm/index.php/Home/Login/index.html
+ERR: 1146:Table 'vnet_bmr.vnet_user' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `vnet_user`
+
+[ 2017-12-18T18:58:16+08:00 ] 211.99.216.18 /vnet_brm/index.php/Home/Login/index.html
+ERR: 1146:Table 'vnet_bmr.vnet_user' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `vnet_user`
+

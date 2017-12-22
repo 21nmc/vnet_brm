@@ -1,0 +1,129 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+   
+	
+	var cust_name = $('#cust_name').val();
+	var pact_code = $('#pact_code').val();
+	var port_code = $('#port_code').val();
+	
+	window.location.href= "__ROOT__/index.php?s=/Home/Pact/haveindex/cust_name/"+cust_name+"/pact_code/"+pact_code+"/port_code/"+port_code+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+           <!--page title begin-->
+        		<ul class="page-title-ul">
+        		<li ><a href="{:U('Pact/index')}">已监控合同端口列表</a></li>
+        		<li ><a href="{:U('Pact/unindex')}">未匹配端口列表</a></li>
+                
+        		<div class="clear"></div>
+        	</ul>
+        	
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            
+
+							<form class="form-inline" id="device-search" role="form" method="get" style="margin-top:20px;">
+							    
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="cust_name" id="cust_name" value="<?php echo I('get.cust_name'); ?>"  placeholder="客户名称...">
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="pact_code" id="pact_code" value="<?php echo I('get.pact_code'); ?>"  placeholder="纸质合同编号...">
+                                </div>
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="port_code" id="port_code" value="<?php echo I('get.port_code'); ?>"  placeholder="端口编号...">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>纸质合同</th>
+                            <th>合同结束时间</th>
+                            <th>产品类型</th>
+                            <th>数量</th>
+                            <th>客户名称</th>
+                            <th>网络名称</th>
+                            <th>端口名称</th>
+                            <th>端口带宽</th>
+                            
+                            
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="pact_list" id="vo">
+                            <tr >
+                            	<td>{$vo.pact_code}</td>
+                                <td>{$vo.end_time}</td>
+                                <td>{$vo.product_name}</td>
+                                <td>{$vo.num}</td>
+                                <td>{$vo.cust_name}</td>
+                                <td>{$vo.wl_device_name}</td>
+                                <td>{$vo.wl_port}</td>
+                                <td>{$vo.bandwidth}</td>
+                                
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

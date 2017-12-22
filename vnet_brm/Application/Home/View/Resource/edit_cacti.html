@@ -1,0 +1,205 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+        <!--page title begin-->
+        <h1 class="page-title">编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+            <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">                           
+                            <input type="hidden" name="id" value="{$id}">
+                            <input type="hidden" name="p" value="{$p}">
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">是否参与带宽统计<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+                                <select class="form-control" name="flag" >
+                                    <if condition="$resource_info['flag'] eq '0' ">
+                                        <option class="level-0" value="0" selected="selected">参与带宽统计</option>
+                                    <else />
+                                        <option class="level-0" value="0" >参与带宽统计</option>
+                                    </if>
+                                    <if condition="$resource_info['flag'] eq '1' ">
+                                        <option class="level-0" value="1" selected="selected">不参与带宽统计</option>
+                                    <else />
+                                        <option class="level-0" value="1" >不参与带宽统计</option>
+                                    </if>
+
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">流量图所在Web页面<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+                                <select class="form-control" name="webid" id="select1">
+                                    <option class="level-0" value="" >请选择流量图所在Web页面.....</option>
+                                    <volist name="web_list" id="vo"> 
+                                        <?php   $vodeid = $vo['id']; $webid=$resource_info['webid'];?>   
+                                        <option class="level-0" value="{$vodeid}" <if condition="$vodeid eq $webid"> selected='selected'</if> >{$vo.name}</option>
+                                    </volist>
+                                </select>
+                              </div>
+                            </div>
+                            
+                            <div class="form-group">当前选择：<font color="red"><?php $typeid = $resource_info['typeid'];  echo $webtype_arr_now[$typeid];?> </font>
+                              <label for="device-type" class="col-xs-4 control-label">Web页面二级分类<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+                                <select class="form-control" name="typeid" id="select2">
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">流量图管理部门<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+                                <select class="form-control" name="depart_id" >
+                                    <option class="level-0" value="" >选择流量图管理部门.....</option>
+                                    <volist name="depart_list" id="vo"> 
+                                        <?php   $void = $vo['id']; $dep_id=$resource_info['dep_id'];?>   
+                                        <option class="level-0" value="{$void}" <if condition="$void eq $dep_id "> selected='selected'</if> >{$vo.depart_name}</option>
+                                    </volist>
+                                </select>
+                              </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">流量图统计类型<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+                                <select class="form-control" name="flowtype" >
+                                    <option class="level-0" value="" >流量图统计类型.....</option>
+
+                                    <if condition="$resource_info['flowtype'] eq '2' ">
+                                        <option class="level-0" value="2" selected="selected">只取OUT流量</option>
+                                    <else />
+                                        <option class="level-0" value="2" >只取OUT流量</option>
+                                    </if>
+
+                                    <if condition="$resource_info['flowtype'] eq '3' ">
+                                        <option class="level-0" value="3" selected="selected">in和out都取</option>
+                                    <else />
+                                        <option class="level-0" value="3" >in和out都取</option>
+                                    </if>
+
+                                    <if condition="$resource_info['flowtype'] eq '4' ">
+                                        <option class="level-0" value="4" selected="selected">比较in/out取最大</option>
+                                    <else />
+                                        <option class="level-0" value="4" >比较in/out取最大</option>
+                                    </if>
+
+                                </select>
+                              </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">Cacti名称<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="name" name="name" value="{$resource_info.name}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">别名<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="other_name" name="other_name" value="{$resource_info.other_name}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">采购带宽:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="purchasing_bandwidth" name="purchasing_bandwidth" value="{$resource_info.purchasing_bandwidth}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">URL<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="url" name="url" value="{$resource_info.url}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">local_graph_id<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="local_graph_id" name="local_graph_id" value="{$resource_info.local_graph_id}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">RrdPath<font color="red">**</font>:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="rrd" name="rrd" value="{$resource_info.rrdpath}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">注释:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="meta" rows="3" maxlength="50">{$resource_info.meta}</textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions col-xs-8 pull-right">
+                                <input type="submit" class="btn btn-primary"></input>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+   
+
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var arr = {$jsonlist2};
+  var arr2=new Array();
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].webid){ //value==arr[i].customer
+        select2.add(new Option(arr[i].typename,arr[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+  select1.onchange();
+
+
+  //select2.onchange();
+
+</script>
+
+
+   
+</block>

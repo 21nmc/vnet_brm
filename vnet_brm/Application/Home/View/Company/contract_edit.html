@@ -1,0 +1,317 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;}
+.form-content .display.block{ display:block;}
+
+.xiaobiaoti{ color:#95b8d6; margin-bottom:10px; border-bottom:2px solid #95b8d6; font-size:18px; font-weight:bold; line-height:34px; padding-left:10px;}
+.hang-coco{ line-height:34px; text-align:center;}
+.hang-biaoti{ background:#95b8d6; color:#fff; margin:4px auto; width:80%; font-size:16px; font-weight:bold;}
+.hang-coco a{line-height:30px;  background:#f7f7f7; margin:1px auto; width:80%; display:block; color:#333;}
+.hang-coco a:hover{ background:#dbdbdb; }
+.checkbox-coco{ display:block; float:left; line-height:34px; font-size:16px;}
+input[type="checkbox"].checkbox-coco-kuang{ margin:9px 6px 0 0; width:16px; height:16px;}
+
+.coco-rizhi h4{ line-height:34px; font-size:14px;}
+
+.sortable{ line-height:34px; margin-bottom:10px;}
+.sortable th{background:#95b8d6; color:#fff; padding:0 4px; }
+.sortable tr:nth-of-type(2n+1){ background:#f8f8f8;}
+.sortable input[type="checkbox"]{ width:16px; height:16px; margin:0 0 0 6px;}
+
+</style>
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">合同编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">编辑新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+	                <ul class="form-li">
+	                	<li class="active">合同数据</li>
+	                	<li>硬件关联</li>
+	                	<li>关联软件</li>
+	                	<li>文件</li>
+	                	<div class="clear"></div>
+	                </ul>
+	                
+	                <div class="form-content">
+	                	<div class="display block">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                        
+                        <div class="col-xs-4">
+                        	<div class="xiaobiaoti">合同特性</div>	
+                            <input type="hidden" name="flag" value="1">
+                            <input type="hidden" name="id" value="{$id}">
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">标题:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="title" value="{$contract_info.title}" require>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">数量:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="number"  value="{$contract_info.number}" require>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">类型:</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="type">
+                                        <volist name="type_list" id="vo">
+                                            <?php   $vvvid = $vo['id'];$typeid=$contract_info['type']; ?>  
+                                        	<option class="level-0" value="{$vo.id}" <if condition="$vvvid eq $typeid">selected='selected'</if>  >{$vo.name}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">总成本(￥):</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="indate" name="totalcost" value="{$contract_info.totalcost}" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">开始时间:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="start" name="startdate" value="{$contract_info.startdate|date="Y-m-d H:i:s",###}" require>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <label for="product-key" class="col-xs-4 control-label">当前结束时间:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control" id="end" name="currentenddate" value="{$contract_info.currentenddate|date="Y-m-d H:i:s",###}" >
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">合同描述</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" id="device-description" name="description" rows="3" maxlength="150">{$contract_info.description}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">注释</label>
+                                <div class="col-xs-8">
+                                    <textarea class="form-control" id="device-description" name="comments" rows="3" maxlength="150">{$contract_info.comments}</textarea>
+                                </div>
+                            </div>
+                    	</div>
+                    	
+                    	<div class="col-xs-4">
+                        	
+                        	 <div class="form-group hang-coco">
+                                <div class="hang-biaoti">硬件:</div>
+                                <?php  foreach($item_list as $items){  if( in_array($items['id'],$itemlink_list) ){  $id_now_t = $items['id']; ?>
+                                       <a href="{:U('Item/item_edit?id='.$id_now_t)}"><?php  echo $items['common_name']; ?></a>
+                                <?php } }   ?>
+                            </div>
+                            <div class="form-group hang-coco">
+                               <div class="hang-biaoti">软件:</div>
+                                <?php  foreach($soft_list as $so){  if( in_array($so['id'],$softlink_list) ){   $id_now_t = $so['id'];?>
+                                       <a href="{:U('Soft/soft_edit?id='.$id_now_t)}"><?php  echo $so['stitle']; ?></a>
+                                <?php } }   ?>
+                            </div>
+                           
+                        	
+                    	</div>
+                    	
+                    	
+                    	
+                    	<div class="clear"></div>
+                    	
+                    	
+                    	
+                    	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                    
+                    
+                    
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <input type="hidden" name="flag" value="2">
+                            <input type="hidden" name="id" value="{$id}">
+                            <div class="form-group">
+                               
+                                
+                                  <div class="col-xs-12">                                  
+                                    <!--  <input type="checkbox"  name="itemid[]" value="{$vo.id}" <?php if( in_array($vo['id'],$itemlink_list) ){ echo "checked = true"; } ?>  >{$vo.common_name}</input>-->
+                                  	<table width="100%" class="sortable">
+          
+          								 <tr class="even">
+          									<th width="5%">关联于</th>
+          									<th>设备名称</th>
+          									<th>SN号</th>
+          									<th>型号</th>
+          						        </tr>
+                                        <volist name="item_list" id="vo">
+	  										<tr>
+	  											<td><input name="itemid[]" value="{$vo.id}" <?php if( in_array($vo['id'],$itemlink_list) ){ echo "checked = true"; } ?> type="checkbox" ></td>
+	  											<?php  $id_now_t = $vo['id'];  ?>
+	  											<td class="bld"><a class="editid" href="{:U('Item/item_edit?id='.$id_now_t)}">{$vo.common_name}</a></td>
+	  											<td class="bld">{$vo.sn}</td>
+	  											<td class="bld">{$vo.model}</td>
+	  										</tr>
+  										</volist>
+										
+ 									</table>
+                                  	
+                                  </div>
+                          
+                                
+                           </div>
+                        
+                            <div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                    
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <input type="hidden" name="flag" value="3">
+                            <input type="hidden" name="id" value="{$id}">
+                           <div class="form-group">
+                               
+                               
+                              <div class="col-xs-12">                                  
+                                    <!--  <input type="checkbox"  name="itemid[]" value="{$vo.id}" <?php if( in_array($vo['id'],$itemlink_list) ){ echo "checked = true"; } ?>  >{$vo.common_name}</input>-->
+                                  	<table width="100%" class="sortable">
+          
+          								 <tr class="even">
+          									<th width="5%">关联于</th>
+          									<th>软件名称</th>
+          									<th>版本</th>
+          									<th>许可信息</th>
+          						        </tr>
+                                        <volist name="soft_list" id="vo">
+	  										<tr>
+	  											<td><input name="softid[]" value="{$vo.id}" <?php if( in_array($vo['id'],$softlink_list) ){ echo "checked = true"; } ?>  type="checkbox" ></td>
+	  											<?php  $id_now_t = $vo['id'];  ?>
+	  											<td class="bld"><a class="editid" href="{:U('Soft/soft_edit?id='.$id_now_t)}">{$vo.stitle}</a></td>
+	  											<td class="bld">{$vo.sversion}</td>
+	  											<td class="bld">{$vo.slicenseinfo}</td>
+	  										</tr>
+  										</volist>
+										
+ 									</table>
+                                  	
+                                  </div>
+                               
+                               
+                                <!-- <volist name="contract_list" id="vo">
+                                  <div class="col-xs-2">
+                                    <input type="checkbox"  name="contract_id[]" value="{$vo.id}" <?php if( in_array($vo['id'],$contractlink_list) ){ echo "checked = true"; } ?>   >{$vo.title}</input>
+                                  </div>
+                                </volist> -->
+                                
+                           </div>
+                           
+                           <div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                     <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="flag" value="4">
+                            <input type="hidden" name="id" value="{$id}">
+                           <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">文件:</label>
+                                <div class="col-xs-4">
+                                    <input type="file"  class="form-control" id="indate" name="imageurl"  require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">文件显示:</label>
+                                <img src="__ROOT__/upload/{$contract_info.imageurl}"   />
+                            </div>
+                           
+                           <div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+	                </div>
+	                    
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+     <script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+   
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+    jeDate({
+    	dateCell:"#end",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+    })
+    
+   
+        
+    $(".form-li").on("click",'li',function(){
+    	$(this).addClass('active').siblings().removeClass('active');
+    	var num = $(this).index();
+    	$(".form-content .display").removeClass('block');
+    	$(".form-content .display").eq(num).addClass('block');
+    	
+    });
+    
+    </script>
+   
+</block>

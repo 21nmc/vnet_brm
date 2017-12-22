@@ -1,0 +1,184 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">复合查询</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>>
+              <a href="{:U('treemanger')}"  type="button" class="btn btn-danger">
+              <span class="glyphicon glyphicon-new-window"></span>节点别名编辑</a>  
+
+              <a href="{:U('index')}"  type="button" class="btn btn-danger">
+              <span class="glyphicon glyphicon-new-window"></span>分类</a-->
+                           
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-16">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            {$table}
+                            <div class="ctables">
+                                <label for="device-type" class="col-xs-16 control-label">区域</label>
+                                <div class="col-xs-16">
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="1"> 华北大区
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="22">华南大区
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="23">华东大区
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="24">华中大区
+                                    </label>
+                                </div>
+
+
+                                <label for="device-type" class="col-xs-16 control-label">城市</label>
+                                <div class="col-xs-16">
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                                    </label>
+
+                                </div>
+                                <label for="device-type" class="col-xs-16 control-label">城市</label>
+                                <div class="col-xs-16">
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                                    </label>
+
+                                </div>
+                                <label for="device-type" class="col-xs-16 chide control-label">城市</label>
+                                <div class="col-xs-16 chide">
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                                    </label>
+
+                                </div>
+                                <label for="device-type" class="col-xs-16 chide control-label">城市</label>
+                                <div class="col-xs-16 chide">
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="1"> 北京
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="22">上海
+                                    </label>
+
+                                    <label class="radio-inline">
+                                    <input type="checkbox" id="device-type" name="device-type" value="23">广州
+                                    </label>
+
+                                </div>
+                                <label for="device-type" class="col-xs-16 chide control-label">其他</label>
+                                <div class="col-xs-16 chide">
+                                    <label class="radio-inline">
+                                    <input  type="text" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-primary" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="more btn-more">更多选项<span class="arrow"></span></div>
+
+                            <div class="form-actions col-xs-8 pull-right">
+                                
+                            </div>
+
+                        </form>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>当前节点</th>
+                            <th>下级节点</th>
+                            <th>操作</th>
+
+                        </tr></thead>
+
+                        <tbody>
+                        
+                        <volist name="treearealist" id="vo">
+                        <tr >
+
+                            <td>{$vo.name}</td>
+                            <td>{$vo.threename}</td>
+
+                            <td>
+                              <a href="{:U('Tree/view?id='.$vo['id'])}" >查看</a>
+                            </td>
+                        
+                        </tr>
+                        </volist>
+                        <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+
+
+
+                    </table>
+            </div>
+        </div>
+                    
+</div>
+
+<script type="text/javascript">
+$(function(){
+    $('.btn-more').toggle(function(){
+        $(this).html('收起选项<span class="upArrow"></span>')
+        $('.ctables>div:gt(2)').removeClass('chide');
+        $('.ctables>label:gt(2)').removeClass('chide');
+    },function(){
+        $(this).html('更多选项<span class="arrow"></span>')
+        $('.ctables>div:gt(2)').addClass('chide');
+        $('.ctables>label:gt(2)').addClass('chide');
+    });
+})
+</script>
+</block>

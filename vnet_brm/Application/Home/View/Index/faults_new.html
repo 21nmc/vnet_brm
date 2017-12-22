@@ -1,0 +1,133 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+ 
+ <script type="text/javascript">
+
+</script>
+ 
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">故障添加</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">故障编号</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="code_name" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">故障等级</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="level">
+                                        <option class="level-0" value="一般故障">一般故障</option>
+                                        <option class="level-0" value="严重故障">严重故障</option>
+                                        <option class="level-0" value="重大故障">重大故障</option>
+                                        <option class="level-0" value="普通质询">普通质询</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">故障分类</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="category" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">归属运营商</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="factory" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">开始时间</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="start_time" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">结束时间</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="end" name="end_time" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">时长</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="time_long">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">故障原因</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="reason">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">影响范围</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="fanwei">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-name" class="col-xs-4 control-label">操作人</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="product-key" name="person_op">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">备注</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="desc" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__STATIC__/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+    jeDate({
+    	dateCell:"#end",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+    })
+    </script>
+   
+</block>

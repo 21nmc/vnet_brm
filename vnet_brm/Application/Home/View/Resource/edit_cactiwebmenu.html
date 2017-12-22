@@ -1,0 +1,60 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <input type="hidden" name="id" value="{$id}">
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">web标题：</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="title" name="title" value="{$title}" require>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">上级菜单:</label>
+                                <div class="col-xs-4">
+
+                                    <select class="form-control" name="pid">
+                                        <option value="0">顶级菜单</option>
+                                        {$pidoption}
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-actions col-xs-8 pull-right">
+                            <input type="submit" class="btn btn-primary"></input>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+
+   
+</block>

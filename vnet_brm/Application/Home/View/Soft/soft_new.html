@@ -1,0 +1,127 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">软件添加</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">厂商:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="manufacturerid">
+                                        <volist name="agent_list" id="vo">
+                                        	<option class="level-0" value="{$vo.id}">{$vo.title}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">硬件类型:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="itemtypeid">
+                                        <volist name="type_all_list" id="vo">
+                                        	<option class="level-0" value="{$vo.id}">{$vo.typedesc}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">标题:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="stitle" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">版本:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="sversion" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">采购日期:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="purchdate" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">数量:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="licqty" >
+                                </div>
+                            </div>
+                       
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">License Per:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="lictype">
+                                            <option class="level-0" value ="0">Box</option>
+				                            <option class="level-0" value ="1">CPU</option>
+				                            <option class="level-0" value ="2">Core</option>
+			                         </select>
+                                </div>
+                            </div>
+                            
+                           <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">许可信息</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="slicenseinfo" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">其他信息</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="sinfo" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                            
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+   
+    </script>
+   
+</block>

@@ -1,0 +1,137 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+    var event_type = $('#event_type').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Jianshe/jianshe/event_type/"+event_type+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+        <!--page title begin-->
+           <h1 class="page-title">待审核事件列表</h1>  
+            
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <form action=""  method="post" id="myForm">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+<div class="col-xs-2">
+                           
+                                    <input  type="submit" class="btn btn-danger" value="一键审核"/>
+                                    
+                                    
+                              </div>     
+                      </div>               
+                </div>
+
+            </div>
+            <br/>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                     
+                </div>
+                            
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th><input id="allboxs" onclick="allcheck()" type="checkbox"/></th>
+                            <th>事件类型</th>
+                            <th>事件发起人</th>
+                            <th>发生时间</th>
+                            <th>影响时间</th>
+                            <th>是否重大事件</th>
+                            <th>影响范围</th>
+                            <th>绩效等级</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="event_list" id="vo">
+                            <tr >
+                                <td><input name="boxs[]" type="checkbox" value="{$vo.id}"/></td>
+                                <td>{$vo.event_type}</td>
+                                <td>
+                                    <?php  $uid = $vo['uid']; $username=get_username_by_uid($uid); echo $username; ?>
+                                </td>
+                                <td>{$vo.start_time|date="Y-m-d H:i:s",###} </td>
+                                <td>{$vo.effect_time}</td>
+                                <td>
+                                <?php  $is_important = $vo['is_important']; if($is_important==1){ echo '重大'; ?>
+                                <?php }else{
+                                    echo '普通';
+                                }?>
+
+                                </td>
+
+                                <td>{$vo.effect_desc}</td>
+                                <td>{$vo.pay_index}</td>
+                                <td>
+                                    <if condition="$is_admin_define eq true" >
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_events?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_events?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    </if>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+                    </form>
+            </div>
+        </div>
+
+                    
+    </div>
+    <script>
+    function allcheck() {
+        var nn = $("#allboxs").is(":checked"); //判断th中的checkbox是否被选中，如果被选中则nn为true，反之为false
+            if(nn == true) {
+                var namebox = $("input[name^='boxs[]']");  //获取name值为boxs的所有input
+                for(i = 0; i < namebox.length; i++) {
+                    namebox[i].checked=true;    //js操作选中checkbox
+                }
+            }
+            if(nn == false) {
+                var namebox = $("input[name^='boxs[]']");
+                for(i = 0; i < namebox.length; i++) {
+                    namebox[i].checked=false;
+                }
+            }
+    }
+    
+    function submit_deal(){
+    	$("myForm").submit();
+    }
+    
+    </script>
+    
+   
+   
+</block>

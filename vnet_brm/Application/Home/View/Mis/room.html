@@ -1,0 +1,104 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+	var name = $('#name').val();
+	window.location.href= "__ROOT__/index.php?s=/Home/Resource/index/name/"+name+"/p/1.html";
+ }
+ </script>
+
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+                <li ><a href="{:U('Mis/index')}">Mis月报</a></li>
+                <li ><a href="{:U('Mis/index2')}">MIS端口管理</a></li>
+                <li><a href="{:U('Mis/mis_portmanger')}">MIS端口配置</a></li>
+                <li ><a href="{:U('Mis/city')}">MIS城市管理</a></li>
+                <li><a href="{:U('Mis/mis_product')}">MIS产品管理</a></li>
+                <li class="hover"><a href="{:U('Mis/room')}">MIS机房管理</a></li>
+                <li><a href="{:U('Mis/mis_history')}">MIS历史</a></li>
+
+                <!--li><a href="{:U('ExportFlow/huabei_product')}">华北机房带宽产品统计</a></li>
+                <li><a href="{:U('ExportFlow/auto_week')}">自定义</a></li-->
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                       <a href="{:U('add_room')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加机房</a>
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        
+                        <thead>
+                        <tr>
+                        	
+                            <th>城市编码</th>
+                            <th>城市名</th>
+
+                        </tr></thead>
+                        <tbody>
+                            
+                            <volist name="room_list" id="vo">
+                            
+                            <tr>
+                          
+                            	
+                            	<td>{$vo.roomcode}</td>
+                                <td>{$vo.name}</td>
+                                <td>
+                                     <a class="btn btn-primary btn-xs" href="{:U('edit_room?id='.$vo['id'])}">编辑信息</a>
+                                     <a class="btn btn-default btn-xs" href="{:U('del_room?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                            </tr>
+                            
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                        
+                   </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

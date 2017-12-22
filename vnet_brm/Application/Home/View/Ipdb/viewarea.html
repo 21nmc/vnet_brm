@@ -1,0 +1,166 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">房间</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+							<if condition="$is_admin_define eq true" >
+                            <a href="{:U('itemareasedit?id='.$id)}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>房间编辑</a>
+							</if>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        <!--all device detail begin -->
+
+
+        <table width="100%">
+          <tr>
+                <td valign="top">
+                  <div class="portlet">
+                      <h2><b>信息</b></h2>
+                      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                          <tbody>
+                              <tr>
+                                  <th width="50%" class="tdright">名称:</th>
+                                  <td class="tdleft">{$areaname}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">所属数据中心:</th>
+                                  <td class="tdleft">{$name}-{$floor}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">机柜总数:</th>
+                                  <td class="tdleft">{$rackcount}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">U位合计:</th>
+                                  <td class="tdleft">{$unitscount}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">% used:</th>
+                                  <td class="tdleft">{$usedusize}%</td>
+                              </tr>
+
+
+
+                          </tbody>
+                      </table>
+                  </div>
+                </td>
+          </tr>
+        </table>
+
+        <table width="100%">
+          <tr>
+                <td valign="top">
+                  <div class="portlet">
+
+                      <h2><b>归属的机柜 ({$rackcount})</b></h2>
+                      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                          <tbody>
+                          
+                          <volist name="racklist" id="vo">
+								<tr><td align="center">
+                              <a href="{:U('Racks/viewrack?rackid='.$vo['id'])}" target="_blank">
+                              {$vo.name}</a>
+                              </td></tr>
+                          </volist>
+                          
+                            
+                          </tbody>
+                      </table>
+
+                  </div>
+
+                </td>
+          </tr>
+        </table>
+
+
+
+
+
+        </div>
+        
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".checkinput").click(function(){
+        if(!$(this).hasClass('disabled')){
+            var input = $(this).parent().find('input');
+            var num = 0;
+            for(var i=0;i<input.length;i++){
+                if(input[i].checked){
+                    num++;
+                }
+            }   
+            if(num==3){
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = false;
+                }  
+            }else{
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = true;
+                }
+            }
+        }
+      });
+    });
+    
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

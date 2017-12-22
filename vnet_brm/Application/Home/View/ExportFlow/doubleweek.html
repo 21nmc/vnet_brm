@@ -1,0 +1,161 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+	var name = $('#name').val();
+	window.location.href= "__ROOT__/index.php?s=/Home/Resource/index/name/"+name+"/p/1.html";
+ }
+ </script>
+
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+        		<li ><a href="{:U('ExportFlow/index')}">一分钟出口端口</a></li>
+                <li ><a href="{:U('ExportFlow/portmanger')}">5分钟出口端口配置</a></li>
+                <li ><a href="{:U('ExportFlow/index2')}">5分钟出口端口管理</a></li>
+        		<li ><a href="{:U('ExportFlow/flow_type')}">资源类型</a></li>
+                <li ><a href="{:U('ExportFlow/day')}">机房日报</a></li>
+                <li ><a href="{:U('ExportFlow/week')}">周报</a></li>
+                <li class="hover"><a href="{:U('ExportFlow/doubleweek')}">双周报</a></li>
+                <li><a href="{:U('ExportFlow/month')}">月报</a></li>
+                <li><a href="{:U('ExportFlow/history')}">历史</a></li>
+
+
+
+                <!--li><a href="{:U('ExportFlow/portmanger')}">MIS出口端口配置</a></li>
+                <li><a href="{:U('ExportFlow/index2')}">MIS出口端口管理</a></li>
+                <li><a href="{:U('ExportFlow/city')}">MIS城市管理</a></li>
+                <li><a href="{:U('ExportFlow/product')}">MIS产品类型管理</a></li>
+                <li><a href="{:U('ExportFlow/room')}">MIS机房管理</a></li-->
+
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                       
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+
+
+      <!--select name="area" style="width:150px;" onchange="javascript:location.href=this.value;" style="width:250px;" id="area">
+
+        <if condition="$area eq '' ">
+           <option value="" selected="selected"  >请选择大区......</option>
+        <else />
+            <option value=""  >请选择大区......</option>
+        </if>
+  
+        <if condition="$area eq 'huabei' ">
+           <option value="5" selected="selected" >华北大区</option>
+        <else />
+           <option value="5" >华北大区</option>                
+        </if>
+
+        <if condition="$area eq 'huanan' ">
+           <option value="4" selected="selected"  >华南大区</option>
+        <else />
+           <option value="4" >华南大区</option>                
+        </if>
+
+        <if condition="$area eq 'huadong' ">
+           <option value="3" selected="selected"  >华东大区</option>
+        <else />
+           <option value="3"  >华东大区</option>                
+        </if>
+
+      </select>
+
+<form method="post" >
+        开始时间：<input type="text"  id="start" name="start"  >                
+        结束时间：<input type="text"  id="end" name="end"  >                
+        <input type="submit" class="btn btn-primary" value="查询">
+</form-->                  
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        
+                        <thead>
+                        <tr>
+                        	<th>类型名称</th>
+                            <th>所属区域</th>
+                            <th>时间跨度</th>
+                            <th>采购带宽(MB)</th>
+                            <th>实际带宽(MB)</th>
+                            <th>使用率</th>
+                            <th>编辑</th>
+                        </tr></thead>
+                        <tbody>
+                            <?php    $arr_a = array('5'=>"华北区","4"=>"华东区","6"=>"华南区"); ?>
+                            <volist name="week_list" id="vo">
+                            
+                            <tr>
+                            	<td><a href="{:U('port_list2?type_id='.$vo['type_id'])}"><?php echo $vo['type_name'];?></a></td>
+                                <td><?php $deid = $vo['depart_id'];  echo $arr_a[$deid];?></td>
+                                <td><?php echo $vo['stime'].'到'.$vo['etime'];?></td>
+                                <td><?php echo $vo['pay_bandwidth'];?></td>
+                                <td><?php echo $vo['bandwidth'];?></td>
+                            	<td><?php echo $vo['shiyonglv'];?>%</td>
+                            	<td><a class="btn btn-primary btn-xs" href="{:U('edit_week?id='.$vo['id'])}">编辑信息</a></td>
+                            </tr>
+                            
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                        
+                   </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+<!--script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+<script type="text/javascript">
+//jeDate.skin('gray');
+jeDate({
+    dateCell:"#start",//isinitVal:true,
+    format:"YYYY-MM-DD hh:mm:ss",// hh:mm:ss
+    isTime:true
+   
+})
+jeDate({
+    dateCell:"#end",//isinitVal:true,
+    format:"YYYY-MM-DD hh:mm:ss",// hh:mm:ss
+    isTime:true
+})
+</script-->   
+   
+</block>

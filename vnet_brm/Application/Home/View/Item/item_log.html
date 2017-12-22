@@ -1,0 +1,111 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">日志列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+
+            
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>状态</th>
+                            <th>设备</th>
+                            <th>机柜</th>
+                            <th>发生时间</th>
+                            <th>操作用户</th>
+                            <th>描述</th>
+                        </tr></thead>
+                        <tbody>
+  
+                        <volist name="list" id="vo">
+                        <tr >
+
+                            <td>{$vo.flag}</td>
+                            <td>{$vo.label}</td>
+                            <td>{$vo.comments}</td>
+                            <td>{$vo.eventclock| date="Y-m-d H:i:s",###}</td>
+                            <td>{$vo.nickname}</td>
+                            <td>
+
+                            <a href="javascript:;" onclick="window.open('{:U('Racks/viewmeta?id='.$vo['id'])}','window','width=600px,height=430px, modal=yes,status=no')">查看</a>
+
+                            </td>
+                        
+                        </tr>
+                        </volist>
+
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var rackname = $('#rackname').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Racks/rackslog/rackname/"+rackname+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

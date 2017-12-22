@@ -1,0 +1,78 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<script type="text/javascript">
+ function submit_now(){
+   
+    
+    var itemtypeid = $('#itemtypeid').val();
+    var stitle = $('#stitle').val();
+    
+    window.location.href= "__ROOT__/index.php?s=/Home/Soft/index/itemtypeid/"+itemtypeid+"/stitle/"+stitle+"/p/1.html";
+ }
+ </script>
+
+<div class="content">
+        <div class="header">
+        <!--page title begin-->
+        <h1 class="page-title">设备列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>indexid</th>
+                            <th>端口名</th>
+                            <th>主机ip</th>
+                            <th>操作</th>
+
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                                <td>{$vo.portindexid}</td>
+                                <td>{$vo.portname}</td>
+                                <td>{$vo.host}</td>
+                                <td>
+                                
+                                 <if  condition="( $vo.status neq '1')">
+<a class="btn btn-primary btn-xs" href="{:U('add_port?id='.$vo['id'])}">添加端口</a>
+</if>
+
+         
+
+                                <!-- <a class="btn btn-default btn-xs" href="{:U('user_del?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')" >删除</a> -->
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

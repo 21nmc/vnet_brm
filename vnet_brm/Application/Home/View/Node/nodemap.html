@@ -1,0 +1,295 @@
+<extend name="Base/allcommon"/>
+
+<block name="main">
+
+
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">设备迁移</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                          <!--a href="{:U('addtree')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span>树状结构添加</a>
+                          <a href="{:U('addassetnode')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span>测试资产关联树状结构添加</a>                       
+                            <a href="{:U('addnode')}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>节点添加</a>
+                          <a href="{:U('addrack')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span> 机架添加</a>
+
+                          <a href="{:U('listracks')}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>机柜列表</a-->
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+        <!--form action="" class="form-horizontal" id="add-device" role="form" method="post">
+            
+            {$showlabel}
+            <br /><input type="submit" class="btn btn-primary"></input>
+        </form-->
+        <!--all device detail begin -->
+            <div class="" id="all-device-detail">
+              <table width="100%">
+                <tr>
+                  <td valign="top" width="20%">
+                    <!--div class="panel-heading">
+                      <div class="zTreeDemoBackground left">
+                        <ul id="treeDemo" class="ztree"></ul>
+                      </div>
+                    </div-->
+                    <table border="0" align="center" cellspacing="0" class="tagtree" id="locationFilter">
+                        <form method="post"></form>
+                        <input type="hidden" name="page" value="rackspace" tabindex="1">
+                        <input type="hidden" name="tab" value="default" tabindex="1">
+                        <input type="hidden" name="changeLocationFilter" value="true" tabindex="1">
+                        <tbody>
+                            <tr>
+                                <td class="tagbox" style="padding-left: 0px">
+                                    <label>
+                                        <input type="checkbox" name="location" checked="" onclick="checkAll(this)" tabindex="1"> Toggle all</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tagbox">
+                                    <hr>
+                                    <div class="tagbox" style="text-align:left; padding-left:0px;">
+                                        <label>
+                                            <input type="checkbox" name="location_id[]" class="0" value="59" checked="" onclick="checkAll(this)" tabindex="1">华东区</label><a id="lfa59" onclick="expand('59')" href="" "#"=""> - </a>
+                                        <div id="lfd59">
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1729" checked="" onclick="checkAll(this)" tabindex="1">liuyong</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="403" checked="" onclick="checkAll(this)" tabindex="1">上海市北数据中心</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="412" checked="" onclick="checkAll(this)" tabindex="1">上海浦东软件园数据中心</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tagbox" style="text-align:left; padding-left:0px;">
+                                        <label>
+                                            <input type="checkbox" name="location_id[]" class="0" value="1296" checked="" onclick="checkAll(this)" tabindex="1">华中区</label><a id="lfa1296" onclick="expand('1296')" href="" "#"=""> - </a>
+                                        <div id="lfd1296">
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1297" checked="" onclick="checkAll(this)" tabindex="1">武汉自建（传输部门使用）</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1317" checked="" onclick="checkAll(this)" tabindex="1">长沙自建(传输部门使用）</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tagbox" style="text-align:left; padding-left:0px;">
+                                        <label>
+                                            <input type="checkbox" name="location_id[]" class="0" value="44" checked="" onclick="checkAll(this)" tabindex="1">华北区</label><a id="lfa44" onclick="expand('44')" href="" "#"=""> - </a>
+                                        <div id="lfd44">
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="64" checked="" onclick="checkAll(this)" tabindex="1">北京B28数据中心</label>
+                                            </div>
+                                            
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="494" checked="" onclick="checkAll(this)" tabindex="1">湖北黄石花湖数据中心</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tagbox" style="text-align:left; padding-left:0px;">
+                                        <label>
+                                            <input type="checkbox" name="location_id[]" class="0" value="60" checked="" onclick="checkAll(this)" tabindex="1">华西区</label><a id="lfa60" onclick="expand('60')" href="" "#"=""> - </a>
+                                        <div id="lfd60">
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1309" checked="" onclick="checkAll(this)" tabindex="1">西安自建(传输部门使用）</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="63" checked="" onclick="checkAll(this)" tabindex="1">陕西西安经开数据中心</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tagbox" style="text-align:left; padding-left:0px;">
+                                        <label>
+                                            <input type="checkbox" name="location_id[]" class="0" value="1242" checked="" onclick="checkAll(this)" tabindex="1">西南区</label><a id="lfa1242" onclick="expand('1242')" href="" "#"=""> - </a>
+                                        <div id="lfd1242">
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1243" checked="" onclick="checkAll(this)" tabindex="1">成都自建（传输部门使用）</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1277" checked="" onclick="checkAll(this)" tabindex="1">昆明自建(传输部门使用）</label>
+                                            </div>
+                                            <div class="tagbox" style="text-align:left; padding-left:16px;">
+                                                <label>
+                                                    <input type="checkbox" name="location_id[]" class="1" value="1333" checked="" onclick="checkAll(this)" tabindex="1">重庆自建(传输部门使用）</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="image" name="submit" class="icon" src="./images/indexbtn.png" border="0" title="set filter" tabindex="1">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </td>
+                  <td valign="top">
+    
+                    <table border="0" cellpadding="10" class="cooltable">
+                                <tbody>
+                                    <tr>
+                                        <th class="tdleft">大区-数据中心</th>
+                                        <th class="tdleft">房间号</th>
+                                        <th class="tdleft">机柜</th>
+                                    </tr>
+
+                                <volist name="list" id="vo">
+                                    <tr class="row_odd">
+                                        <th class="tdleft">
+
+                                            {$vo.area} » 
+                                            <a href="{:U('Ipdb/viewlocation?locationid='.$vo['locationid'])}" target="_blank">{$vo.locname}-{$vo.floor}层</a>
+ 
+                                        </th>
+
+                                        <th class="tdleft">
+                                          <a href="{:U('Ipdb/viewarea?&areaid='.$vo['locareaid'])}" target="_blank">{$vo.areaname}</a>
+                                        </th>
+                                            <th class="tdleft">
+                                                <table border="0" cellspacing="5">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td align="center" valign="bottom">
+
+                                                            <a href="{:U('Racks/viewrack?rackid='.$vo['id'])}">{$vo.label}</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                    </tr>
+                                </volist>
+
+
+                                </tbody>
+                            </table>
+                  </td>
+                </tr>
+              </table>
+                
+                  
+            </div>
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+
+                    
+
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    //var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      //$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+    });
+    
+
+    function checkAll(bx) {
+        for (var tbls = document.getElementsByTagName("table"), i = tbls.length; i--;)
+            if (tbls[i].id == "locationFilter") {
+                var bxs = tbls[i].getElementsByTagName("input");
+                var in_tree = false;
+                for (var j = 0; j < bxs.length; j++) {
+                    if (in_tree == false && bxs[j].value == bx.value)
+                        in_tree = true;
+                    else if (parseInt(bxs[j].className) <= parseInt(bx.className))
+                        in_tree = false;
+                    if (bxs[j].type == "checkbox" && in_tree == true)
+                        bxs[j].checked = bx.checked;
+                }
+            }
+    }
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

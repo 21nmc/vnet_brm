@@ -1,0 +1,95 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">合同列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('contract_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新合同</a>
+                        	
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="ip" id="code_name" value="<?php echo I('get.code_name'); ?>"  placeholder="sn编号……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>上级编号</th>
+                            <th>合同类型</th>
+                            <th>数量</th>
+                            <th>标题</th>
+                            <th>开始时间</th>
+                            <th>结束数据</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.id}</td>
+                                <td>{$vo.parentid}</td>
+                                <td><?php  $typeid = $vo['type'];  echo $type_list[$typeid];  ?></td>
+                                <td>{$vo.number}</td>
+                                <td>{$vo.title}</td>
+                                <td>{$vo.startdate|date="Y-m-d H:i:s",###}</td>
+                                <td>{$vo.currentenddate|date="Y-m-d H:i:s",###}</td>
+                                <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('contract_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('contract_del?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

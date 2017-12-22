@@ -1,0 +1,129 @@
+<extend name="Base/common"/>987654321·
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">{$company_info.company_name}({$company_info.description})合同列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                        
+                        <a href="{:U('index')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span>返回客户列表</a>
+                        
+						<if condition="($is_admin_define eq true) OR ($is_owner_define eq 'YES')" >
+                        <a href="{:U('contract_new?id='.$id)}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span>合同添加</a>
+                        </if>
+
+                        <form class="form-inline pull-right" id="device-search" role="form" method="get" >
+                        
+                            
+                          
+                            <div class="form-group">
+                            <input type="text" class="form-control" name="name" id="name" value="{$name}"  placeholder="客户名称……">
+                            <input type="hidden" name='id' id='key' value="{$id}">
+                            </div>
+                            <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                        </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>合同名称</th>
+                            <th>合同描述</th>
+                            <th>合同开始时间</th>
+                            <th>合同结束时间</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+  
+                        <volist name="list" id="vo">
+                        <tr >
+                            <td><a href="{:U('contract_zichan?contract_id='.$vo['id'])}">{$vo.title}</a></td>
+                            <td>{$vo.description}</td>
+                                <td>{$vo.startdate|date="Y-m-d H:i:s",###}</td>
+                                <td>{$vo.currentenddate|date="Y-m-d H:i:s",###}</td>
+							<if condition="($is_admin_define eq true) OR ($is_owner_define eq 'YES')" >
+                            <td>
+                              <a href="{:U('contract_edit?id='.$vo['id'])}" >编辑</a> | 
+                              <a href="{:U('contract_config?id='.$vo['id'])}" >合同添加资产</a> |
+                              <a href="{:U('contract_del?id='.$vo['id'])}" onclick="javascript:return p_del()"> 删除</a>
+                            </td>
+                        	</if>
+                        </tr>
+                        </volist>
+
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+    var name = $('#name').val();
+    var id = $('#key').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Company/company_info/name/"+name+"/id/"+id+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>

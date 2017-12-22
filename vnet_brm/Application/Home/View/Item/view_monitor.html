@@ -1,0 +1,148 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">端口列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+          <br/>
+          <div class="alert alert-info">
+        		<a href="javascript:void(0);" class="alert-link">设备名:</a>&nbsp;&nbsp;{$sys_name}
+          </div>
+          
+          <div class="alert alert-info">
+        		<a href="javascript:void(0);" class="alert-link">运行时间:</a>&nbsp;&nbsp;{$runtime_info}小时
+          </div>
+          
+          <div class="alert alert-info">
+        		<a href="javascript:void(0);" class="alert-link">系统描述:</a>&nbsp;&nbsp;{$device_info}
+          </div>
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                        
+                        <a href="{:U('index')}"  type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-new-window"></span>返回资产列表</a>
+                        
+
+                        
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+            
+			   
+                <div class="panel-heading">
+
+                </div>
+                
+                  
+                
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>端口名称</th>
+                            <th>端口描述</th>
+                            <th>客户</th>
+                            <th>合同带宽</th>
+                            <th>实时入口流量</th>
+                            <th>实时出口流量</th>
+                            <th>端口状态</th>
+                            <th>IP</th>
+                        </tr></thead>
+                        <tbody>
+  
+                        <volist name="list" id="vo">
+                        <?php  $alert = $vo['alert']; 
+ 							   $desc = $vo['ifdescr'];
+							   $in = intval($vo['in']);		
+							   $out = intval($vo['out']);
+							   $falert = 0;
+							   if($desc == "" || $desc == null){
+									if($in>0){
+										$falert = 1;
+									}
+									if($out>0){
+										$falert = 1;
+									}
+							   }
+						 ?>
+                        <tr <if condition="($alert eq 1) OR ($falert eq 1)">bgcolor="#FF0000"</if> >
+                            <td>{$vo.index}</td>
+                            <?php  $tid=$vo['portid']; ?>
+                            <td><a href="{:U('Item/view_monitor_detail?id='.$tid)}">{$vo.portname}</a></td>
+                            <td>{$vo.ifdescr}</td>
+                            <td>{$vo.companyname}</td>
+                            <td>{$vo.mis_bandwidth}</td>
+                            <td>{$vo.in}</td>
+                            <td>{$vo.out}</td>
+							<if condition="$vo.status eq 2" >
+                            <td>未开启</td>
+                            <elseif condition="$vo.status eq 1"/>
+                            <td>开启</td>
+                            <else /> 
+                        	</if>
+                        	<td></td>
+                        	   	
+                        </tr>
+                        </volist>
+
+                           
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+    <footer>
+        <hr>
+        <p class="pull-right">&copy; ccib网管中心</p>
+    </footer>
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+    var name = $('#name').val();
+    var id = $('#key').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Company/company_info/name/"+name+"/id/"+id+"/p/1.html";
+
+ }
+
+</script>  
+   
+
+
+</block>

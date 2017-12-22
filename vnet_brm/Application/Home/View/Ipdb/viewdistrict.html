@@ -1,0 +1,157 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">大区域</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                            <!--a href="{:U('treemanger')}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>层级管理</a-->
+
+                       </div>
+                    </div>
+                </div>
+            </div>
+        <!--all device detail begin -->
+
+
+        <table width="100%">
+          <tr>
+                <td valign="top">
+                  <div class="portlet">
+                      <h2><b>信息</b></h2>
+                      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                          <tbody>
+                              <tr>
+                                  <th width="50%" class="tdright">名称:</th>
+                                  <td class="tdleft">{$areaname}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">机房总数:</th>
+                                  <td class="tdleft">{$locationcount}</td>
+                              </tr>
+                              <tr>
+                                  <th width="50%" class="tdright">房间总数:</th>
+                                  <td class="tdleft">{$roomcount}</td>
+                              </tr>
+
+                          </tbody>
+                      </table>
+                  </div>
+                </td>
+          </tr>
+        </table>
+
+        <table width="100%">
+          <tr>
+                <td valign="top">
+                  <div class="portlet">
+
+                      <h2><b>归属的数据中心 ({$locationcount})</b></h2>
+                      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                          <tbody>
+                            <foreach name="list" item="vo">
+                              <tr><td >0A-090A-090A-090A-090A-090A-090A-090A-09</td></tr>
+                              <tr><td >420A-090A-090A-090A-090A-090A-090A-090A-09</td></tr>
+                            </foreach>
+                          </tbody>
+                      </table>
+
+                  </div>
+
+                </td>
+          </tr>
+        </table>
+
+
+
+
+
+        </div>
+        
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".checkinput").click(function(){
+        if(!$(this).hasClass('disabled')){
+            var input = $(this).parent().find('input');
+            var num = 0;
+            for(var i=0;i<input.length;i++){
+                if(input[i].checked){
+                    num++;
+                }
+            }   
+            if(num==3){
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = false;
+                }  
+            }else{
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = true;
+                }
+            }
+        }
+      });
+    });
+    
+  </SCRIPT>
+
+
+
+
+
+
+
+
+</block>

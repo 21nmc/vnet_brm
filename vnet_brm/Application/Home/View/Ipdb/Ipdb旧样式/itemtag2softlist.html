@@ -1,0 +1,21 @@
+<table border="0">
+    <!--tr>
+		<th align="center"><font size="5" face="楷体" color="000">资产明细</font></th>
+	</tr-->
+	<caption align="center" ><font size="5" face="宋体" color="000"><b>软件列表</b></font></caption>
+	<tr bgcolor="#99ccff">
+        <th>标签名称<!--left></left--></th>
+        <th align="center"><font size="4" face="宋体" color="000">软件名称</font><!--left></left--></th>
+    </tr>
+
+    <foreach name="list" item="vo">
+    
+        <tr bgcolor="#cfcfcf">
+            <td width="150px">{$vo.tagname}</td>
+            <td width="300px"><a href="{:U('Ipdb/softwares?id='.$vo['softwareid'])}" >{$vo.softwareid}</a></td>
+        </tr>
+
+    </foreach>
+<tr bgcolor="#fafafa"><td colspan="2">
+    <center><input type="button" name="close" value="关闭" onclick="window.close();" /></center>
+</td></tr>

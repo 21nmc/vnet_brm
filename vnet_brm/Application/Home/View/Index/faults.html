@@ -1,0 +1,103 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+ 
+ <script type="text/javascript">
+ function submit_now(){
+	   
+		var code_name = $('#code_name').val();
+		window.location.href= "/dataSource/index.php?s=/Home/Index/faults/code_name/"+code_name+"/p/1.html";
+}
+</script>
+ 
+ <div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">故障统计列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('faults_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新故障</a>
+                        	<a href="{:U('import_faults')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 故障导入</a>
+                       
+
+							<form class="form-inline pull-right" id="device-search" role="form" method="get">
+                                <div class="form-group">
+                                        <input type="text" class="form-control" name="ip" id="code_name" value="<?php echo I('get.code_name'); ?>"  placeholder="故障编号……">
+                                </div>
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead><tr>
+                        	<th>故障编号</th>
+                            <th>故障等级</th>
+                            <th>故障分类</th>
+                            <th>归属运营商</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                            <th>时长</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.code_name}</td>
+                                <td>{$vo.level}</td>
+                                <td>{$vo.category}</td>
+                                <td>{$vo.factory}</td>
+                                <td>{$vo.start_time}</td>
+                                <td>{$vo.end_time}</td>
+                                <td>{$vo.time_long}</td>
+                                <td>
+                                <a class="btn btn-primary btn-xs" href="{:U('edit_faults?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('del_faults?id='.$vo['id'])}" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="8" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+    
+</block>

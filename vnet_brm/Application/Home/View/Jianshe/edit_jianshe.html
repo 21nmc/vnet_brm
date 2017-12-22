@@ -1,0 +1,116 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">                           
+                            <input type="hidden" name="id" value="{$id}">
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">大区<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+
+                                <select class="form-control" name="area" >
+
+                                    <if condition="$event_info.area eq '华北区' "><option value="华北区" selected="selected" >华北区</option><else /><option value="华北区" >华北区</option></if>
+
+                                    <if condition="$event_info.area eq '华东区' "><option value="华东区" selected="selected" >华东区</option><else /><option value="华东区" >华东区</option></if>
+
+                                    <if condition="$event_info.area eq '华南区' "><option value="华南区" selected="selected" >华南区</option><else /><option value="华南区" >华南区</option></if>
+
+                                </select>
+
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="device-type" class="col-xs-4 control-label">事件类型<font color="red">*</font>:</label>
+                              <div class="col-xs-4">
+
+                                <select class="form-control" name="event_type" >
+
+                                    <if condition="$event_info.event_type eq '网络攻击' "><option value="网络攻击" selected="selected" >网络攻击</option><else /><option value="网络攻击" >网络攻击</option></if>
+
+                                    <if condition="$event_info.event_type eq 'DDoS攻击' "><option value="DDoS攻击" selected="selected" >DDoS攻击</option><else /><option value="DDoS攻击" >DDoS攻击</option></if>
+
+                                    <if condition="$event_info.event_type eq '运营商传输故障' "><option value="运营商传输故障" selected="selected" >运营商传输故障</option><else /><option value="运营商传输故障" >运营商传输故障</option></if>
+
+                                    <if condition="$event_info.event_type eq '其他' "><option value="其他" selected="selected" >其他</option><else /><option value="其他" >其他</option></if>
+
+
+                                </select>
+
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">影响时间<font color="red">*</font>:</label>                            
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="startcai" name="event_clock" value="{$event_info.event_clock}"  required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">处理时间:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="chultime" name="chultime" value="{$event_info.chultime}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">影响范围:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="content" rows="3" maxlength="50">{$event_info.content}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">事件原因:</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="meta" rows="3" maxlength="50">{$event_info.meta}</textarea>
+                                </div>
+                            </div>
+
+                            
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+   
+
+<script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+<script type="text/javascript">
+//jeDate.skin('gray');
+jeDate({
+    dateCell:"#startcai",
+    format:"YYYY-MM-DD hh:mm:ss",
+    isTime:true
+})
+</script>
+
+   
+</block>

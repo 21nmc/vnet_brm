@@ -1,0 +1,328 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style type="text/css">
+li{ list-style:none; margin:0; padding:0;}
+.clear{ clear:both;}
+.form-li{ width:100%; box-sizing:border-box; background:#f1f1f1; margin:10px 0; padding-top:10px; border-radius:6px 6px 0 0;}
+.form-li li{ float:left; padding:0 30px; border-radius:6px 6px 0 0; border:1px solid #dbdbdb; line-height:34px; margin:0 4px; background:#f7f7f7; cursor:pointer;}
+.form-li li.active{ border-bottom:1px solid #fff;  background:#fff;}
+.form-li li:hover{ background:#888; color:#fff; }
+
+.form-content .display{ display:none;}
+.form-content .display.block{ display:block;}
+</style>
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">机柜信息</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                <ul class="form-li">
+                    <li class="active">机柜信息</li>
+                    <if condition="($is_admin_define eq true)" >
+                    	<li><a href="{:U('Racks/editlistracks?id='.$id)}" >机柜编辑</a></li>
+                    </if>
+                    <li><a href="{:U('Racks/rackslog?rackid='.$id)}" >日志</a></li>
+                    <div class="clear"></div>
+                </ul>
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+                          <!--a href="{:U('addtree')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span>树状结构添加</a>
+                          <a href="{:U('addassetnode')}"  type="button" class="btn btn-danger">
+                          <span class="glyphicon glyphicon-new-window"></span>测试资产关联树状结构添加</a>                       
+                            <a href="{:U('addnode')}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>节点添加</a>
+
+                            <a href="{:U('Racks/editlistracks?id='.$id)}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>机柜信息</a>
+
+                            <a href="{:U('Racks/editlistracks?id='.$id)}"  type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-new-window"></span>机柜编辑</a-->
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+
+
+
+        <div class="form-content">
+          <div class="display block">
+            <table width="100%">
+              <tr>
+                <!--td valign="top">
+                <div class="zTreeDemoBackground left">
+                  <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                </td-->
+
+					<if condition="$is_store eq 1 ">
+					    <td valign="top">
+                      <div class="portlet">
+                          <h2>设备汇总</h2>
+                          <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <th width="50%" class="tdright">机房:</th>
+                                      <td class="tdleft">{$area}/{$name}-{$floor}<a href=""></a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">房间:</th>
+                                      <td class="tdleft">{$areaname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">机柜名称:</th>
+                                      <td class="tdleft">{$rackname}</td>
+                                  </tr>
+                                 <tr>
+                                      <th width="50%" class="tdright">设备数:</th>
+                                      <td class="tdleft">{$itemcount}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      </td>
+                      
+                      <td valign="top">
+                      <div class="portlet">
+                          <h2>汇总</h2>
+                          <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                              <tbody>
+                                  <volist name="itemlist" id="vo">
+                                  <tr>
+                                      <td class="tdleft"><a href="{:U('Item/item_info?id='.$vo['id'])}">{$vo.common_name}</a></td>
+                                  </tr>
+		                          </volist>
+                              </tbody>
+                          </table>
+                      </div>
+                      </td>
+					
+					<else /> 
+					
+						<td valign="top">
+                      <table class="rack" width="80%">
+                        <tbody><tr><th >RU</th><th>Front</th><th>Middle</th><th>Back</th></tr>
+                        
+
+                        <!--tr align="middle" >
+                        <td class="checkinput" style="background-color:white">20</td>
+                         <td class="emptyrow" ></td>
+                         <td class="emptyrow" ></td>
+                         <td class="emptyrow" ></td>
+                        </tr>
+
+                        <tr align="middle" >
+                        <td style="background-color:white">18</td>
+                        <td class="emptyrow" style="background-color:#677764" colspan="3">服务器一</td>
+                        </tr>
+
+                        <tr align="middle" >
+                        <td style="background-color:white">17</td>
+                        <td class="emptyrow" style="background-color:#ffcc99" colspan="3">预约占用服务器二</td>
+                        </tr-->
+                        {$racktable}
+
+                        <tr><td colspan="4" style="background-color:#666;border:1px solid #666;padding:0;">&nbsp;</td></tr>
+                        <tr>
+                        <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                        <td style="border:0"></td><td style="padding:0;border:0;text-align:center"><img height="30" src="__PUBLIC__/images/rackwheel.png"></td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </td>
+
+
+                    <td valign="top">
+                      <div class="portlet">
+                          <h2>汇总</h2>
+                          <table border="0" cellspacing="0" cellpadding="3" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <th width="50%" class="tdright">机房:</th>
+                                      <td class="tdleft">{$area}/{$name}-{$floor}<a href=""></a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">房间:</th>
+                                      <td class="tdleft">{$areaname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">机柜名称:</th>
+                                      <td class="tdleft">{$rackname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">Height(U位):</th>
+                                      <td class="tdleft">{$usize}</td>
+                                  </tr>
+                                  <!--动态区域-->
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">机柜租用方式:</th>
+                                      <td class="tdleft">{$lease_mode}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">机柜所属部门:</th>
+                                      <td class="tdleft">{$dname}</td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">机柜电力(A):</th>
+                                      <td class="tdleft"><a href="">{$power}</a></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright sticker">设备占用U数(U数):</th>
+                                      <td class="tdleft"><a href="">{$usedusize_u}</a></td>
+                                  </tr>
+
+                                  <tr>
+                                      <th width="50%" class="tdright">% used:</th>
+                                      <td class="tdleft"><div class="tdleft_percent"><span style="width:33%;">{$usedusize}%</span></div></td>
+                                  </tr>
+                                  <tr>
+                                      <th width="50%" class="tdright">设备数:</th>
+                                      <td class="tdleft">{$itemcount}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+
+                      <div class="portlet">
+                          <h2>Comment</h2>
+                          <div class="commentblock">{$comments}</div>
+                      </div>
+
+                    </td>
+					</if>
+                    
+
+
+              </tr>
+            </table>
+          </div>
+          <!--div class="display">22</div-->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        
+
+                    
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Tree/areatype/name/"+name+"/p/1.html";
+
+ }
+
+
+</script>  
+   
+  <SCRIPT type="text/javascript">
+    
+    var setting = {
+      data: {
+        simpleData: {
+          enable: true
+        }
+      }
+    };
+
+
+
+    var zNodes = {$json_showmenu};
+
+    $(document).ready(function(){
+      $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+      $(".checkinput").click(function(){
+        if(!$(this).hasClass('disabled')){
+            var input = $(this).parent().find('input');
+            var num = 0;
+            for(var i=0;i<input.length;i++){
+                if(input[i].checked){
+                    num++;
+                }
+            }   
+            if(num==3){
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = false;
+                }  
+            }else{
+                for(var i=0;i<input.length;i++){
+                    input[i].checked = true;
+                }
+            }
+        }
+      });
+    });
+    
+  </SCRIPT>
+
+
+    <script type="text/javascript">
+
+        
+    $(".form-li").on("click",'li',function(){
+      $(this).addClass('active').siblings().removeClass('active');
+      var num = $(this).index();
+      $(".form-content .display").removeClass('block');
+      $(".form-content .display").eq(num).addClass('block');
+      
+    });
+    
+    </script>
+
+
+
+
+
+</block>

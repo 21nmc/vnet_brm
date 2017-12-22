@@ -1,0 +1,172 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">硬件编辑</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">资产描述:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="miaoshu">
+                                        <option class="level-0" value="服务器">服务器</option>
+                                        <option class="level-0" value="交换机">交换机</option>
+                                        <option class="level-0" value="路由器">路由器</option>
+                                        <option class="level-0" value="安全设备">安全设备</option>
+                                        <option class="level-0" value="UPS">UPS</option>
+                                        <option class="level-0" value="机架">机架</option>
+                                        <option class="level-0" value="PDU">PDU</option>
+                                        <option class="level-0" value="波分设备">波分设备</option>
+                                        <option class="level-0" value="模块">模块</option>
+                                        <option class="level-0" value="板卡">板卡</option>
+                                        <option class="level-0" value="其他">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">品牌:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="pinpai">
+                                        <option class="level-0" value ="思科">思科</option>
+			                            <option class="level-0" value ="华为">华为</option>
+			                            <option class="level-0" value ="锐捷">锐捷</option>
+			                            <option class="level-0" value ="Juniper">Juniper</option>
+			                            <option class="level-0" value ="戴尔">戴尔</option>
+			                            <option class="level-0" value ="惠普">惠普</option>
+			                            <option class="level-0" value ="曙光">曙光</option>
+			                            <option class="level-0" value ="浪潮">浪潮</option>
+			                            <option class="level-0" value ="威睿">威睿</option>
+			                            <option class="level-0" value ="绿盟">绿盟</option>
+			                            <option class="level-0" value ="迪普">迪普</option>
+			                            <option class="level-0" value ="烽火">烽火</option>
+			                            <option class="level-0" value ="中兴">中兴</option>
+			                            <option class="level-0" value ="山石">山石</option>
+			                            <option class="level-0" value ="超云">超云</option>
+			                            <option class="level-0" value ="其他">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">型号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="xinghao" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-uuid" class="col-xs-4 control-label">SN号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="sn" require>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">配置:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="peizhi" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">软件版本号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="software" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">软件版本号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="software" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">资产编号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="zichanbianhao" >
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">部门:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="bumen">
+                                            <option class="level-0" value ="网管中心">网管中心</option>
+				                            <option class="level-0" value ="IDC">IDC</option>
+				                            <option class="level-0" value ="传输部">传输部</option>
+				                            <option class="level-0" value ="运维部">运维部</option>
+				                            <option class="level-0" value ="发展部">发展部</option>
+				                            <option class="level-0" value ="骨干网">骨干网</option>
+			                         </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">ip:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="ip" >
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product-key" class="col-xs-4 control-label">使用状态:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="start" name="status" >
+                                </div>
+                            </div>
+                            
+                           
+                            
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">备注</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="device-description" name="beizhu" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                        		
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__STATIC__/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+    jeDate({
+    	dateCell:"#end",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+    })
+    </script>
+   
+</block>

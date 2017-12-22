@@ -1,0 +1,93 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+        		<li class="hover"><a href="{:U('Ying/itemtypes')}">硬件类型列表</a></li>
+        		<li ><a href="{:U('Agent/index')}">代理类型列表</a></li>
+                <li><a href="{:U('Ipdb/itemcontracttypes')}">合同类型列表</a></li>
+                <li><a href="{:U('Product/productlist')}">产品列表</a></li>
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('itemtype_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新类型</a>
+                        	
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                        	<th>ID</th>
+                            <th>硬件类型描述</th>
+                            <th>是否支持软件</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                            	<td>{$vo.id}</td>
+                                <td>{$vo.typedesc}</td>
+                                <td><if condition="$vo.hassoftware eq 1"> 支持
+								<else /> 不支持</if></td>
+                          		<td>
+                                <a class="btn btn-primary btn-xs" href="{:U('itemtype_edit?id='.$vo['id'])}">编辑</a>
+                                
+                                <a class="btn btn-default btn-xs" href="{:U('itemtype_del?id='.$vo['id'])}" >删除</a>
+                                </td>
+                            </tr>
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

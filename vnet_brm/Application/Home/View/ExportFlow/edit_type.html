@@ -1,0 +1,118 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+        <h1 class="page-title">修改</h1>
+        </div>
+        <ul class="breadcrumb">
+        	<!--  <li><a href="new_device.html">添加新类型</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post"> 
+                          <input type="hidden" name="id" value="{$type_info.id}">                          
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">类型名称:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="type" name="type_name" value="{$type_info.type_name}" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">所属区域<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="port_type" name="depart_id">
+                                         <?php  $did = $type_info['depart_id']; ?>
+                                         <option  value="5" <if condition="$did eq 5">selected="selected"</if> >华北</option>
+                                         <option  value="4" <if condition="$did eq 4">selected="selected"</if> >华东</option>
+                                         <option  value="6" <if condition="$did eq 6">selected="selected"</if> >华南</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">所属类型名称<font color="red">*</font>:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" id="port_type" name="fid">
+                                         <?php  $fid = $type_info['id']; ?>
+                                         <option  value="0" >顶级类型</option>
+                                         <volist name="list" id="vo">
+                                             <?php  $fid_now = $vo['id'];  ?>
+										                         <option  value="{$vo.id}"  <if condition="$fid eq $fid_now">selected="selected"</if> >{$vo.type_name}</option>
+                                         </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">顶级类型采购带宽:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="type" name="pay_bandwidth"  value="{$type_info.pay_bandwidth}" >
+                                </div>
+                            </div>
+
+                             
+
+                           	<div class="form-actions col-xs-8 pull-right">
+                        		<input type="submit" class="btn btn-primary"></input>
+                    		</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+
+                    
+</div>
+  
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var arr = {$jsonlist2};
+  var arr2=new Array();
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].webid){ //value==arr[i].customer
+        select2.add(new Option(arr[i].typename,arr[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+  select1.onchange();
+
+
+  //select2.onchange();
+
+</script>
+
+
+
+
+
+
+
+
+   
+</block>

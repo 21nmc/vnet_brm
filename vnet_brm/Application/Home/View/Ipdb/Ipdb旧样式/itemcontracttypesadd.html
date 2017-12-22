@@ -1,0 +1,122 @@
+<extend name="Base/usercommon"/>
+
+
+
+<block name="main">
+
+      <div class="topbox"></div>
+      <!--main begin-->
+      <div class="wrap clearfix wrapper">
+
+        <div class="lt-menu">
+          <h2>管理中心</h2>
+          <ul class="nav">
+
+           <li class="item">
+              <a  href="{:U('Ipdb/listitems')}">硬件<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listsoftware')}">软件<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listlocations')}">地点<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listracks')}">机柜<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listinvoices')}">单据<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listcontracts')}">合同<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemtagtypes')}">标记<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemtypes')}">硬件类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item on">
+              <a  href="{:U('Ipdb/itemcontracttypes')}">合同类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemstatustypes')}">状态类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemfiletypes')}">文件类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+
+
+          </ul>
+        </div>
+
+<ul class="clearfix">
+
+    <form  action="{:U('Ipdb/itemcontracttypesadd')}" method="post"> 
+            <div class="main">
+
+              <div class="loca clearfix">菜单添加</div>
+              <div class="edit-contact" >
+
+              <li>
+                <div class="p">
+                  <label class="dt">标题*：</label>
+                  <span class="fl">
+                    <input class="txt" id="name" name="name" type="text" value="" required>
+                  </span>
+                  <em class="errorTxt"></em>
+                </div>
+              </li>
+
+              <li>
+                <div class="p">
+                  <label class="dt">排序：</label>
+                  <span class="fl">
+                    <input class="txt" id="sort" name="sort" type="text" value="" >
+                  </span>
+                  <em class="errorTxt"></em>
+                </div>
+              </li>
+
+
+              <li>
+                <div class="p">
+                  <label class="dt">上级菜单：</label>
+                  <span class="fl">
+                    <select name="contypeid">
+                        <option value="0">顶级菜单</option>
+                        {$contypeoption}
+                    </select>
+                  </span>
+                  <em class="errorTxt"></em>
+                </div>
+              </li>
+
+
+              <li class="last">
+                <div class="p">
+                  <label class="dt">&nbsp;</label>
+                  <input class="submit fl" type="submit" value="保存" >
+                </div>
+              </li>
+
+
+    </form>
+
+ </ul>
+
+</div>
+      
+
+
+
+
+
+<script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+</script>
+
+
+</block>
+
+
+
+

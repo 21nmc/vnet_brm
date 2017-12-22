@@ -1,0 +1,90 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">设备添加</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post">
+                           
+                            
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">所属业务:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="group_list" required="required">
+                                        <volist name="group_list" id="vo">
+                                          <option class="level-0" value="{$vo.id}">{$vo.depart_name}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">设备名:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="name" required>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">ip:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="ip" required>
+                                </div>
+                            </div>
+                              <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">SNMP Community:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="indate" name="snmp" required>
+                                </div>
+                            </div>
+                            
+                          
+              
+                            
+                            <div class="form-actions col-xs-8 pull-right">
+                            <input type="submit" class="btn btn-primary"></input>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+   
+    <script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD hh:mm:ss",
+        isTime:true
+       
+    })
+   
+    </script>
+   
+</block>

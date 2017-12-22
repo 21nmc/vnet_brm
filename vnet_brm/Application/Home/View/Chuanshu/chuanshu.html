@@ -1,0 +1,147 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+
+
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+    var event_type = $('#event_type').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Chuanshu/chuanshu/event_type/"+event_type+"/p/1.html";
+ }
+ </script>
+ 
+<div class="content">
+        <div class="header">
+        <!--page title begin-->
+           <h1 class="page-title">事件列表</h1>  
+            
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+<div class="col-xs-2">
+                            <if condition="$is_admin_define eq true" >
+                                    <a href="{:U('add_event')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    添加</a>
+                            <else /> 
+                                    <a href="{:U('add_event')}"  type="button" class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-new-window"></span>
+                                    添加</a>
+                            </if>
+</div><div class="col-xs-4">
+                            <select class="form-control" name="area" onchange="javascript:location.href=this.value;">
+                                <option class="level-0" value="__ROOT__/index.php?s=/Home/Chuanshu/chuanshu.html" >选择大区.....</option>
+
+                                <if condition="$area eq '华北区' ">
+                                   <option value="{:U('Chuanshu/chuanshu?area=华北区')}" selected="selected"  >华北区</option>
+                                <else />
+                                   <option value="{:U('Chuanshu/chuanshu?area=华北区')}"  >华北区</option>
+                                </if>
+
+                                <if condition="$area eq '华东区' ">
+                                   <option value="{:U('Chuanshu/chuanshu?area=华东区')}" selected="selected"  >华东区</option>
+                                <else />
+                                   <option value="{:U('Chuanshu/chuanshu?area=华东区')}"  >华东区</option>
+                                </if>
+
+                                <if condition="$area eq '华南区' ">
+                                   <option value="{:U('Chuanshu/chuanshu?area=华南区')}" selected="selected"  >华南区</option>
+                                <else />
+                                   <option value="{:U('Chuanshu/chuanshu?area=华南区')}"  >华南区</option>
+                                </if>
+
+                            </select>
+</div>
+                            <form class="form-inline pull-right" id="device-search" role="form" method="get">
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="event_type" id="event_type" value="<?php echo I('get.event_type'); ?>"  placeholder="事件类型……">
+                                </div>
+
+                                <button type="button" class="btn btn-default" onclick="submit_now()"  style= "margin:0;">筛选</button>
+                            </form>
+                       </div>
+    
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                            <th>事件类型</th>
+                            <th>影响时间</th>
+                            <th>处理时间</th>
+                            <th>影响范围</th>
+                            <th>事件原因</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <tr >
+                                <td>{$vo.event_type}</td>
+                                <td>{$vo.event_clock}</td>
+                                <td>{$vo.chultime}</td>
+                                <td>{$vo.content}</td>
+                                <td>{$vo.meta}</td>
+                                <if condition="$is_admin_define eq true" >
+                                    <td>
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_event?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_event?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    </td>
+                                <elseif condition="$is_owner_define eq 'YES'"/>
+                                    <td>
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_event?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_event?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    </td>
+                                <else /> 
+                                    <td>
+                                         <a class="btn btn-primary btn-xs" href="{:U('edit_event?id='.$vo['id'])}">编辑</a>
+                                         <a class="btn btn-default btn-xs" href="{:U('del_event?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                    </td>
+                                </if>
+                            </tr>
+                            </volist>
+                            <tr><td  colspan="10" style="align:center">{$page}</td></tr>
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+                    
+    </div>
+    
+   
+   
+</block>

@@ -1,0 +1,289 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">机架添加</h1>
+        </div>
+        <ul class="breadcrumb">
+          <!--  <li><a href="new_device.html">绑定新设备</a> <span class="divider">/</span></li>
+            <li class="active">设备管理</li>-->
+        </ul>
+        <!--page title end and the main content begin-->
+        <div class="container">
+            <!--new device from begin-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="display">
+                        <form action="" class="form-horizontal" id="add-device" role="form" method="post" >
+
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">机柜名称*:</label>
+                                <div class="col-xs-4">
+
+                                    <input type="text" class="form-control" id="name" name="name" required>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">高度 (U)*:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="usize">
+                                            {$usizelist}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">编号:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="revnums">
+                                        <!--option  value='0'>1=Bottom</option-->
+                                        <option  value='1'>1=Top</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">标签:</label>
+                                <div class="col-xs-4">
+
+                                    <input type="text" class="form-control" id="label" name="label" >
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">深度(mm):</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="depth" name="depth" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">型号:</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="model" name="model" >
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">数据中心地点*：</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="locationid" id="select1">
+                                        {$list}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">区域*：</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="areaid" id="select2"></select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">标记*:</label>
+                                <div class="col-xs-4">
+
+                                    <select class="form-control" name="contypeid">
+                                        <option value="0">顶级标记</option>
+                                        {$contypeoption}
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">托管费用(￥/月)：</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="money" name="money" >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">
+                                机柜启用时间(YYYY-MM-DD):</label>
+                                <div class="col-xs-4">
+                                    <input type="text" name="start_time" id="start" onfocus="selecttime(1)"  name="start_time" size="20" class="date" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">
+                                机柜终止时间(YYYY-MM-DD):</label>
+                                <div class="col-xs-4">
+                                    <input type="text" name="end_time" id="end" onfocus="selecttime(2)" name="end_time" size="20"  class="date" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">
+                                机柜所属部门:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="departmentid">
+                                        {$departmentoption}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">
+                                机柜租用方式:</label>
+                                <div class="col-xs-4">
+                                    <select class="form-control" name="lease_mode">
+                                        <option  value='0'>散U租用</option>
+                                        <option  value='1'>整柜租用</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category-name" class="col-xs-4 control-label">
+                                机柜电力(A):</label>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" id="power" name="power" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">硬件:</label>
+                                <div class="col-xs-4">
+                                    0
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-type" class="col-xs-4 control-label">在用:</label>
+                                <div class="col-xs-4">
+                                    <span>{$inused}</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="device-description" class="col-xs-4 control-label">注释</label>
+                                <div class="col-xs-4">
+                                    <textarea class="form-control" id="comments" name="comments" rows="3" maxlength="150"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-actions col-xs-8 pull-right">
+                            <input type="submit" class="btn btn-primary"></input>
+                            
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+        <!--the content end -->
+      
+                    <footer>
+                        <hr>
+                        <p class="pull-right"></p>
+                    </footer>
+                    
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var select1 = document.getElementById("select1");
+  var select2 = document.getElementById("select2");
+  var arr = {$jsonlist2};
+  var arr2=new Array();
+
+  select1.onchange = function(){
+    var value = this.value;
+    select2.length = 0;
+    select2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].locationid){ //value==arr[i].customer
+        select2.add(new Option(arr[i].areaname,arr[i].id));
+      }
+    }
+
+    if(select2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+  select1.onchange();
+
+
+  select2.onchange();
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var treetypeselect1 = document.getElementById("treetypeselect1");
+  var treetypeselect2 = document.getElementById("treetypeselect2");
+  var arr = {$jsontreelist};
+  var arr2=new Array();
+
+  treetypeselect1.onchange = function(){
+    var value = this.value;
+    treetypeselect2.length = 0;
+    treetypeselect2.add(new Option("默认",""));
+    for(var i=0;i<arr.length;i++){
+
+      if(value==arr[i].id){ //value==arr[i].customer
+        treetypeselect2.add(new Option(arr[i].name,arr[i].id));
+      }
+    }
+
+    if(treetypeselect2.length==0){
+      //select2.add(new Option("默认","null"));
+    }
+      $('#span1').html("");
+  }
+  treetypeselect1.onchange();
+
+  treetypeselect2.onchange();
+
+</script>
+
+
+<script type="text/javascript" src="__PUBLIC__/static/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+    <script type="text/javascript">
+    //jeDate.skin('gray');
+    jeDate({
+        dateCell:"#start",//isinitVal:true,
+        format:"YYYY-MM-DD",// hh:mm:ss
+        isTime:true
+       
+    })
+    jeDate({
+        dateCell:"#end",//isinitVal:true,
+        format:"YYYY-MM-DD",// hh:mm:ss
+        isTime:true
+    })
+    </script>
+
+
+   
+</block>

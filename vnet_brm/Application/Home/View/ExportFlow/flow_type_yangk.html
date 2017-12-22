@@ -1,0 +1,125 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+        		<li ><a href="{:U('ExportFlow/index')}">出口端口</a></li>
+        		<li class="hover" ><a href="{:U('ExportFlow/flow_type')}">资源类型</a></li>
+                <li ><a href="{:U('ExportFlow/day')}">机房日报</a></li>
+                <li ><a href="{:U('ExportFlow/week')}">周报</a></li>
+                <li><a href="{:U('ExportFlow/doubleweek')}">双周报</a></li>
+                <li><a href="{:U('ExportFlow/month')}">月报</a></li>
+                <li><a href="{:U('ExportFlow/history')}">历史</a></li>
+                <li><a href="{:U('ExportFlow/auto_week')}">自定义</a></li>
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+                            <a href="{:U('flow_type_new')}"  type="button" class="btn btn-danger"><span class="glyphicon glyphicon-new-window"></span> 添加新类型</a>
+                        	
+
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+                
+
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        <thead>
+                        <tr>
+                        	<th>类型名称</th>
+                            <th>所属区域</th>
+                            <th>采购带宽(MB)</th>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                        
+                            <volist name="list" id="vo">
+                            <?php   $top = $vo['top'];  $arr_a = array('5'=>"华北","4"=>"华东","6"=>"华南"); ?>
+                            <tr>
+                            	<td><?php echo $top['type_name'];?></td>
+                            	<td><?php $deid = $top['depart_id'];  echo $arr_a[$deid];?></td>
+                            	<td><?php echo $top['pay_bandwidth'];?></td>
+                            	<if condition="$is_admin_define eq true" >
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_type?id='.$top['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_type?id='.$top['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <elseif condition="$is_owner_define eq 'YES'"/>
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_type?id='.$top['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_type?id='.$top['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <else /> 
+                                	<td></td>
+                                </if>
+                            </tr>
+                            <?php  $sub = $vo['sub'];  if(!empty($sub)){    foreach($sub as $o){ ?>
+                            <tr>
+                            	<td>&nbsp;&nbsp;&nbsp;&nbsp;<?php  echo $o['type_name'];?></td>
+                            	<td><?php $deid = $o['depart_id'];  echo $arr_a[$deid];?></td>
+                            	<td></td>
+                            	<if condition="$is_admin_define eq true" >
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_type?id='.$o['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_type?id='.$o['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <elseif condition="$is_owner_define eq 'YES'"/>
+                                <td>
+	                                 <a class="btn btn-primary btn-xs" href="{:U('edit_type?id='.$o['id'])}">编辑信息</a>
+	                                 <a class="btn btn-default btn-xs" href="{:U('del_type?id='.$o['id'])}" onclick="return confirm('确定删除该条记录?')"  >删除</a>
+                                </td>
+                                <else /> 
+                                	<td></td>
+                                </if>
+                            </tr>
+                            <?php } }  ?>
+                            </volist>
+                            
+                            
+                           
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+   
+   
+</block>

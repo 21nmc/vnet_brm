@@ -1,0 +1,221 @@
+<extend name="Base/common"/>
+
+<block name="main">
+<style>
+.clear{ clear:both;}
+li{ list-style:none;}
+.page-title-ul{ font-size:16px; height:40px;}
+.page-title-ul li{ float:left; padding:20px 0 0; margin:0 10px;}
+.page-title-ul li a{ color:#1e1e1e; line-height:24px; padding:8px 24px; border-radius:6px 6px 0 0; border:1px solid #ccc; border-bottom:none;}
+.page-title-ul li.hover a{ background:#fff; border-bottom:none;}
+</style>
+
+<script type="text/javascript">
+ function submit_now(){
+	var name = $('#name').val();
+	window.location.href= "__ROOT__/index.php?s=/Home/Resource/index/name/"+name+"/p/1.html";
+ }
+ </script>
+
+
+<div class="content">
+        <div class="header">
+    	<!--page title begin-->
+            <ul class="page-title-ul">
+                <li ><a href="{:U('Mis/index')}">Mis月报</a></li>
+                <li ><a href="{:U('Mis/index2')}">MIS端口管理</a></li>
+                <li><a href="{:U('Mis/mis_portmanger')}">MIS端口配置</a></li>
+                <li ><a href="{:U('Mis/city')}">MIS城市管理</a></li>
+                <li><a href="{:U('Mis/mis_product')}">MIS产品管理</a></li>
+                <li ><a href="{:U('Mis/room')}">MIS机房管理</a></li>
+                <li class="hover"><a href="{:U('Mis/mis_history')}">MIS历史</a></li>
+
+        		<div class="clear"></div>
+        	</ul>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                       
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+
+
+      <!--select name="area" style="width:150px;" onchange="javascript:location.href=this.value;" style="width:250px;" id="area">
+
+        <if condition="$area eq '' ">
+           <option value="" selected="selected"  >请选择大区......</option>
+        <else />
+            <option value=""  >请选择大区......</option>
+        </if>
+  
+        <if condition="$area eq 'huabei' ">
+           <option value="5" selected="selected" >华北大区</option>
+        <else />
+           <option value="5" >华北大区</option>                
+        </if>
+
+        <if condition="$area eq 'huanan' ">
+           <option value="4" selected="selected"  >华南大区</option>
+        <else />
+           <option value="4" >华南大区</option>                
+        </if>
+
+        <if condition="$area eq 'huadong' ">
+           <option value="3" selected="selected"  >华东大区</option>
+        <else />
+           <option value="3"  >华东大区</option>                
+        </if>
+
+      </select-->
+
+<form method="post" action="">
+
+
+        <select name="report_type"  style="width:200px;">
+          <if condition="$report_type eq '' ">
+             <option value="" selected="selected"  >请选择报表类别......</option>
+          <else />
+              <option value=""  >请选择报表类别......</option>
+          </if>
+
+          <if condition="$report_type eq 'mis_day' ">
+             <option value="mis_day" selected="selected" >MIS日报</option>
+          <else />
+             <option value="mis_day" >MIS日报</option>                
+          </if>
+
+          <if condition="$report_type eq 'mis_week' ">
+             <option value="mis_week" selected="selected" >MIS周报</option>
+          <else />
+             <option value="mis_week" >MIS周报</option>                
+          </if>
+
+          <if condition="$report_type eq 'mis_doubleweek' ">
+             <option value="mis_doubleweek" selected="selected" >MIS双周报</option>
+          <else />
+             <option value="mis_doubleweek" >MIS双周报</option>                
+          </if>
+
+
+          <if condition="$report_type eq 'mis_month' ">
+             <option value="mis_month" selected="selected" >MIS月报</option>
+          <else />
+             <option value="mis_month" >MIS月报</option>                
+          </if>
+
+        </select>
+
+
+        开始时间：<input type="text"  id="start" name="start" value="{$start}" >                
+        结束时间：<input type="text"  id="end" name="end" value="{$end}" >                
+        <input type="submit" class="btn btn-primary" value="查询">
+</form>                  
+        <!--all device detail begin -->
+            <div class="panel panel-default" id="all-device-detail">
+                <div class="panel-heading">
+                
+                </div>
+                  <table class="table">
+                        
+                        <thead>
+                        <tr>
+                          <th>机房编码</th>
+                            <th>机房名称</th>
+                            <th>产品</th>
+<if condition="$report_type eq 'mis_month' ">
+                            <th>(MB)/月</th>
+                            <th>年</th>
+                            <th>月</th>
+</if>
+<if condition="($report_type eq 'mis_day') or ($report_type eq '') ">                           
+                            <th>(MB)/日(可加权平均)</th>
+</if>
+<if condition="$report_type eq 'mis_week' "> 
+                            <th>(MB)/周</th>
+</if>
+<if condition="$report_type eq 'mis_doubleweek' "> 
+                            <th>(MB)/双周</th>
+</if>
+                            <th>操作</th>
+                        </tr></thead>
+                        <tbody>
+                            <volist name="list" id="vo">
+                            <tr>
+                              <td><?php echo $vo['roomcode'];?></td>
+                              <td><?php echo $vo['roomname'];?></td>
+                                <td><?php echo $vo['productname'];?></td>
+
+<if condition="$report_type eq 'mis_month' ">
+                                <td><?php echo $vo['avgbandwidth_month'];?></td>
+                                <td><?php echo $vo['year'];?></td>
+                                <td><?php echo $vo['month'];?></td>
+</if>
+
+                                <td>
+
+<if condition="$report_type eq 'mis_day'  ">
+                                <?php echo $vo['avgbandwidth_day'].'/'.$vo['day'];?>
+</if>                                
+<if condition="$report_type eq ''  ">
+                                <?php echo $vo['avgbandwidth_day'].'/'.$start.' to '.$end;?>
+</if> 
+                                </td>
+  
+
+
+<if condition="$report_type eq 'mis_week' ">                                
+                                <td><font color="green"><?php echo $vo['avgbandwidth_week'].'/';?></font>{$vo.week_stime|date='Y-m-d',###}到{$vo.week_etime|date='Y-m-d',###}</td>
+</if> 
+<if condition="$report_type eq 'mis_doubleweek' "> 
+                                <td><font color="green"><?php echo $vo['avgbandwidth_doubleweek'].'/'; ?></font>{$vo.dweek_stime|date='Y-m-d',###}到{$vo.dweek_etime|date='Y-m-d',###}</td>
+</if> 
+                                <td>
+                                    <a class="btn btn-primary btn-xs" href="{:U('mis_edittype?id='.$vo['id'])}">编辑信息</a>
+                                    <a class="btn btn-default btn-xs" href="{:U('mis_deltype?id='.$vo['id'])}" onclick="return confirm('确定删除该条记录?')">删除</a>
+                                </td>
+                            </tr>
+                            
+                            </volist>
+                            
+                           
+                        </tbody>
+                        
+                   </table>
+            </div>
+        </div>
+        
+                    <footer>
+                        <hr>
+                        <p class="pull-right">&copy; ccib网管中心</p>
+                    </footer>
+                    
+    </div>
+    
+<script type="text/javascript" src="__PUBLIC__/static/jedate/jedate.js"></script>
+<script type="text/javascript">
+//jeDate.skin('gray');
+jeDate({
+    dateCell:"#start",//isinitVal:true,
+    format:"YYYY-MM-DD",// hh:mm:ss
+    isTime:true
+   
+})
+jeDate({
+    dateCell:"#end",//isinitVal:true,
+    format:"YYYY-MM-DD",// hh:mm:ss
+    isTime:true
+})
+</script>   
+   
+</block>

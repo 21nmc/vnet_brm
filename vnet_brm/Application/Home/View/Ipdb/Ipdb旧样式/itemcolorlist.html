@@ -1,0 +1,155 @@
+<extend name="Base/usercommon"/>
+
+
+
+<block name="main">
+
+      <div class="topbox"></div>
+      <!--main begin-->
+      <div class="wrap clearfix wrapper">
+
+        <div class="lt-menu">
+          <h2>管理中心</h2>
+          <ul class="nav">
+
+           <li class="item">
+              <a  href="{:U('Ipdb/listitems')}">硬件<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listsoftware')}">软件<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listlocations')}">地点<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listracks')}">机柜<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listinvoices')}">单据<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/listcontracts')}">合同<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemtagtypes')}">标记<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+
+           <li class="item">
+              <a  href="{:U('Ipdb/itemtypes')}">硬件类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item on">
+              <a  href="{:U('Ipdb/itemcontracttypes')}">合同类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemstatustypes')}">状态类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+           <li class="item">
+              <a  href="{:U('Ipdb/itemfiletypes')}">文件类型<img src="__STATIC__/ipdb/images/add.png" /></a></li>
+
+          </ul>
+        </div>
+
+<ul class="clearfix">
+
+    <form  action="{:U('Ipdb/itemcolorlist')}" method="post"> 
+            <div class="main">
+
+              <div class="loca clearfix">颜色添加</div>
+              <div class="edit-contact" >
+
+              <li>
+                <div class="p">
+                  <label class="dt">颜色标题*：</label>
+                  <span class="fl">
+                    <input class="txt" id="colorname" name="colorname" type="text" value="" required>
+                  </span>
+                  <em class="errorTxt"></em>
+                </div>
+              </li>
+
+              <li>
+                <div class="p">
+                  <label class="dt">颜色值：</label>
+                  <span class="fl">
+                    <input class="txt" id="color" name="color" type="text" value="" >
+                  </span>
+                  <em class="errorTxt"></em>
+                </div>
+              </li>
+
+              <li class="last">
+                <div class="p">
+                  <label class="dt">&nbsp;</label>
+                  <input class="submit fl" type="submit" value="添加" >
+                </div>
+              </li>
+
+
+    </form>
+
+
+      <div class="loca clearfix">颜色类型管理</div>
+      <div class="data-list" id="msgBox">
+      <table class="table" summary="">
+        
+          <thead>
+           <tr>
+ 
+              <th>名称</th>
+              <th>颜色样式</th>
+
+              <th>操作</th>
+
+           </tr>
+           
+         </thead>
+         
+        <tbody>
+          <notempty name="list">
+            <foreach name="list" item="vo">
+              <tr >
+                <td>{$vo.colorname}</td>
+                <td bgcolor="#{$vo.color}">{$vo.color}</td>
+                <td><a href="{:U('Ipdb/delcolortypes?id='.$vo['id'])}" onclick="javascript:return p_del()">删除</a></td>
+              </tr>
+            </foreach>
+        </tbody>  
+            <!--tr>
+                <td colspan="12" >
+                    <center><div class="pagination"><ul>{$page}</ul></div></center>
+                </td>
+            </tr>
+            
+          < <tr>
+              <td colspan="12" class="text-center"> <center>记录为空! </center></td>
+          </tr> -->
+        </notempty>
+
+
+      
+   
+       </table>
+      </div>
+    </div>   
+ </ul>
+
+
+
+
+
+</div>
+      
+
+
+
+
+
+<script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+</script>
+
+
+</block>
+
+
+
+

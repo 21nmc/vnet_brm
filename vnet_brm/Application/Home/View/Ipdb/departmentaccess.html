@@ -1,0 +1,159 @@
+<extend name="Base/common"/>
+
+<block name="main">
+
+<div class="content">
+        <div class="header">
+      <!--page title begin-->
+        <h1 class="page-title">部门授权列表</h1>
+        </div>
+       
+        <!--page title end and the main content begin-->
+
+        <div class="container">
+
+          <!--the toolbar begin -->
+            <div class="toolbar">
+                <div class="row">
+                    <div class="col-xs-6" style="width:100%;">
+                        <div class="quick-add-btn">
+
+
+                            <div class="form-group">
+                                <div class="col-xs-4">
+
+                                    <select name="id" onchange="javascript:location.href=this.value;" class="form-control">
+                                        {$departmentoption}
+                                    </select>
+                                </div>
+                            </div>
+                       </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+
+            </div>
+        <!--all device detail begin -->
+
+<form  action="" method="post">
+<input type="hidden" name="id" value="{$id}">
+{$checkmod}
+        <!--div class="form-horizontal form-horizontal1 auth-form coco-form">
+  
+            <dl class="checkmod">
+                <dt class="hd">
+                    <label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="rules[]" value="1">一级</label>
+                </dt>
+
+            <dd class="bd">
+
+                <div class="rule_check">
+                    <div>
+                        <label class="checkbox"><input class="auth_rules rules_row" type="checkbox" name="rules[]" value="2">二级</label>
+                    </div>
+
+                    <span class="divsion">&nbsp;</span>
+                        <span class="child_row">
+                            <label class="checkbox"><input class="auth_rules" type="checkbox" name="rules[]" value="74">三级</label>
+                        </span>
+                </div>
+
+                <div class="rule_check">
+
+                        <div>
+                            <label class="checkbox"><input class="auth_rules rules_row" type="checkbox" name="rules[]" value="4">当前告警</label>
+                        </div>
+
+                        <span class="divsion">&nbsp;</span>
+                            <span class="child_row">
+                                <label class="checkbox">
+                                    <input class="auth_rules" type="checkbox" name="rules[]" value="5">资产查看<label class="checkbox">
+                                    <input class="auth_rules" type="checkbox" name="rules[]" value="73">未处理</label>
+                                </label>
+                            </span>
+                </div>
+
+                </div>
+
+            </dd>
+
+
+           </dl>  
+
+
+        </div-->
+
+
+
+<input type="submit" class="btn btn-primary"></input>
+</form>
+
+
+        </div>
+           
+    </div>
+    
+ <script type="text/javascript">
+
+  function p_del() { 
+    var msg = "您真的确定要执行删除操作吗？\n\n请确认！"; 
+    if (confirm(msg)==true){ 
+        return true; 
+    }else{ 
+        return false; 
+    } 
+  } 
+
+function submit_now(){
+   
+    var name = $('#name').val();
+    window.location.href= "__ROOT__/index.php?s=/Home/Ipdb/department/name/"+name+"/p/1.html";
+
+ }
+ $('.rules_all').on('change',function(){
+    $(this).closest('dl').find('dd').find('input').prop('checked',this.checked);
+});
+$('.rules_row').on('change',function(){
+    $(this).closest('.rule_check').find('.child_row').find('input').prop('checked',this.checked);
+});
+$('.checkbox').each(function(){
+    $(this).qtip({
+        content: {
+            text: $(this).attr('title'),
+            title: $(this).text()
+        },
+        position: {
+            my: 'bottom center',
+            at: 'top center',
+            target: $(this)
+        },
+        style: {
+            classes: 'qtip-dark',
+            tip: {
+                corner: true,
+                mimic: false,
+                width: 10,
+                height: 10
+            }
+        }
+    });
+});
+
+
+
+
+</script>  
+   
+
+
+
+
+
+
+
+
+
+</block>
